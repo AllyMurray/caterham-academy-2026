@@ -1,12 +1,15 @@
-# Caterham Academy Permitted Modifications
+# Caterham Academy Race Car Prep
 
-Static GitHub Pages reference for the permitted modifications, options, and part
-numbers called out in the 2026 Caterham Academy Championship Regulations.
+Static GitHub Pages site for 2026 Caterham Academy race car prep and permitted
+parts reference.
+
+- `index.html`: race car prep checklist and modification shortlist.
+- `parts.html`: full permitted modifications, options, and part-number reference.
 
 ## Local Preview
 
-Open `index.html` directly in a browser, or serve the directory with any static
-file server.
+Open `index.html` or `parts.html` directly in a browser, or serve the directory
+with any static file server.
 
 ## GitHub Pages
 

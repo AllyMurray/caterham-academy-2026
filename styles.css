@@ -296,6 +296,49 @@ main {
   text-decoration: none;
 }
 
+.prep-overview {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin: 0 0 24px;
+}
+
+.prep-card {
+  display: grid;
+  gap: 8px;
+  min-height: 156px;
+  align-content: start;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.prep-card span {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--track);
+  color: #fff;
+  font-weight: 900;
+}
+
+.prep-card strong {
+  font-size: 1.05rem;
+  line-height: 1.2;
+}
+
+.prep-card small {
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
 .content-section {
   margin-top: 22px;
   overflow: hidden;
@@ -396,6 +439,17 @@ td:nth-child(2) {
   border-top: 0;
 }
 
+.prep-stages {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 22px;
+}
+
+.prep-stages .content-section {
+  margin-top: 0;
+}
+
 .prohibited {
   border-color: rgba(166, 52, 47, 0.4);
 }
@@ -452,6 +506,11 @@ tr.is-hidden {
 
   .controls {
     position: static;
+  }
+
+  .prep-overview,
+  .prep-stages {
+    grid-template-columns: 1fr;
   }
 
   .section-heading,
