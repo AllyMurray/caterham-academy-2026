@@ -6,7 +6,7 @@ spanner checks, and permitted parts reference.
 - `index.html`: delivery prep guide and modification shortlist.
 - `race-prep.html`: race event, session, safety kit, and scrutineering checklist.
 - `parts.html`: full permitted modifications, options, and part-number reference.
-- `spanner-checks.html`: workshop spanner checks and track-prep checklist.
+- `spanner-checks.html`: workshop spanner checks, support points, and visual checks.
 
 ## Local Preview
 
