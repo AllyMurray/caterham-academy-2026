@@ -368,7 +368,7 @@ main {
 
 .todo-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
   gap: 0;
   border-top: 1px solid var(--line);
 }
