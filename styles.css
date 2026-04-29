@@ -301,6 +301,33 @@ main {
   overflow: hidden;
 }
 
+.mod-summary {
+  margin-bottom: 26px;
+}
+
+.mod-summary .section-heading p {
+  max-width: 850px;
+  color: var(--muted);
+}
+
+.mod-summary table {
+  min-width: 980px;
+}
+
+.mod-summary td:first-child {
+  width: 22%;
+}
+
+.mod-summary td:nth-child(2) {
+  width: 32%;
+}
+
+.mod-summary td:nth-child(4) {
+  width: 18%;
+  color: var(--muted);
+  font-weight: 700;
+}
+
 .section-heading {
   padding: 26px 26px 10px;
 }
