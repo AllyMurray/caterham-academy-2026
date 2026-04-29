@@ -20,6 +20,7 @@
         </a>
         <div class="topbar-links">
           <a href="#guide">Guide</a>
+          <a href="#todo">To-do list</a>
           <a href="#prep-mods">Prep mods</a>
           <a href="parts.html">Parts list</a>
           <a
@@ -40,6 +41,7 @@
           </p>
           <div class="hero-actions">
             <a class="button primary" href="#guide">Read the guide</a>
+            <a class="button" href="#todo">To-do list</a>
             <a class="button" href="#prep-mods">Prep parts table</a>
             <a class="button" href="parts.html">Full parts list</a>
           </div>
@@ -75,7 +77,7 @@
         <input
           id="site-search"
           type="search"
-          placeholder="Try factory IVA, fuel cell, brake pads, rear light, 30P307A..."
+          placeholder="Try ignition switch, transponder, brake pads, rear light, 30P307A..."
           autocomplete="off"
         />
         <p id="search-status" role="status" aria-live="polite">Showing all entries.</p>
@@ -182,6 +184,165 @@
                 <li>Avoid the specifically prohibited quicker ratio steering rack, part number 30S030A.</li>
               </ul>
             </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="todo" class="content-section todo-section searchable">
+        <div class="section-heading">
+          <p class="section-kicker">Workshop checklist</p>
+          <h2>Car Prep To-Do List</h2>
+          <p>
+            This is the practical job list to work through after handover and before the
+            first event. Some items are directly reflected in the permitted-parts
+            reference; others are reliability or workshop checks, so confirm anything not
+            explicitly listed before treating it as a regulation-backed modification.
+          </p>
+        </div>
+
+        <div class="todo-grid">
+          <article class="todo-card">
+            <h3>Modifications</h3>
+            <ul class="todo-list">
+              <li>
+                <label>
+                  <input type="checkbox" />
+                  <span>Reverse the ignition switch</span>
+                </label>
+                <p>Reduces the risk of the switch bouncing closed on track.</p>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" />
+                  <span>Rotate the transponder 180 degrees</span>
+                </label>
+                <p>Protects the sensitive cable, especially if the car ends up in a gravel trap.</p>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" />
+                  <span>Fit AP Racing reservoir cap and bellows</span>
+                </label>
+                <p>Helps avoid brake fluid leaks; confirm the cap route against the permitted race cap parts.</p>
+              </li>
+            </ul>
+          </article>
+
+          <article class="todo-card">
+            <h3>Fitment</h3>
+            <ul class="todo-list">
+              <li>
+                <label>
+                  <input type="checkbox" />
+                  <span>Fit uprated brake pads, front and rear</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" />
+                  <span>Fit side impact bar, passenger side</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" />
+                  <span>Fit half sidescreens</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" />
+                  <span>Fit centre mirror</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" />
+                  <span>Fit race mirror package</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" />
+                  <span>Fit front anti-roll bar</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" />
+                  <span>Fit heat barrier</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" />
+                  <span>Fit fuel drain hose with stop tap</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" />
+                  <span>Fit catch tank with foam insert</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" />
+                  <span>Fit arm restraints, if not included with car</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" />
+                  <span>Fit dash timer</span>
+                </label>
+              </li>
+            </ul>
+          </article>
+
+          <article class="todo-card">
+            <h3>Setup &amp; Checks</h3>
+            <ul class="todo-list">
+              <li>
+                <label>
+                  <input type="checkbox" />
+                  <span>Check foam filler between seat back and bulkhead</span>
+                </label>
+                <p>Mandatory per the regulations.</p>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" />
+                  <span>Cable-tie dipstick in place, sigma engine only</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" />
+                  <span>Secure hoses with cable ties</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" />
+                  <span>Drill catch tank lid and remove seals for pressure relief</span>
+                </label>
+                <p>Should be done from the factory.</p>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" />
+                  <span>Full brake fluid change/bleed after fitting brake pressure sensor</span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" />
+                  <span>Check tyre valve stems are short type</span>
+                </label>
+                <p>Prevents wheel contact damage.</p>
+              </li>
+            </ul>
           </article>
         </div>
       </section>

@@ -357,6 +357,67 @@ main {
   margin: 0.38rem 0;
 }
 
+.todo-section {
+  margin-bottom: 26px;
+}
+
+.todo-section .section-heading p {
+  max-width: 900px;
+  color: var(--muted);
+}
+
+.todo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+.todo-card {
+  padding: 24px 26px;
+}
+
+.todo-card + .todo-card {
+  border-left: 1px solid var(--line);
+}
+
+.todo-card h3 {
+  margin-bottom: 14px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.todo-list {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.todo-list label {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  font-weight: 800;
+}
+
+.todo-list input {
+  width: 16px;
+  height: 16px;
+  margin-top: 0.24em;
+  accent-color: var(--track);
+}
+
+.todo-list p {
+  margin: 5px 0 0 28px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
 .mod-summary {
   margin-bottom: 26px;
 }
@@ -521,6 +582,20 @@ tr.is-hidden {
   .guide-step {
     grid-template-columns: 1fr;
     gap: 10px;
+  }
+
+  .todo-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .todo-card {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .todo-card + .todo-card {
+    border-top: 1px solid var(--line);
+    border-left: 0;
   }
 
   .compact-section {
