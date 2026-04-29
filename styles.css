@@ -391,31 +391,52 @@ main {
 
 .todo-list {
   display: grid;
-  gap: 14px;
+  gap: 10px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.todo-list label {
+.todo-item {
   display: grid;
-  grid-template-columns: 18px minmax(0, 1fr);
-  gap: 10px;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: 12px;
   align-items: start;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel-alt);
+  padding: 12px;
+  color: var(--ink);
   font-weight: 800;
+  cursor: pointer;
+}
+
+.todo-item:hover {
+  border-color: rgba(31, 111, 78, 0.35);
+  background: #fff;
 }
 
 .todo-list input {
   width: 16px;
   height: 16px;
-  margin-top: 0.24em;
+  margin-top: 0.18em;
   accent-color: var(--track);
 }
 
-.todo-list p {
-  margin: 5px 0 0 28px;
+.todo-copy {
+  display: grid;
+  gap: 4px;
+}
+
+.todo-title {
+  line-height: 1.35;
+}
+
+.todo-context {
   color: var(--muted);
   font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.42;
 }
 
 .mod-summary {

@@ -2,7 +2,7 @@ const searchInput = document.querySelector("#site-search");
 const statusNode = document.querySelector("#search-status");
 const searchableSections = Array.from(document.querySelectorAll(".searchable"));
 const tableRows = Array.from(document.querySelectorAll(".searchable tbody tr"));
-const listItems = Array.from(document.querySelectorAll(".searchable li"));
+const listItems = Array.from(document.querySelectorAll(".searchable li, .searchable .todo-item"));
 
 if (searchInput && statusNode) {
   function normalise(value) {
@@ -13,7 +13,7 @@ if (searchInput && statusNode) {
     const visibleRows = Array.from(section.querySelectorAll("tbody tr")).some(
       (row) => !row.classList.contains("is-hidden"),
     );
-    const textBlocks = Array.from(section.querySelectorAll("li"));
+    const textBlocks = Array.from(section.querySelectorAll("li, .todo-item"));
     const visibleText = textBlocks.some((item) => !item.classList.contains("is-hidden"));
     return visibleRows || visibleText || Boolean(query && normalise(section.textContent).includes(query));
   }
