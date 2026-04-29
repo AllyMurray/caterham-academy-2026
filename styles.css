@@ -511,6 +511,17 @@ td:nth-child(2) {
   font-size: 0.94rem;
 }
 
+.table-group td {
+  width: auto !important;
+  background: #eef4f0;
+  color: var(--track);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
 .plain-list {
   border-top: 1px solid var(--line);
   padding: 22px 26px 24px;
