@@ -76,6 +76,14 @@
           autocomplete="off"
         />
         <p id="search-status" role="status" aria-live="polite">Showing all entries.</p>
+        <div class="checklist-actions">
+          <p id="checklist-progress" class="checklist-progress" role="status" aria-live="polite">
+            0 checks complete.
+          </p>
+          <button id="reset-checklist" class="secondary-button" type="button">
+            Reset checklist
+          </button>
+        </div>
       </section>
 
       <section id="torque-checks" class="content-section searchable">
@@ -90,7 +98,7 @@
 
         <div class="plain-list">
           <h3>Front Suspension</h3>
-          <ol>
+          <ol class="checklist-list" data-checklist="front-suspension">
             <li>Upper wishbones: 47 Nm.</li>
             <li>Lower wishbones: 81 Nm.</li>
             <li>Dampers: 25 Nm.</li>
@@ -104,7 +112,7 @@
 
         <div class="plain-list">
           <h3>Rear Suspension</h3>
-          <ol>
+          <ol class="checklist-list" data-checklist="rear-suspension">
             <li>Radius arms to chassis: 47 Nm.</li>
             <li>Radius arms to De Dion tube: 81 Nm.</li>
             <li>De Dion tube aluminium endplate and bearing: 47 Nm.</li>
@@ -119,7 +127,7 @@
 
         <div class="plain-list">
           <h3>Steering</h3>
-          <ol>
+          <ol class="checklist-list" data-checklist="steering">
             <li>Track rod ends to steering arms: 41 Nm.</li>
             <li>Steering rack clamp bolts: 11 Nm.</li>
             <li>Check lower-to-upper steering column clamp bolts and grub screw, with no play.</li>
@@ -129,7 +137,7 @@
 
         <div class="plain-list">
           <h3>Engine</h3>
-          <ol>
+          <ol class="checklist-list" data-checklist="engine">
             <li>Engine mounting rubbers to chassis: 20 Nm.</li>
             <li>Engine mounting rubbers to engine mounting brackets: 81 Nm.</li>
             <li>Engine mounting brackets to engine block: 25 Nm M8 bolts and 47 Nm M10 bolts.</li>
@@ -143,7 +151,7 @@
 
         <div class="plain-list">
           <h3>Gearbox</h3>
-          <ol>
+          <ol class="checklist-list" data-checklist="gearbox">
             <li>Gearbox mount to gearbox: 54 Nm.</li>
             <li>Gearbox mount to chassis: 20 Nm.</li>
           </ol>
@@ -152,7 +160,7 @@
 
       <section id="before-every-session" class="rule-card searchable">
         <h2>Before Every Session</h2>
-        <ul>
+        <ul class="checklist-list" data-checklist="before-every-session">
           <li><strong>Torque the wheel nuts before every session:</strong> 85 Nm or 65 lb ft.</li>
           <li>Check oil level and wheel nuts again before going back on track.</li>
           <li>Start each weekend with enough brake pad material to last. If in doubt, change pads before the final practice session.</li>
@@ -170,7 +178,7 @@
 
         <div class="plain-list">
           <h3>Lighting</h3>
-          <ul>
+          <ul class="checklist-list" data-checklist="lighting">
             <li>Check all lights are working.</li>
             <li>Check all lights are fixed securely.</li>
             <li>Check lights are taped where required.</li>
@@ -179,7 +187,7 @@
 
         <div class="plain-list">
           <h3>Cooling System</h3>
-          <ol>
+          <ol class="checklist-list" data-checklist="cooling-system">
             <li>Visually check hose clips and connections for leaks.</li>
             <li>Check coolant level visually.</li>
             <li>Check radiator mountings and condition visually.</li>
@@ -188,7 +196,7 @@
 
         <div class="plain-list">
           <h3>Wheels And Tyres</h3>
-          <ol>
+          <ol class="checklist-list" data-checklist="wheels-tyres">
             <li>Check tyre pressures.</li>
             <li>Check wheel weights are secure and taped.</li>
           </ol>
@@ -196,7 +204,7 @@
 
         <div class="plain-list">
           <h3>Fibreglass</h3>
-          <ol>
+          <ol class="checklist-list" data-checklist="fibreglass">
             <li>Check front wing fixings.</li>
             <li>Check rear wing fixings.</li>
             <li>Check nose cone fasteners.</li>
@@ -206,7 +214,7 @@
 
         <div class="plain-list">
           <h3>Other Checks</h3>
-          <ol>
+          <ol class="checklist-list" data-checklist="other-checks">
             <li>Check race numbers and sponsor logos.</li>
             <li>Clean the car.</li>
             <li>Check brake pad material.</li>
@@ -227,7 +235,7 @@
 
         <div class="plain-list">
           <h3>Tools And Access</h3>
-          <ul>
+          <ul class="checklist-list" data-checklist="tools-access">
             <li>Cut down an 8 mm Allen key for easier access on the radius arms.</li>
             <li>Buy a brake bleed kit or similar.</li>
             <li>Use a trolley jack under the front towing eye and at the rear in the centre under the A-frame.</li>
@@ -237,7 +245,7 @@
 
         <div class="plain-list">
           <h3>Trackside Prep</h3>
-          <ul>
+          <ul class="checklist-list" data-checklist="trackside-prep">
             <li>Carry cable ties for the cycle wings in case one is lost.</li>
             <li>Side repeaters are not required on race cars.</li>
             <li>Check for bulbs touching the lenses on rear lights.</li>
@@ -249,7 +257,7 @@
 
         <div class="plain-list">
           <h3>Parts And Setup Prompts</h3>
-          <ul>
+          <ul class="checklist-list" data-checklist="parts-setup-prompts">
             <li>Fit the race master cylinder cap, part 77175.</li>
             <li>If the windscreen takes damage on the driver's side, the checklist notes that the windscreen can be rotated.</li>
             <li>Academy track day starter pack: 300K0001AK.</li>

@@ -1,3 +1,127 @@
+const CHECKLIST_STORAGE_KEY = "caterham-academy-2026:spanner-checks:v1";
+const checklistLists = Array.from(document.querySelectorAll("[data-checklist]"));
+const checklistProgress = document.querySelector("#checklist-progress");
+const resetChecklistButton = document.querySelector("#reset-checklist");
+
+function getChecklistStorage() {
+  try {
+    const testKey = `${CHECKLIST_STORAGE_KEY}:test`;
+    window.localStorage.setItem(testKey, "1");
+    window.localStorage.removeItem(testKey);
+    return window.localStorage;
+  } catch {
+    return null;
+  }
+}
+
+function readChecklistState(storage) {
+  if (!storage) return {};
+
+  try {
+    return JSON.parse(storage.getItem(CHECKLIST_STORAGE_KEY)) || {};
+  } catch {
+    return {};
+  }
+}
+
+function writeChecklistState(storage, state) {
+  if (!storage) return;
+
+  try {
+    storage.setItem(CHECKLIST_STORAGE_KEY, JSON.stringify(state));
+  } catch {
+    // Keep the checklist usable even if browser storage is unavailable or full.
+  }
+}
+
+function updateChecklistProgress(inputs, storage) {
+  if (!checklistProgress) return;
+
+  const checkedCount = inputs.filter((input) => input.checked).length;
+  const storageNote = storage ? "" : " Browser storage is unavailable.";
+  checklistProgress.textContent =
+    checkedCount === 1
+      ? `1 of ${inputs.length} checks complete.${storageNote}`
+      : `${checkedCount} of ${inputs.length} checks complete.${storageNote}`;
+}
+
+function initialiseChecklists() {
+  if (!checklistLists.length) return;
+
+  const storage = getChecklistStorage();
+  const state = readChecklistState(storage);
+  const inputs = [];
+
+  checklistLists.forEach((list) => {
+    const listId = list.dataset.checklist;
+
+    Array.from(list.children).forEach((item, index) => {
+      if (item.tagName !== "LI") return;
+
+      const itemKey = `${listId}:${index + 1}`;
+      const checkboxId = `checklist-${listId}-${index + 1}`;
+      const checkbox = document.createElement("input");
+      const label = document.createElement("label");
+      const text = document.createElement("span");
+
+      checkbox.type = "checkbox";
+      checkbox.id = checkboxId;
+      checkbox.checked = Boolean(state[itemKey]);
+
+      label.className = "checklist-item";
+      label.htmlFor = checkboxId;
+      text.className = "checklist-text";
+
+      while (item.firstChild) {
+        text.appendChild(item.firstChild);
+      }
+
+      label.append(checkbox, text);
+      item.append(label);
+      item.classList.toggle("is-complete", checkbox.checked);
+      inputs.push(checkbox);
+
+      checkbox.addEventListener("change", () => {
+        item.classList.toggle("is-complete", checkbox.checked);
+
+        if (checkbox.checked) {
+          state[itemKey] = true;
+        } else {
+          delete state[itemKey];
+        }
+
+        writeChecklistState(storage, state);
+        updateChecklistProgress(inputs, storage);
+      });
+    });
+  });
+
+  resetChecklistButton?.addEventListener("click", () => {
+    inputs.forEach((input) => {
+      input.checked = false;
+      input.closest("li")?.classList.remove("is-complete");
+    });
+
+    Object.keys(state).forEach((key) => {
+      delete state[key];
+    });
+
+    if (storage) {
+      try {
+        storage.removeItem(CHECKLIST_STORAGE_KEY);
+      } catch {
+        writeChecklistState(storage, state);
+      }
+    }
+
+    updateChecklistProgress(inputs, storage);
+  });
+
+  updateChecklistProgress(inputs, storage);
+}
+
+initialiseChecklists();
+
 const searchInput = document.querySelector("#site-search");
 const statusNode = document.querySelector("#search-status");
 const searchableSections = Array.from(document.querySelectorAll(".searchable"));

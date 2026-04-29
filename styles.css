@@ -254,6 +254,39 @@ main {
   font-size: 0.92rem;
 }
 
+.checklist-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.checklist-progress {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+
+.secondary-button {
+  min-height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  padding: 8px 12px;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.secondary-button:hover {
+  border-color: rgba(31, 111, 78, 0.35);
+  background: var(--panel-alt);
+}
+
 .rule-card {
   margin-bottom: 22px;
   padding: 24px;
@@ -422,6 +455,59 @@ main {
   height: 16px;
   margin-top: 0.18em;
   accent-color: var(--track);
+}
+
+.checklist-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding-left: 0 !important;
+  list-style: none;
+}
+
+.checklist-list li {
+  margin: 0;
+}
+
+.checklist-item {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel-alt);
+  padding: 12px;
+  color: var(--ink);
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.checklist-item:hover {
+  border-color: rgba(31, 111, 78, 0.35);
+  background: #fff;
+}
+
+.checklist-item input {
+  width: 16px;
+  height: 16px;
+  margin-top: 0.22em;
+  accent-color: var(--track);
+}
+
+.checklist-item input:focus-visible {
+  outline: 3px solid rgba(31, 111, 78, 0.2);
+  outline-offset: 2px;
+}
+
+.checklist-text {
+  line-height: 1.42;
+}
+
+.checklist-list li.is-complete .checklist-text {
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-thickness: 1.5px;
 }
 
 .todo-copy {
