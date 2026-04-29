@@ -1,9 +1,9 @@
 # Caterham Academy Race Car Prep
 
-Static GitHub Pages site for 2026 Caterham Academy race car prep and permitted
-parts reference.
+Static GitHub Pages site for a 2026 Caterham Academy race car prep guide and
+permitted parts reference.
 
-- `index.html`: race car prep checklist and modification shortlist.
+- `index.html`: race car prep guide and modification shortlist.
 - `parts.html`: full permitted modifications, options, and part-number reference.
 
 ## Local Preview

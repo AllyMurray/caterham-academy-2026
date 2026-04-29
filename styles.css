@@ -296,31 +296,41 @@ main {
   text-decoration: none;
 }
 
-.prep-overview {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
-  margin: 0 0 24px;
+.content-section {
+  margin-top: 22px;
+  overflow: hidden;
 }
 
-.prep-card {
-  display: grid;
-  gap: 8px;
-  min-height: 156px;
-  align-content: start;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel);
-  padding: 18px;
-  box-shadow: var(--shadow);
-  color: var(--ink);
-  text-decoration: none;
+.guide-section {
+  margin-bottom: 26px;
 }
 
-.prep-card span {
+.guide-section .section-heading p {
+  max-width: 850px;
+  color: var(--muted);
+}
+
+.guide-body {
   display: grid;
-  width: 34px;
-  height: 34px;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+.guide-step {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 18px;
+  padding: 24px 26px;
+}
+
+.guide-step + .guide-step {
+  border-top: 1px solid var(--line);
+}
+
+.guide-step-number {
+  display: grid;
+  width: 38px;
+  height: 38px;
   place-items: center;
   border-radius: 50%;
   background: var(--track);
@@ -328,20 +338,23 @@ main {
   font-weight: 900;
 }
 
-.prep-card strong {
-  font-size: 1.05rem;
-  line-height: 1.2;
+.guide-step h3 {
+  margin-bottom: 8px;
+  font-size: 1.18rem;
 }
 
-.prep-card small {
+.guide-step p:not(.guide-step-number) {
+  max-width: 880px;
   color: var(--muted);
-  font-size: 0.92rem;
-  line-height: 1.4;
 }
 
-.content-section {
-  margin-top: 22px;
-  overflow: hidden;
+.guide-step ul {
+  margin: 12px 0 0;
+  padding-left: 1.15rem;
+}
+
+.guide-step li {
+  margin: 0.38rem 0;
 }
 
 .mod-summary {
@@ -439,17 +452,6 @@ td:nth-child(2) {
   border-top: 0;
 }
 
-.prep-stages {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 22px;
-  margin-top: 22px;
-}
-
-.prep-stages .content-section {
-  margin-top: 0;
-}
-
 .prohibited {
   border-color: rgba(166, 52, 47, 0.4);
 }
@@ -508,16 +510,17 @@ tr.is-hidden {
     position: static;
   }
 
-  .prep-overview,
-  .prep-stages {
-    grid-template-columns: 1fr;
-  }
-
   .section-heading,
+  .guide-step,
   .plain-list,
   .rule-card {
     padding-right: 18px;
     padding-left: 18px;
+  }
+
+  .guide-step {
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
 
   .compact-section {

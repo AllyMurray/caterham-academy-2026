@@ -2,19 +2,20 @@ const searchInput = document.querySelector("#site-search");
 const statusNode = document.querySelector("#search-status");
 const searchableSections = Array.from(document.querySelectorAll(".searchable"));
 const tableRows = Array.from(document.querySelectorAll(".searchable tbody tr"));
+const listItems = Array.from(document.querySelectorAll(".searchable li"));
 
 if (searchInput && statusNode) {
   function normalise(value) {
     return value.toLowerCase().trim();
   }
 
-  function sectionHasVisibleContent(section) {
+  function sectionHasVisibleContent(section, query) {
     const visibleRows = Array.from(section.querySelectorAll("tbody tr")).some(
       (row) => !row.classList.contains("is-hidden"),
     );
-    const textBlocks = Array.from(section.querySelectorAll(".plain-list li"));
+    const textBlocks = Array.from(section.querySelectorAll("li"));
     const visibleText = textBlocks.some((item) => !item.classList.contains("is-hidden"));
-    return visibleRows || visibleText;
+    return visibleRows || visibleText || Boolean(query && normalise(section.textContent).includes(query));
   }
 
   function applySearch() {
@@ -27,14 +28,14 @@ if (searchInput && statusNode) {
       if (isMatch) matches += 1;
     });
 
-    document.querySelectorAll(".plain-list li").forEach((item) => {
+    listItems.forEach((item) => {
       const isMatch = !query || normalise(item.textContent).includes(query);
       item.classList.toggle("is-hidden", !isMatch);
       if (isMatch && query) matches += 1;
     });
 
     searchableSections.forEach((section) => {
-      section.classList.toggle("is-hidden", !sectionHasVisibleContent(section));
+      section.classList.toggle("is-hidden", !sectionHasVisibleContent(section, query));
     });
 
     if (!query) {
