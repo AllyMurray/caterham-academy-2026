@@ -1,4 +1,5 @@
-const CHECKLIST_STORAGE_KEY = "caterham-academy-2026:spanner-checks:v1";
+const CHECKLIST_STORAGE_KEY =
+  document.body.dataset.checklistStorageKey || "caterham-academy-2026:checklist:v1";
 const checklistLists = Array.from(document.querySelectorAll("[data-checklist]"));
 const checklistProgress = document.querySelector("#checklist-progress");
 const resetChecklistButton = document.querySelector("#reset-checklist");
