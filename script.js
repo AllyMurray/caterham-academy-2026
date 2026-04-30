@@ -127,7 +127,10 @@ const searchInput = document.querySelector("#site-search");
 const statusNode = document.querySelector("#search-status");
 const searchableSections = Array.from(document.querySelectorAll(".searchable"));
 const tableRows = Array.from(document.querySelectorAll(".searchable tbody tr"));
-const listItems = Array.from(document.querySelectorAll(".searchable li, .searchable .todo-item"));
+const listItems = Array.from(
+  document.querySelectorAll(".searchable li, .searchable .todo-item, .searchable .prep-item"),
+);
+const prepGroups = Array.from(document.querySelectorAll(".searchable .prep-group"));
 
 if (searchInput && statusNode) {
   function normalise(value) {
@@ -138,7 +141,7 @@ if (searchInput && statusNode) {
     const visibleRows = Array.from(section.querySelectorAll("tbody tr")).some(
       (row) => !row.classList.contains("is-hidden"),
     );
-    const textBlocks = Array.from(section.querySelectorAll("li, .todo-item"));
+    const textBlocks = Array.from(section.querySelectorAll("li, .todo-item, .prep-item"));
     const visibleText = textBlocks.some((item) => !item.classList.contains("is-hidden"));
     return visibleRows || visibleText || Boolean(query && normalise(section.textContent).includes(query));
   }
@@ -157,6 +160,13 @@ if (searchInput && statusNode) {
       const isMatch = !query || normalise(item.textContent).includes(query);
       item.classList.toggle("is-hidden", !isMatch);
       if (isMatch && query) matches += 1;
+    });
+
+    prepGroups.forEach((group) => {
+      const visibleItems = Array.from(group.querySelectorAll(".prep-item")).some(
+        (item) => !item.classList.contains("is-hidden"),
+      );
+      group.classList.toggle("is-hidden", Boolean(query) && !visibleItems);
     });
 
     searchableSections.forEach((section) => {
