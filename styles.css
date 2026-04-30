@@ -343,6 +343,49 @@ main {
   text-decoration: none;
 }
 
+.guide-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+.guide-menu-card {
+  display: grid;
+  gap: 8px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 18px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.guide-menu-card:nth-child(3n) {
+  border-right: 0;
+}
+
+.guide-menu-card:hover {
+  background: var(--panel-alt);
+  color: var(--track);
+}
+
+.guide-menu-card strong {
+  font-size: 1.05rem;
+  line-height: 1.25;
+}
+
+.guide-menu-card span {
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.38;
+}
+
+.guide-menu-card.is-current {
+  background: #eef4f0;
+  color: var(--track);
+}
+
 .content-section {
   margin-top: 22px;
   overflow: hidden;
@@ -964,8 +1007,14 @@ tr.is-hidden {
 
   .compact-guide,
   .prep-card-grid,
+  .guide-menu-grid,
   .prep-flow {
     grid-template-columns: 1fr;
+  }
+
+  .guide-menu-card,
+  .guide-menu-card:nth-child(3n) {
+    border-right: 0;
   }
 
   .prep-flow-item + .prep-flow-item {
