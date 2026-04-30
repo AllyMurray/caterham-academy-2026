@@ -649,7 +649,10 @@ main {
 }
 
 .prep-group {
-  padding: 24px 26px;
+  display: grid;
+  grid-template-columns: minmax(180px, 0.24fr) minmax(0, 1fr);
+  gap: 28px;
+  padding: 26px;
 }
 
 .prep-group + .prep-group {
@@ -657,43 +660,61 @@ main {
 }
 
 .prep-group h3 {
-  margin-bottom: 14px;
+  position: sticky;
+  top: 88px;
+  align-self: start;
+  margin-bottom: 0;
   color: var(--muted);
   font-size: 0.82rem;
   font-weight: 900;
+  line-height: 1.35;
   text-transform: uppercase;
 }
 
 .prep-card-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
+  gap: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
 }
 
 .prep-item {
   display: grid;
-  align-content: start;
-  gap: 12px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel-alt);
-  padding: 14px;
+  grid-template-columns: minmax(170px, 0.34fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+  border: 0;
+  background: #fff;
+  padding: 16px;
+}
+
+.prep-item + .prep-item {
+  border-top: 1px solid var(--line);
+}
+
+.prep-item:nth-child(even) {
+  background: #fbfcfb;
 }
 
 .prep-item-wide {
-  grid-column: span 2;
+  grid-column: auto;
 }
 
 .prep-item h4 {
+  grid-column: 1;
+  margin-bottom: 0;
   font-size: 1.02rem;
   line-height: 1.25;
 }
 
 .status-badges {
+  grid-column: 1;
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: -4px;
+  margin-top: 8px;
 }
 
 .source-badge {
@@ -736,8 +757,11 @@ main {
 }
 
 .prep-item dl {
+  grid-column: 2;
+  grid-row: 1 / span 2;
   display: grid;
-  gap: 10px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px 16px;
 }
 
 .prep-item div {
@@ -756,6 +780,10 @@ main {
   color: var(--ink);
   font-size: 0.94rem;
   line-height: 1.42;
+}
+
+.prep-item dd a {
+  overflow-wrap: anywhere;
 }
 
 .section-heading {
@@ -944,8 +972,26 @@ tr.is-hidden {
   }
 
   .prep-group {
+    display: block;
     padding-right: 18px;
     padding-left: 18px;
+  }
+
+  .prep-group h3 {
+    position: static;
+    margin-bottom: 14px;
+  }
+
+  .prep-item {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 14px;
+  }
+
+  .prep-item dl {
+    grid-column: 1;
+    grid-row: auto;
+    grid-template-columns: 1fr;
   }
 
   .prep-item-wide {
