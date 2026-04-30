@@ -200,6 +200,16 @@ h1 {
   font-weight: 750;
 }
 
+.source-card a {
+  color: #fff;
+  text-decoration-color: rgba(255, 255, 255, 0.36);
+}
+
+.source-card a:hover {
+  color: var(--gold);
+  text-decoration-color: currentColor;
+}
+
 main {
   padding: 34px 0 70px;
 }
