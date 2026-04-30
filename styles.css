@@ -422,11 +422,45 @@ main {
   color: var(--muted);
 }
 
+.prep-flow {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--line);
+  background: #fbfcfb;
+}
+
+.prep-flow-item {
+  display: grid;
+  gap: 6px;
+  padding: 16px 18px;
+}
+
+.prep-flow-item + .prep-flow-item {
+  border-left: 1px solid var(--line);
+}
+
+.prep-flow-item strong {
+  color: var(--track);
+  font-size: 0.9rem;
+  line-height: 1.25;
+}
+
+.prep-flow-item span {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.35;
+}
+
 .todo-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
   gap: 0;
   border-top: 1px solid var(--line);
+}
+
+.delivery-todo-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .todo-card {
@@ -435,6 +469,18 @@ main {
 
 .todo-card + .todo-card {
   border-left: 1px solid var(--line);
+}
+
+.delivery-todo-grid .todo-card + .todo-card {
+  border-left: 0;
+}
+
+.delivery-todo-grid .todo-card:nth-child(even) {
+  border-left: 1px solid var(--line);
+}
+
+.delivery-todo-grid .todo-card:nth-child(n + 3) {
+  border-top: 1px solid var(--line);
 }
 
 .todo-card h3 {
@@ -824,8 +870,14 @@ tr.is-hidden {
   }
 
   .compact-guide,
-  .prep-card-grid {
+  .prep-card-grid,
+  .prep-flow {
     grid-template-columns: 1fr;
+  }
+
+  .prep-flow-item + .prep-flow-item {
+    border-top: 1px solid var(--line);
+    border-left: 0;
   }
 
   .compact-guide .guide-step + .guide-step {
@@ -844,6 +896,10 @@ tr.is-hidden {
 
   .todo-card + .todo-card {
     border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+
+  .delivery-todo-grid .todo-card:nth-child(even) {
     border-left: 0;
   }
 
