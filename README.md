@@ -7,6 +7,8 @@ knowledge, race prep, spanner checks, and permitted parts reference.
 - `driver-guide.html`: driver guide hub covering the supplied Academy PDFs.
 - `guide-*.html`: focused driver guide pages for basics, car prep, safety,
   setup, events/rules, and racecraft.
+- `sources.html`: source coverage map and open confirmation items from the PDFs.
+- `search.html`: global site search across the static guide pages.
 - `race-prep.html`: race event, session, safety kit, and scrutineering checklist.
 - `parts.html`: full permitted modifications, options, and part-number reference.
 - `spanner-checks.html`: workshop spanner checks, support points, and visual checks.

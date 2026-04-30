@@ -386,6 +386,19 @@ main {
   color: var(--track);
 }
 
+.source-note {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.section-heading .source-note {
+  max-width: none;
+}
+
 .content-section {
   margin-top: 22px;
   overflow: hidden;
@@ -924,6 +937,69 @@ td:nth-child(2) {
   text-transform: uppercase;
 }
 
+.coverage-grid {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.coverage-row {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.7fr) minmax(190px, 0.65fr) minmax(260px, 1fr);
+  gap: 24px;
+  border-bottom: 1px solid var(--line);
+  padding: 20px 26px;
+}
+
+.coverage-row h3,
+.coverage-row p {
+  margin-bottom: 6px;
+}
+
+.coverage-row p {
+  color: var(--muted);
+}
+
+.coverage-row ul {
+  margin: 0;
+  padding-left: 1.15rem;
+}
+
+.coverage-row li {
+  margin: 0.32rem 0;
+}
+
+.search-results {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.search-result {
+  display: grid;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  padding: 16px;
+}
+
+.search-result h3 {
+  margin-bottom: 0;
+}
+
+.search-result p {
+  margin-bottom: 0;
+  color: var(--muted);
+}
+
+.search-result-meta {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
 .compact-section {
   display: grid;
   grid-template-columns: minmax(220px, 0.45fr) minmax(260px, 1fr) minmax(260px, 1fr);
@@ -1008,7 +1084,8 @@ tr.is-hidden {
   .compact-guide,
   .prep-card-grid,
   .guide-menu-grid,
-  .prep-flow {
+  .prep-flow,
+  .coverage-row {
     grid-template-columns: 1fr;
   }
 

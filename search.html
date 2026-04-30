@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Caterham Academy Site Search</title>
+    <meta
+      name="description"
+      content="Search the Caterham Academy prep site across delivery prep, driver guide, race prep, spanner checks, parts, and source coverage."
+    />
+    <meta name="theme-color" content="#123f2d" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icon-192.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="topbar" aria-label="Primary">
+        <a class="brand" href="index.html" aria-label="Caterham Academy delivery prep home">
+          <span class="brand-mark">7</span>
+          <span>Academy Mods</span>
+        </a>
+        <div class="topbar-links">
+          <a href="index.html">Delivery prep</a>
+          <a href="driver-guide.html">Driver guide</a>
+          <a href="race-prep.html">Race prep</a>
+          <a href="spanner-checks.html">Spanner checks</a>
+          <a href="parts.html">Parts list</a>
+          <a href="sources.html">Sources</a>
+          <a href="search.html">Search</a>
+        </div>
+      </nav>
+
+      <section id="top" class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Site search</p>
+          <h1>Search The Guide</h1>
+          <p class="lead">
+            Find the right page for parts, delivery prep, race prep, spanner checks,
+            driver-guide topics, and source coverage.
+          </p>
+        </div>
+        <aside class="source-card" aria-label="Search scope">
+          <dl>
+            <div>
+              <dt>Searches</dt>
+              <dd>All main site pages and focused driver-guide sections</dd>
+            </div>
+            <div>
+              <dt>Tip</dt>
+              <dd>Try a part number, job, tool, or scrutineering risk</dd>
+            </div>
+          </dl>
+        </aside>
+      </section>
+    </header>
+
+    <main>
+      <section class="controls" aria-label="Global site search">
+        <label for="global-search">Search all pages</label>
+        <input
+          id="global-search"
+          type="search"
+          placeholder="Try 30P307E, headlight tape, helmet clearance, fuel sampling, brake pads..."
+          autocomplete="off"
+        />
+        <p id="global-search-status" role="status" aria-live="polite">Showing suggested pages.</p>
+      </section>
+
+      <section class="content-section">
+        <div class="section-heading">
+          <p class="section-kicker">Results</p>
+          <h2>Matching Pages</h2>
+          <p>
+            Search results point to the most relevant page or section; use the on-page
+            search on larger pages for a finer filter.
+          </p>
+        </div>
+        <div id="global-search-results" class="search-results" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        Built as a quick reference for the 2026 Caterham Academy. Always check the current
+        regulations, final instructions, bulletins, and official guidance before acting.
+      </p>
+    </footer>
+  </body>
+</html>
