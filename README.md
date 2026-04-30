@@ -1,9 +1,10 @@
 # Caterham Academy Prep
 
-Static GitHub Pages site for 2026 Caterham Academy delivery prep, race prep,
-spanner checks, and permitted parts reference.
+Static GitHub Pages site for 2026 Caterham Academy delivery prep, driver
+knowledge, race prep, spanner checks, and permitted parts reference.
 
 - `index.html`: delivery prep guide and modification shortlist.
+- `driver-guide.html`: broader driver guide covering the supplied Academy PDFs.
 - `race-prep.html`: race event, session, safety kit, and scrutineering checklist.
 - `parts.html`: full permitted modifications, options, and part-number reference.
 - `spanner-checks.html`: workshop spanner checks, support points, and visual checks.
