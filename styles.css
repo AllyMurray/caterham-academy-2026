@@ -80,9 +80,20 @@ main,
   font-weight: 800;
 }
 
-.brand:hover {
+.site-header .brand:hover,
+.site-header .brand:focus {
   color: #fff;
   text-decoration-color: var(--gold);
+}
+
+.site-header .brand:hover span,
+.site-header .brand:focus span {
+  color: inherit;
+}
+
+.site-header .brand:hover .brand-mark,
+.site-header .brand:focus .brand-mark {
+  color: var(--gold);
 }
 
 .brand-mark {
