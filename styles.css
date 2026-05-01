@@ -1,15 +1,16 @@
 :root {
   color-scheme: light;
-  --ink: #17211b;
-  --muted: #5f6d66;
-  --line: #d9e1dd;
+  --ink: #121411;
+  --muted: #62655f;
+  --line: #dde2d5;
   --panel: #ffffff;
-  --panel-alt: #f4f7f5;
-  --track: #123f2d;
-  --track-2: #1f6f4e;
-  --gold: #e3b341;
+  --panel-alt: #f5f7ec;
+  --track: #050505;
+  --track-2: #3f5200;
+  --gold: #c8f000;
+  --charcoal: #3f4144;
   --red: #a6342f;
-  --shadow: 0 18px 50px rgba(17, 34, 27, 0.12);
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.14);
 }
 
 * {
@@ -22,7 +23,7 @@ html {
 
 body {
   margin: 0;
-  background: #f7f9f7;
+  background: #f5f6ef;
   color: var(--ink);
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -33,7 +34,7 @@ body {
 a {
   color: var(--track-2);
   font-weight: 700;
-  text-decoration-color: rgba(31, 111, 78, 0.35);
+  text-decoration-color: rgba(63, 82, 0, 0.35);
   text-underline-offset: 0.18em;
 }
 
@@ -44,8 +45,8 @@ a:hover {
 
 .site-header {
   background:
-    linear-gradient(135deg, rgba(18, 63, 45, 0.94), rgba(15, 34, 30, 0.86)),
-    radial-gradient(circle at 80% 20%, rgba(227, 179, 65, 0.22), transparent 28%);
+    linear-gradient(132deg, rgba(200, 240, 0, 0.22) 0 18%, transparent 18% 100%),
+    linear-gradient(135deg, rgba(5, 5, 5, 0.98), rgba(63, 65, 68, 0.94));
   color: #fff;
 }
 
@@ -334,7 +335,7 @@ main {
 
 .controls input:focus {
   border-color: var(--track-2);
-  outline: 3px solid rgba(31, 111, 78, 0.18);
+  outline: 3px solid rgba(200, 240, 0, 0.32);
 }
 
 #search-status {
@@ -372,7 +373,7 @@ main {
 }
 
 .secondary-button:hover {
-  border-color: rgba(31, 111, 78, 0.35);
+  border-color: rgba(63, 82, 0, 0.35);
   background: var(--panel-alt);
 }
 
@@ -458,7 +459,7 @@ main {
 }
 
 .guide-menu-card.is-current {
-  background: #eef4f0;
+  background: #f1f6d8;
   color: var(--track);
 }
 
@@ -681,7 +682,7 @@ main {
 }
 
 .todo-item:hover {
-  border-color: rgba(31, 111, 78, 0.35);
+  border-color: rgba(63, 82, 0, 0.35);
   background: #fff;
 }
 
@@ -723,7 +724,7 @@ main {
 }
 
 .checklist-item:hover {
-  border-color: rgba(31, 111, 78, 0.35);
+  border-color: rgba(63, 82, 0, 0.35);
   background: #fff;
 }
 
@@ -735,7 +736,7 @@ main {
 }
 
 .checklist-item input:focus-visible {
-  outline: 3px solid rgba(31, 111, 78, 0.2);
+  outline: 3px solid rgba(200, 240, 0, 0.3);
   outline-offset: 2px;
 }
 
@@ -790,7 +791,7 @@ main {
 
 .prep-group h3 {
   border-bottom: 1px solid var(--line);
-  background: #eef4f0;
+  background: #f1f6d8;
   padding: 10px 16px;
   margin-bottom: 0;
   color: var(--track);
@@ -873,8 +874,8 @@ main {
 }
 
 .source-badge.recommended {
-  border-color: rgba(31, 111, 78, 0.28);
-  background: #eef6f1;
+  border-color: rgba(63, 82, 0, 0.28);
+  background: #f2f8dc;
   color: var(--track);
 }
 
@@ -991,7 +992,7 @@ td:nth-child(2) {
 
 .table-group td {
   width: auto !important;
-  background: #eef4f0;
+  background: #f1f6d8;
   color: var(--track);
   font-family: inherit;
   font-size: 0.78rem;
@@ -1111,6 +1112,14 @@ tr.is-hidden {
   padding: 28px 0 44px;
   color: var(--muted);
   font-size: 0.92rem;
+}
+
+.site-footer p + p {
+  margin-top: 10px;
+}
+
+.site-footer strong {
+  color: var(--ink);
 }
 
 @media (max-width: 820px) {
