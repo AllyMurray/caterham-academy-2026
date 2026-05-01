@@ -76,16 +76,18 @@ main,
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  border: 1px solid transparent;
   border-radius: 999px;
   font-size: 1rem;
   font-weight: 800;
-  margin: -6px;
-  padding: 6px;
+  margin: -7px;
+  padding: 6px 10px 6px 6px;
 }
 
 .site-header .brand:hover,
 .site-header .brand:focus {
-  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(200, 240, 0, 0.42);
+  background: rgba(200, 240, 0, 0.14);
   color: #fff;
 }
 
