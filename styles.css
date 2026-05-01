@@ -106,6 +106,82 @@ main,
   color: #fff;
 }
 
+.topbar-links a[aria-current] {
+  color: #fff;
+  text-decoration-color: currentColor;
+}
+
+.brand:focus-visible,
+.topbar-links a:focus-visible,
+.menu-toggle:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.menu-toggle {
+  display: none;
+  min-height: 42px;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  padding: 8px 12px;
+  font: inherit;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.menu-toggle:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.menu-toggle-icon {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.menu-toggle-icon::before,
+.menu-toggle-icon::after {
+  position: absolute;
+  left: 0;
+  width: 20px;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  content: "";
+  transition:
+    transform 0.18s ease,
+    top 0.18s ease;
+}
+
+.menu-toggle-icon::before {
+  top: -6px;
+}
+
+.menu-toggle-icon::after {
+  top: 6px;
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle-icon {
+  background: transparent;
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle-icon::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle-icon::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 360px;
@@ -1046,12 +1122,51 @@ tr.is-hidden {
   }
 
   .topbar {
-    align-items: flex-start;
-    flex-direction: column;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    margin-left: auto;
   }
 
   .topbar-links {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
     justify-content: flex-start;
+    gap: 0;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 8px;
+    background: rgba(8, 25, 20, 0.48);
+    padding: 6px;
+  }
+
+  .js-enabled .topbar-links {
+    display: none;
+  }
+
+  .js-enabled .topbar.is-menu-open .topbar-links {
+    display: flex;
+  }
+
+  .topbar-links a {
+    display: block;
+    border-radius: 6px;
+    padding: 12px;
+    color: rgba(255, 255, 255, 0.88);
+  }
+
+  .topbar-links a + a {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .topbar-links a:hover,
+  .topbar-links a[aria-current] {
+    background: rgba(255, 255, 255, 0.1);
   }
 
   .hero {

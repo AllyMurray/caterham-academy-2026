@@ -1,3 +1,69 @@
+document.documentElement.classList.add("js-enabled");
+
+function initialisePrimaryMenu() {
+  const topbar = document.querySelector(".topbar");
+  const toggle = document.querySelector(".menu-toggle");
+  const menu = document.querySelector("[data-primary-menu]");
+
+  if (!topbar || !toggle || !menu) return;
+
+  const links = Array.from(menu.querySelectorAll("a"));
+  const currentFile = window.location.pathname.split("/").pop() || "index.html";
+
+  links.forEach((link) => {
+    const linkFile = new URL(link.href, window.location.href).pathname.split("/").pop() || "index.html";
+
+    if (linkFile === currentFile) {
+      link.setAttribute("aria-current", "page");
+    } else if (linkFile === "driver-guide.html" && currentFile.startsWith("guide-")) {
+      link.setAttribute("aria-current", "location");
+    }
+  });
+
+  function isOpen() {
+    return toggle.getAttribute("aria-expanded") === "true";
+  }
+
+  function setOpen(open) {
+    topbar.classList.toggle("is-menu-open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+  }
+
+  toggle.addEventListener("click", () => {
+    setOpen(!isOpen());
+  });
+
+  links.forEach((link) => {
+    link.addEventListener("click", () => {
+      setOpen(false);
+    });
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!isOpen() || topbar.contains(event.target)) return;
+    setOpen(false);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || !isOpen()) return;
+    setOpen(false);
+    toggle.focus();
+  });
+
+  const desktopQuery = window.matchMedia("(min-width: 821px)");
+  const closeOnDesktop = () => {
+    if (desktopQuery.matches) setOpen(false);
+  };
+
+  if (desktopQuery.addEventListener) {
+    desktopQuery.addEventListener("change", closeOnDesktop);
+  } else if (desktopQuery.addListener) {
+    desktopQuery.addListener(closeOnDesktop);
+  }
+}
+
+initialisePrimaryMenu();
+
 const CHECKLIST_STORAGE_KEY =
   document.body.dataset.checklistStorageKey || "caterham-academy-2026:checklist:v1";
 const checklistLists = Array.from(document.querySelectorAll("[data-checklist]"));
