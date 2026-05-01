@@ -80,6 +80,11 @@ main,
   font-weight: 800;
 }
 
+.brand:hover {
+  color: #fff;
+  text-decoration-color: var(--gold);
+}
+
 .brand-mark {
   display: grid;
   width: 32px;
