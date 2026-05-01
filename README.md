@@ -3,7 +3,9 @@
 Static GitHub Pages site for 2026 Caterham Academy delivery prep, driver
 knowledge, race prep, spanner checks, and permitted parts reference.
 
-- `index.html`: delivery prep guide and modification shortlist.
+- `index.html`: task-focused start page.
+- `delivery-prep.html`: delivery prep guide and modification shortlist.
+- `reference.html`: reference hub for parts, guide pages, sources, and search.
 - `driver-guide.html`: driver guide hub covering the supplied Academy PDFs.
 - `guide-*.html`: focused driver guide pages for basics, car prep, safety,
   setup, events/rules, and racecraft.

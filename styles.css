@@ -467,6 +467,12 @@ main {
   color: var(--track);
 }
 
+.guide-menu-card:focus-visible,
+.task-card:focus-visible {
+  outline: 3px solid rgba(63, 82, 0, 0.38);
+  outline-offset: -3px;
+}
+
 .guide-menu-card strong {
   font-size: 1.05rem;
   line-height: 1.25;
@@ -500,6 +506,56 @@ main {
 .content-section {
   margin-top: 22px;
   overflow: hidden;
+}
+
+.task-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+.task-card {
+  display: grid;
+  gap: 10px;
+  min-height: 190px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 24px 26px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.task-card:nth-child(2n) {
+  border-right: 0;
+}
+
+.task-card:hover {
+  background: var(--panel-alt);
+  color: var(--ink);
+}
+
+.task-card strong {
+  font-size: clamp(1.35rem, 2.4vw, 2rem);
+  line-height: 1.08;
+}
+
+.task-card span:not(.task-label) {
+  max-width: 520px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+.task-label {
+  color: var(--track-2);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.primary-task {
+  background: #f1f6d8;
 }
 
 .guide-section {
@@ -1230,8 +1286,14 @@ tr.is-hidden {
   .prep-card-grid,
   .guide-menu-grid,
   .prep-flow,
+  .task-grid,
   .coverage-row {
     grid-template-columns: 1fr;
+  }
+
+  .task-card,
+  .task-card:nth-child(2n) {
+    border-right: 0;
   }
 
   .guide-menu-card,

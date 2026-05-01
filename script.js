@@ -1,5 +1,12 @@
 document.documentElement.classList.add("js-enabled");
 
+const currentPageFile = window.location.pathname.split("/").pop() || "index.html";
+const legacyDeliveryPrepHashes = new Set(["#guide", "#todo", "#prep-mods"]);
+
+if (currentPageFile === "index.html" && legacyDeliveryPrepHashes.has(window.location.hash)) {
+  window.location.replace(`delivery-prep.html${window.location.hash}`);
+}
+
 function initialisePrimaryMenu() {
   const topbar = document.querySelector(".topbar");
   const toggle = document.querySelector(".menu-toggle");
@@ -8,14 +15,18 @@ function initialisePrimaryMenu() {
   if (!topbar || !toggle || !menu) return;
 
   const links = Array.from(menu.querySelectorAll("a"));
-  const currentFile = window.location.pathname.split("/").pop() || "index.html";
+  const currentFile = currentPageFile;
 
   links.forEach((link) => {
     const linkFile = new URL(link.href, window.location.href).pathname.split("/").pop() || "index.html";
 
     if (linkFile === currentFile) {
       link.setAttribute("aria-current", "page");
-    } else if (linkFile === "driver-guide.html" && currentFile.startsWith("guide-")) {
+    } else if (
+      linkFile === "reference.html" &&
+      (currentFile.startsWith("guide-") ||
+        ["driver-guide.html", "parts.html", "sources.html", "search.html"].includes(currentFile))
+    ) {
       link.setAttribute("aria-current", "location");
     }
   });
@@ -261,8 +272,17 @@ const globalSearchResults = document.querySelector("#global-search-results");
 
 const GLOBAL_SEARCH_INDEX = [
   {
-    title: "Delivery Prep",
+    title: "Start",
     url: "index.html",
+    section: "Workflow launcher",
+    summary:
+      "Start page for choosing delivery prep, race weekend prep, spanner checks, or reference lookup.",
+    keywords:
+      "start home workflow launcher delivery prep race weekend spanner checks reference",
+  },
+  {
+    title: "Delivery Prep",
+    url: "delivery-prep.html",
     section: "Post-delivery checklist",
     summary:
       "What to order, fit, and check after handover: ignition switch, transponder, brake pads, half sidescreens, mirrors, anti-roll bar, fuel drain, dash timer, handbrake cover, tape, and first shakedown items.",
@@ -271,7 +291,7 @@ const GLOBAL_SEARCH_INDEX = [
   },
   {
     title: "Prep Parts And Why They Matter",
-    url: "index.html#prep-mods",
+    url: "delivery-prep.html#prep-mods",
     section: "Delivery prep buying list",
     summary:
       "Practical buying list for parts to order separately, fit after handover, or treat as conscious modifications.",
@@ -286,6 +306,15 @@ const GLOBAL_SEARCH_INDEX = [
       "Split driver reference covering basics, car prep, safety, setup, events, rules, racecraft, and source coverage.",
     keywords:
       "driver guide menu academy basics car prep safety setup events rules racecraft source coverage",
+  },
+  {
+    title: "Reference Hub",
+    url: "reference.html",
+    section: "Parts, guide, sources, and search",
+    summary:
+      "Reference hub for parts, driver guide pages, source coverage, global search, and the regulations PDF.",
+    keywords:
+      "reference hub parts driver guide sources coverage search regulations PDF",
   },
   {
     title: "Basics & Terms",
