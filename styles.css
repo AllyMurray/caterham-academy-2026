@@ -76,14 +76,17 @@ main,
   display: inline-flex;
   align-items: center;
   gap: 10px;
+  border-radius: 999px;
   font-size: 1rem;
   font-weight: 800;
+  margin: -6px;
+  padding: 6px;
 }
 
 .site-header .brand:hover,
 .site-header .brand:focus {
+  background: rgba(255, 255, 255, 0.1);
   color: #fff;
-  text-decoration-color: var(--gold);
 }
 
 .site-header .brand:hover span,
