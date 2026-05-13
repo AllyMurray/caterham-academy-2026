@@ -1,4 +1,4 @@
-const CACHE_NAME = "caterham-academy-prep-v17";
+const CACHE_NAME = "caterham-academy-prep-v18";
 const CORE_ASSETS = [
   "./",
   "./index.html",
