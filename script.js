@@ -205,18 +205,22 @@ function initialiseDeliveryFitBuilder() {
   if (!choiceRows.length) return;
 
   choiceRows.forEach((row) => {
-    const label = document.createElement("label");
-    const input = document.createElement("input");
-    const text = document.createElement("span");
+    let label = row.querySelector(".prep-fit-choice");
+    let input = label?.querySelector("input");
 
-    label.className = "prep-fit-choice";
+    if (!label || !input) {
+      label = document.createElement("label");
+      input = document.createElement("input");
+
+      label.className = "prep-fit-choice";
+      input.type = "checkbox";
+      label.append(input, " Include in fit list");
+      row.prepend(label);
+    }
+
     input.type = "checkbox";
     input.dataset.fitChoice = row.dataset.fitChoice;
     if (row.dataset.fitRequires) input.dataset.fitRequires = row.dataset.fitRequires;
-    text.textContent = "Fit";
-
-    label.append(input, text);
-    row.prepend(label);
     row.classList.add("prep-item-selectable");
   });
 

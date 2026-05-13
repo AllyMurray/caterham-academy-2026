@@ -955,20 +955,20 @@ main {
 
 .prep-fit-choice {
   grid-column: 1;
-  grid-row: 2;
-  display: inline-grid;
-  width: fit-content;
-  grid-template-columns: 16px auto;
-  gap: 7px;
+  grid-row: 1;
+  display: grid;
+  width: 100%;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: 8px;
   align-items: center;
-  border: 1px solid rgba(63, 82, 0, 0.2);
-  border-radius: 999px;
+  border: 1px solid rgba(63, 82, 0, 0.28);
+  border-radius: 8px;
   background: #f8faf8;
-  padding: 4px 8px;
+  padding: 7px 9px;
   color: var(--track);
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-weight: 900;
-  line-height: 1;
+  line-height: 1.2;
   text-transform: uppercase;
   cursor: pointer;
 }
@@ -979,10 +979,14 @@ main {
 }
 
 .prep-fit-choice input {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   margin: 0;
   accent-color: var(--track);
+}
+
+.prep-item-selectable h4 {
+  grid-row: 2;
 }
 
 .prep-item-selectable .status-badges {
