@@ -329,6 +329,7 @@ const listItems = Array.from(
   ),
 );
 const prepGroups = Array.from(document.querySelectorAll(".searchable .prep-group"));
+const referenceDrawers = Array.from(document.querySelectorAll(".reference-drawer"));
 
 if (searchInput && statusNode) {
   function normalise(value) {
@@ -379,6 +380,12 @@ if (searchInput && statusNode) {
 
     searchableSections.forEach((section) => {
       section.classList.toggle("is-hidden", !sectionHasVisibleContent(section, query));
+    });
+
+    referenceDrawers.forEach((drawer) => {
+      if (query && normalise(drawer.textContent).includes(query)) {
+        drawer.open = true;
+      }
     });
 
     if (!query) {

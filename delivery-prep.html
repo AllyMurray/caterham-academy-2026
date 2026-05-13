@@ -159,25 +159,6 @@
           </p>
         </div>
 
-        <div class="prep-flow" aria-label="Delivery prep workflow summary">
-          <article class="prep-flow-item">
-            <strong>1. Driver fit and safety</strong>
-            <span>Make the cockpit safe and comfortable before changing the car around it.</span>
-          </article>
-          <article class="prep-flow-item">
-            <strong>2. Fit the parts</strong>
-            <span>Install the useful race-prep parts that are not already supplied.</span>
-          </article>
-          <article class="prep-flow-item">
-            <strong>3. Controls and data</strong>
-            <span>Sort switchgear, transponder, inertia switch, and timing/data items.</span>
-          </article>
-          <article class="prep-flow-item">
-            <strong>4. Verify and set up</strong>
-            <span>Check the delivered car, then do service and setup work before testing.</span>
-          </article>
-        </div>
-
         <div class="delivery-builder" data-delivery-builder aria-labelledby="delivery-builder-heading">
           <div class="delivery-builder-heading">
             <div>
@@ -205,13 +186,10 @@
                 </div>
               </div>
               <div class="delivery-builder-options">
-                <label class="builder-choice builder-choice-static">
-                  <input type="checkbox" checked disabled />
-                  <span class="todo-copy">
-                    <span class="todo-title">Core driver fit checks</span>
-                    <span class="todo-context">Seat, belts, FHR, helmet clearance, head restraint, arm restraints, and cage padding remain in the checklist.</span>
-                  </span>
-                </label>
+                <div class="builder-note">
+                  <span class="todo-title">Core driver fit checks are included automatically</span>
+                  <span class="todo-context">Seat, belts, FHR, helmet clearance, head restraint, arm restraints, and cage padding remain in the generated checklist.</span>
+                </div>
               </div>
             </article>
 
@@ -699,15 +677,13 @@
           <p class="section-kicker">Quick reference</p>
           <h2>Prep Parts And Why They Matter</h2>
           <p>
-            This is the quick lookup for the guide above. It keeps the mod, part
-            number or source, benefit, and timing together without turning Delivery prep
-            into the full regulation catalogue. For the complete regulation
-            reference, use the <a href="parts.html">full parts list</a>. Badges call out
-            mandatory regulation items, conditional requirements, and explicit Caterham
-            recommendations or cautions.
+            Open this only when you need part numbers, sources, or fitment notes. For
+            the complete regulation reference, use the <a href="parts.html">full parts list</a>.
           </p>
         </div>
-        <div class="prep-groups">
+        <details class="reference-drawer">
+          <summary>Open prep parts reference</summary>
+          <div class="prep-groups">
           <article class="prep-group">
             <h3>Order Separately, Fit After Handover</h3>
             <div class="prep-card-grid">
@@ -1177,7 +1153,8 @@
               </article>
             </div>
           </article>
-        </div>
+          </div>
+        </details>
       </section>
 
       <section class="rule-card">
