@@ -22,11 +22,24 @@ knowledge, race prep, spanner checks, and permitted parts reference.
 Open any of the HTML pages directly in a browser, or serve the directory with
 any static file server.
 
+## Tests
+
+Install dependencies once, then run the Playwright regression suite:
+
+```sh
+npm install
+npx playwright install chromium
+npm run check
+```
+
+The tests cover the Delivery Prep checklist builder, saved selection handling,
+dependency expansion, and the generated checklist handoff.
+
 ## GitHub Pages
 
 This repository includes a GitHub Actions workflow that publishes the root static
-site to GitHub Pages. In the repository settings, set Pages to use GitHub Actions
-as the source.
+site to GitHub Pages after the test suite passes. In the repository settings, set
+Pages to use GitHub Actions as the source.
 
 ## Progressive Web App
 
