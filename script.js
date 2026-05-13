@@ -244,7 +244,7 @@ function initialiseDeliveryFitBuilder() {
 
   function enforceDependencies() {
     choices.forEach((choice) => {
-      choice.closest(".builder-choice")?.classList.remove("is-dependency-selected");
+      choice.closest("[data-builder-option]")?.classList.remove("is-dependency-selected");
     });
 
     choices.forEach((choice) => {
@@ -257,7 +257,7 @@ function initialiseDeliveryFitBuilder() {
           const requiredChoice = findChoice(requiredPart);
           if (!requiredChoice) return;
           requiredChoice.checked = true;
-          requiredChoice.closest(".builder-choice")?.classList.add("is-dependency-selected");
+          requiredChoice.closest("[data-builder-option]")?.classList.add("is-dependency-selected");
         });
     });
   }
@@ -325,7 +325,7 @@ const searchableSections = Array.from(document.querySelectorAll(".searchable"));
 const tableRows = Array.from(document.querySelectorAll(".searchable tbody tr"));
 const listItems = Array.from(
   document.querySelectorAll(
-    ".searchable li, .searchable .builder-choice, .searchable .todo-item, .searchable .prep-item, .searchable .coverage-row",
+    ".searchable li, .searchable .todo-item, .searchable .prep-item, .searchable .coverage-row",
   ),
 );
 const prepGroups = Array.from(document.querySelectorAll(".searchable .prep-group"));
@@ -344,7 +344,7 @@ if (searchInput && statusNode) {
     const rows = Array.from(section.querySelectorAll("tbody tr"));
     const visibleRows = rows.some((row) => !row.classList.contains("is-hidden"));
     const textBlocks = Array.from(
-      section.querySelectorAll("li, .builder-choice, .todo-item, .prep-item, .coverage-row"),
+      section.querySelectorAll("li, .todo-item, .prep-item, .coverage-row"),
     );
     const visibleText = textBlocks.some(isSearchVisible);
     const hasStructuredContent = rows.length > 0 || textBlocks.length > 0;
