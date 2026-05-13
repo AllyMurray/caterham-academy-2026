@@ -706,7 +706,7 @@ main {
 
 .builder-step-tabs {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 0;
   border-top: 1px solid var(--line);
 }
@@ -752,6 +752,44 @@ main {
   font-weight: 900;
   line-height: 1.3;
   text-transform: uppercase;
+}
+
+.builder-choice-stack {
+  display: grid;
+  align-content: start;
+  gap: 16px;
+}
+
+.builder-choice-group {
+  display: grid;
+  gap: 10px;
+}
+
+.builder-choice-group h4 {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 900;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.builder-choice-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.42;
+}
+
+.builder-conditional {
+  display: grid;
+  gap: 10px;
+  border-left: 3px solid var(--line);
+  padding-left: 14px;
+}
+
+.builder-conditional[hidden] {
+  display: none;
 }
 
 .builder-review-body {
@@ -893,6 +931,15 @@ main {
   height: 16px;
   margin-top: 0.18em;
   accent-color: var(--track);
+}
+
+.driver-fit-generated-list {
+  display: grid;
+  gap: 0;
+}
+
+.delivery-todo-grid .driver-fit-generated-list .todo-item {
+  border-top: 1px solid var(--line);
 }
 
 .checklist-list {
@@ -1479,13 +1526,15 @@ tr.is-hidden {
   }
 
   .builder-step-tabs {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
   }
 
+  .builder-step-tabs button,
   .builder-step-tabs button:nth-child(2n) {
     border-right: 0;
   }
 
+  .builder-step-tabs button + button,
   .builder-step-tabs button:nth-child(n + 3) {
     border-top: 1px solid var(--line);
   }

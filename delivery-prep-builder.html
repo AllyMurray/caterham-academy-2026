@@ -40,8 +40,8 @@
           <p class="eyebrow">2026 Caterham Academy</p>
           <h1>Build Delivery Prep Checklist</h1>
           <p class="lead">
-            Pick the optional jobs you plan to fit after handover. Your choices are saved
-            and used to generate the Delivery Prep checklist.
+            Pick the driver-fit path and optional jobs you plan to complete after handover.
+            Your choices are saved and used to generate the Delivery Prep checklist.
           </p>
           <nav class="on-page-nav" aria-label="On this page">
             <span>Steps</span>
@@ -58,7 +58,7 @@
             </div>
             <div>
               <dt>Always included</dt>
-              <dd>Driver fit, safety checks, delivery checks, setup, and service baseline</dd>
+              <dd>Safety checks, delivery checks, setup, and service baseline</dd>
             </div>
             <div>
               <dt>Return later</dt>
@@ -86,23 +86,141 @@
           <p class="section-kicker">Checklist builder</p>
           <h2 id="delivery-builder-heading">Choose The Jobs You Are Fitting</h2>
           <p>
-            Work through each group, then review the saved selection. Dependencies are
-            added automatically where one choice requires another.
+            Work through driver fit first, then the parts groups. Dependencies are added
+            automatically where one choice requires another.
           </p>
         </div>
 
         <div class="builder-step-tabs" aria-label="Builder steps">
-          <button type="button" data-builder-step-target="body">1. Body &amp; cockpit</button>
-          <button type="button" data-builder-step-target="brakes">2. Brakes, fuel &amp; data</button>
-          <button type="button" data-builder-step-target="setup">3. Setup &amp; service</button>
-          <button type="button" data-builder-step-target="review">4. Review</button>
+          <button type="button" data-builder-step-target="fit">1. Driver fit</button>
+          <button type="button" data-builder-step-target="body">2. Body &amp; cockpit</button>
+          <button type="button" data-builder-step-target="brakes">3. Brakes, fuel &amp; data</button>
+          <button type="button" data-builder-step-target="setup">4. Setup &amp; service</button>
+          <button type="button" data-builder-step-target="review">5. Review</button>
         </div>
 
         <div class="builder-flow-panels">
+          <section class="builder-flow-panel" data-builder-panel="fit" aria-labelledby="builder-fit-heading">
+            <article class="todo-card builder-flow-card">
+              <div class="todo-card-heading">
+                <p class="builder-step-label">Step 1 of 5</p>
+                <h3 id="builder-fit-heading">Driver Fit</h3>
+                <p>Start with helmet clearance. The generated checklist will only show the path that matches your measurement.</p>
+              </div>
+              <div class="builder-choice-stack">
+                <div class="builder-choice-group">
+                  <h4>Helmet clearance</h4>
+                  <p class="builder-choice-note">Measure with the driver belted in, helmet and FHR on, in the normal driving position.</p>
+                  <div class="todo-list">
+                    <label class="todo-item" data-driver-fit-option>
+                      <input type="radio" name="helmet-clearance" value="unchecked" data-driver-fit-choice="clearance" checked />
+                      <span class="todo-copy">
+                        <span class="todo-title">Not checked yet</span>
+                        <span class="todo-context">Keep a measurement job in the generated checklist.</span>
+                      </span>
+                    </label>
+                    <label class="todo-item" data-driver-fit-option>
+                      <input type="radio" name="helmet-clearance" value="pass" data-driver-fit-choice="clearance" />
+                      <span class="todo-copy">
+                        <span class="todo-title">5 cm or more</span>
+                        <span class="todo-context">The car clears the minimum measurement in the current seat position.</span>
+                      </span>
+                    </label>
+                    <label class="todo-item" data-driver-fit-option>
+                      <input type="radio" name="helmet-clearance" value="fail" data-driver-fit-choice="clearance" />
+                      <span class="todo-copy">
+                        <span class="todo-title">Less than 5 cm</span>
+                        <span class="todo-context">Tilt the seat back with front spacers, then measure again.</span>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="builder-conditional" data-driver-fit-conditional="clearance-pass" hidden>
+                  <div class="builder-choice-group">
+                    <h4>Seat plan</h4>
+                    <p class="builder-choice-note">With 5 cm or more clearance, choose whether to keep the original Tillett seat or fit a bead seat by preference.</p>
+                    <div class="todo-list">
+                      <label class="todo-item" data-driver-fit-option>
+                        <input type="radio" name="seat-plan" value="keep-tillett" data-driver-fit-choice="seatPlan" checked />
+                        <span class="todo-copy">
+                          <span class="todo-title">Keep the original Tillett seat</span>
+                          <span class="todo-context">Use the supplied seat if fit, reach, belts, and clearance are all acceptable.</span>
+                        </span>
+                      </label>
+                      <label class="todo-item" data-driver-fit-option>
+                        <input type="radio" name="seat-plan" value="bead-seat" data-driver-fit-choice="seatPlan" />
+                        <span class="todo-copy">
+                          <span class="todo-title">Fit a bead seat</span>
+                          <span class="todo-context">Use a bead seat for fit, support, or preference even though clearance is compliant.</span>
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="builder-conditional" data-driver-fit-conditional="clearance-fail" hidden>
+                  <div class="builder-choice-group">
+                    <h4>Spacer adjustment</h4>
+                    <p class="builder-choice-note">Fit spacers under the front of the seat to tilt it back and lower the driver's helmet, then recheck clearance.</p>
+                    <div class="todo-list">
+                      <label class="todo-item" data-driver-fit-option>
+                        <input type="radio" name="adjusted-clearance" value="unchecked" data-driver-fit-choice="adjustedClearance" checked />
+                        <span class="todo-copy">
+                          <span class="todo-title">Not rechecked yet</span>
+                          <span class="todo-context">Keep the spacer and recheck jobs in the generated checklist.</span>
+                        </span>
+                      </label>
+                      <label class="todo-item" data-driver-fit-option>
+                        <input type="radio" name="adjusted-clearance" value="pass" data-driver-fit-choice="adjustedClearance" />
+                        <span class="todo-copy">
+                          <span class="todo-title">5 cm or more after spacers</span>
+                          <span class="todo-context">Clearance is now compliant, so you can choose the seat plan.</span>
+                        </span>
+                      </label>
+                      <label class="todo-item" data-driver-fit-option>
+                        <input type="radio" name="adjusted-clearance" value="fail" data-driver-fit-choice="adjustedClearance" />
+                        <span class="todo-copy">
+                          <span class="todo-title">Still less than 5 cm after spacers</span>
+                          <span class="todo-context">A bead seat is required if spacers do not create the minimum clearance.</span>
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="builder-conditional" data-driver-fit-conditional="adjusted-pass" hidden>
+                  <div class="builder-choice-group">
+                    <h4>Seat plan after spacers</h4>
+                    <p class="builder-choice-note">With clearance restored to 5 cm or more, choose whether to keep the Tillett seat or move to a bead seat.</p>
+                    <div class="todo-list">
+                      <label class="todo-item" data-driver-fit-option>
+                        <input type="radio" name="adjusted-seat-plan" value="keep-tillett" data-driver-fit-choice="seatPlan" checked />
+                        <span class="todo-copy">
+                          <span class="todo-title">Keep the original Tillett seat</span>
+                          <span class="todo-context">Use the tilted seat position if driver fit and belt geometry remain correct.</span>
+                        </span>
+                      </label>
+                      <label class="todo-item" data-driver-fit-option>
+                        <input type="radio" name="adjusted-seat-plan" value="bead-seat" data-driver-fit-choice="seatPlan" />
+                        <span class="todo-copy">
+                          <span class="todo-title">Fit a bead seat</span>
+                          <span class="todo-context">Use a bead seat for fit, support, or preference after the spacer adjustment.</span>
+                        </span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+
+                <p class="fit-summary" data-driver-fit-summary role="status" aria-live="polite">Helmet clearance has not been checked yet.</p>
+              </div>
+            </article>
+          </section>
+
           <section class="builder-flow-panel" data-builder-panel="body" aria-labelledby="builder-body-heading">
             <article class="todo-card builder-flow-card">
               <div class="todo-card-heading">
-                <p class="builder-step-label">Step 1 of 4</p>
+                <p class="builder-step-label">Step 2 of 5</p>
                 <h3 id="builder-body-heading">Body &amp; Cockpit</h3>
                 <p>Choose the body, cockpit, and visibility jobs you are fitting after handover.</p>
               </div>
@@ -149,7 +267,7 @@
           <section class="builder-flow-panel" data-builder-panel="brakes" aria-labelledby="builder-brakes-heading">
             <article class="todo-card builder-flow-card">
               <div class="todo-card-heading">
-                <p class="builder-step-label">Step 2 of 4</p>
+                <p class="builder-step-label">Step 3 of 5</p>
                 <h3 id="builder-brakes-heading">Brakes, Fuel &amp; Data</h3>
                 <p>Pick the common brake, fuel, timing, and camera jobs.</p>
               </div>
@@ -203,7 +321,7 @@
           <section class="builder-flow-panel" data-builder-panel="setup" aria-labelledby="builder-setup-heading">
             <article class="todo-card builder-flow-card">
               <div class="todo-card-heading">
-                <p class="builder-step-label">Step 3 of 4</p>
+                <p class="builder-step-label">Step 4 of 5</p>
                 <h3 id="builder-setup-heading">Setup &amp; Service</h3>
                 <p>Choose the setup parts you want included in the generated work list.</p>
               </div>
@@ -229,11 +347,12 @@
           <section class="builder-flow-panel" data-builder-panel="review" aria-labelledby="builder-review-heading">
             <article class="todo-card builder-flow-card builder-review-card">
               <div class="todo-card-heading">
-                <p class="builder-step-label">Step 4 of 4</p>
+                <p class="builder-step-label">Step 5 of 5</p>
                 <h3 id="builder-review-heading">Review &amp; Use Checklist</h3>
                 <p>The delivery checklist will use this saved selection until you edit it again.</p>
               </div>
               <div class="builder-review-body">
+                <p class="fit-summary" data-driver-fit-summary role="status" aria-live="polite">Helmet clearance has not been checked yet.</p>
                 <p class="fit-summary" data-fit-summary data-fit-summary-mode="selected" role="status" aria-live="polite">Showing the recommended prep list.</p>
                 <div class="delivery-builder-actions">
                   <button type="button" data-fit-select-all>Use recommended</button>

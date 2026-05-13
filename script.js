@@ -223,6 +223,254 @@ const DELIVERY_FIT_DEPENDENCIES = {
   "impact-bar": ["anti-slip-tape"],
 };
 
+const DELIVERY_DRIVER_FIT_STORAGE_KEY = "caterham-academy-2026:delivery-driver-fit:v1";
+const DELIVERY_DRIVER_FIT_DEFAULT_STATE = {
+  clearance: "unchecked",
+  adjustedClearance: "unchecked",
+  seatPlan: "keep-tillett",
+};
+const DELIVERY_DRIVER_FIT_VALID_VALUES = {
+  clearance: new Set(["unchecked", "pass", "fail"]),
+  adjustedClearance: new Set(["unchecked", "pass", "fail"]),
+  seatPlan: new Set(["keep-tillett", "bead-seat"]),
+};
+
+function normaliseDriverFitState(value) {
+  const source = value && typeof value === "object" ? value : {};
+  const state = { ...DELIVERY_DRIVER_FIT_DEFAULT_STATE, ...source };
+
+  Object.entries(DELIVERY_DRIVER_FIT_VALID_VALUES).forEach(([key, values]) => {
+    if (!values.has(state[key])) state[key] = DELIVERY_DRIVER_FIT_DEFAULT_STATE[key];
+  });
+
+  if (state.clearance !== "fail") state.adjustedClearance = "unchecked";
+
+  return state;
+}
+
+function getDriverFitSummary(state) {
+  if (state.clearance === "pass") {
+    return state.seatPlan === "bead-seat"
+      ? "Helmet clearance is 5 cm or more; fitting a bead seat by choice."
+      : "Helmet clearance is 5 cm or more; keeping the original Tillett seat.";
+  }
+
+  if (state.clearance === "fail") {
+    if (state.adjustedClearance === "pass") {
+      return state.seatPlan === "bead-seat"
+        ? "Helmet clearance reaches 5 cm or more after front spacers; fitting a bead seat by choice."
+        : "Helmet clearance reaches 5 cm or more after front spacers; keeping the original Tillett seat.";
+    }
+
+    if (state.adjustedClearance === "fail") {
+      return "Helmet clearance remains under 5 cm after front spacers; bead seat required.";
+    }
+
+    return "Helmet clearance is under 5 cm; fit front seat spacers, then recheck.";
+  }
+
+  return "Helmet clearance has not been checked yet.";
+}
+
+function getSeatPlanItem(state, contextPrefix = "") {
+  if (state.seatPlan === "bead-seat") {
+    return {
+      title: "Book bead seat fitting and covering",
+      context: `${contextPrefix}Fit a bead seat for driver fit, support, or preference, then recheck belt geometry and cockpit reach.`,
+    };
+  }
+
+  return {
+    title: "Keep the original Tillett seat",
+    context: `${contextPrefix}Keep the supplied seat if fit, steering reach, pedal reach, belt geometry, and head restraint position remain correct.`,
+  };
+}
+
+function getDriverFitChecklistItems(state) {
+  if (state.clearance === "pass") {
+    return [
+      {
+        title: "Confirm helmet-to-roll-cage clearance is at least 5 cm",
+        context:
+          "Recheck with the driver fully belted in, helmet and FHR on, in the normal driving position.",
+      },
+      getSeatPlanItem(state),
+    ];
+  }
+
+  if (state.clearance === "fail") {
+    const items = [
+      {
+        title: "Record helmet-to-roll-cage clearance below 5 cm",
+        context:
+          "Measure to the top of the cage with a straight edge if needed, with the driver fully belted in and wearing helmet and FHR.",
+      },
+      {
+        title: "Fit front seat spacers to tilt the seat back",
+        context:
+          "Raise the front of the seat to tilt it back and lower the driver's helmet position before checking the rest of the driving position.",
+      },
+    ];
+
+    if (state.adjustedClearance === "pass") {
+      items.push(
+        {
+          title: "Recheck helmet clearance after fitting spacers",
+          context: "Confirm the spacer adjustment gives at least 5 cm helmet-to-roll-cage clearance.",
+        },
+        getSeatPlanItem(state, "After the spacer adjustment, "),
+      );
+      return items;
+    }
+
+    if (state.adjustedClearance === "fail") {
+      items.push(
+        {
+          title: "Recheck helmet clearance after fitting spacers",
+          context: "Confirmed still below 5 cm after the spacer adjustment.",
+        },
+        {
+          title: "Book bead seat fitting and covering",
+          context:
+            "Required because the spacer adjustment still does not provide the mandatory 5 cm helmet-to-roll-cage clearance.",
+        },
+      );
+      return items;
+    }
+
+    items.push({
+      title: "Recheck helmet clearance after fitting spacers",
+      context:
+        "If it is now 5 cm or more, keep the Tillett seat or fit a bead seat by choice. If it is still below 5 cm, fit a bead seat.",
+    });
+    return items;
+  }
+
+  return [
+    {
+      title: "Measure helmet-to-roll-cage clearance",
+      context:
+        "Mandatory minimum is 5 cm between the top of the driver's helmet and the top of the roll cage. Check with helmet and FHR on, belted in, using a straight edge across the cage if needed.",
+    },
+    {
+      title: "Choose the seat path after measuring clearance",
+      context:
+        "At 5 cm or more, keep the original Tillett seat or fit a bead seat by choice. Below 5 cm, fit front seat spacers, recheck, and fit a bead seat if clearance is still short.",
+    },
+  ];
+}
+
+function createDriverFitChecklistItem(item) {
+  const label = document.createElement("label");
+  const checkbox = document.createElement("input");
+  const copy = document.createElement("span");
+  const title = document.createElement("span");
+  const context = document.createElement("span");
+
+  label.className = "todo-item";
+  checkbox.type = "checkbox";
+  copy.className = "todo-copy";
+  title.className = "todo-title";
+  context.className = "todo-context";
+  title.textContent = item.title;
+  context.textContent = item.context;
+  copy.append(title, context);
+  label.append(checkbox, copy);
+  return label;
+}
+
+function initialiseDeliveryDriverFit() {
+  const choices = Array.from(document.querySelectorAll("[data-driver-fit-choice]"));
+  const summaries = Array.from(document.querySelectorAll("[data-driver-fit-summary]"));
+  const conditionalSections = Array.from(document.querySelectorAll("[data-driver-fit-conditional]"));
+  const generatedLists = Array.from(document.querySelectorAll("[data-driver-fit-list]"));
+  const storage = getChecklistStorage();
+
+  if (!choices.length && !summaries.length && !generatedLists.length) return;
+
+  function readState() {
+    if (!storage) return normaliseDriverFitState();
+
+    try {
+      return normaliseDriverFitState(JSON.parse(storage.getItem(DELIVERY_DRIVER_FIT_STORAGE_KEY)));
+    } catch {
+      return normaliseDriverFitState();
+    }
+  }
+
+  function writeState(state) {
+    if (!storage || !choices.length) return;
+
+    try {
+      storage.setItem(DELIVERY_DRIVER_FIT_STORAGE_KEY, JSON.stringify(state));
+    } catch {
+      // The generated checklist still updates for the current page view if storage is unavailable.
+    }
+  }
+
+  function applyStateToChoices(state) {
+    choices.forEach((choice) => {
+      const key = choice.dataset.driverFitChoice;
+      choice.checked = state[key] === choice.value;
+    });
+  }
+
+  function updateConditionalSections(state) {
+    conditionalSections.forEach((section) => {
+      const condition = section.dataset.driverFitConditional;
+      const isVisible =
+        (condition === "clearance-pass" && state.clearance === "pass") ||
+        (condition === "clearance-fail" && state.clearance === "fail") ||
+        (condition === "adjusted-pass" &&
+          state.clearance === "fail" &&
+          state.adjustedClearance === "pass");
+
+      section.hidden = !isVisible;
+    });
+  }
+
+  function renderGeneratedLists(state) {
+    const items = getDriverFitChecklistItems(state);
+
+    generatedLists.forEach((list) => {
+      list.textContent = "";
+      items.forEach((item) => {
+        list.append(createDriverFitChecklistItem(item));
+      });
+    });
+  }
+
+  function render(state) {
+    const normalisedState = normaliseDriverFitState(state);
+    applyStateToChoices(normalisedState);
+    updateConditionalSections(normalisedState);
+    summaries.forEach((summary) => {
+      summary.textContent = getDriverFitSummary(normalisedState);
+    });
+    renderGeneratedLists(normalisedState);
+    writeState(normalisedState);
+  }
+
+  let state = readState();
+
+  choices.forEach((choice) => {
+    choice.addEventListener("change", () => {
+      if (!choice.checked) return;
+
+      state = normaliseDriverFitState({
+        ...state,
+        [choice.dataset.driverFitChoice]: choice.value,
+      });
+
+      render(state);
+    });
+  });
+
+  render(state);
+}
+
+initialiseDeliveryDriverFit();
+
 function initialiseDeliveryFitBuilder() {
   const builder = document.querySelector("[data-delivery-builder]");
   const choices = builder ? Array.from(builder.querySelectorAll("[data-builder-choice]")) : [];
@@ -563,9 +811,9 @@ const GLOBAL_SEARCH_INDEX = [
     url: "delivery-prep-builder.html#builder",
     section: "Custom prep jobs",
     summary:
-      "Step through body, cockpit, brakes, fuel, data, setup, and service choices to build a saved delivery prep checklist.",
+      "Step through driver fit, body, cockpit, brakes, fuel, data, setup, and service choices to build a saved delivery prep checklist.",
     keywords:
-      "delivery prep builder custom checklist choose prep jobs optional parts selected fitment edit prep jobs",
+      "delivery prep builder custom checklist choose prep jobs optional parts selected fitment edit prep jobs helmet clearance bead seat tillett spacers",
   },
   {
     title: "Prep Parts And Why They Matter",

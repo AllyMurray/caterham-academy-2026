@@ -1,6 +1,7 @@
 const { expect, test } = require("@playwright/test");
 
 const FIT_STORAGE_KEY = "caterham-academy-2026:delivery-fit-builder:v2";
+const DRIVER_FIT_STORAGE_KEY = "caterham-academy-2026:delivery-driver-fit:v1";
 const DEFAULT_PARTS = [
   "anti-slip-tape",
   "brake-pads",
@@ -51,9 +52,22 @@ async function seedBuilderStorage(page, parts) {
   );
 }
 
+async function seedDriverFitStorage(page, state) {
+  await page.goto("/delivery-prep-builder.html#builder");
+  await page.evaluate(
+    ({ driverFitState, storageKey }) => {
+      window.localStorage.setItem(storageKey, JSON.stringify(driverFitState));
+    },
+    { driverFitState: state, storageKey: DRIVER_FIT_STORAGE_KEY },
+  );
+}
+
 test("uses the recommended prep jobs by default and generates the full fitment list", async ({ page }) => {
   await page.goto("/delivery-prep-builder.html#builder");
 
+  await expect(page.locator("[data-driver-fit-summary]").first()).toHaveText(
+    "Helmet clearance has not been checked yet.",
+  );
   await expect(page.locator("[data-fit-summary]")).toHaveText("13 prep jobs selected.");
   expect(await checkedBuilderParts(page)).toEqual(DEFAULT_PARTS);
   expect(await storedBuilderParts(page)).toEqual(DEFAULT_PARTS);
@@ -61,7 +75,12 @@ test("uses the recommended prep jobs by default and generates the full fitment l
   await page.goto("/delivery-prep.html#generated-checklist");
 
   await expect(page.locator('[data-fit-summary-mode="selected"]')).toHaveText("13 prep jobs selected.");
+  await expect(page.locator("[data-driver-fit-summary]")).toHaveText(
+    "Helmet clearance has not been checked yet.",
+  );
   await expect(page.locator('[data-fit-summary-mode="shown"]')).toHaveText("13 fitment jobs shown.");
+  await expect(page.getByText("Measure helmet-to-roll-cage clearance")).toBeVisible();
+  await expect(page.getByText("Choose the seat path after measuring clearance")).toBeVisible();
   expect(await visibleFitParts(page)).toEqual(DEFAULT_PARTS);
   await expect(page.locator("[data-fit-empty]")).toBeHidden();
 });
@@ -69,13 +88,18 @@ test("uses the recommended prep jobs by default and generates the full fitment l
 test("steps through the builder and sends the user back to the generated checklist", async ({ page }) => {
   await page.goto("/delivery-prep-builder.html#builder");
 
-  await expect(page.locator('[data-builder-panel="body"]')).toBeVisible();
+  await expect(page.locator('[data-builder-panel="fit"]')).toBeVisible();
+  await expect(page.locator('[data-builder-panel="body"]')).toBeHidden();
   await expect(page.locator("[data-builder-prev]")).toBeDisabled();
+
+  await page.locator("[data-builder-next]").click();
+  await expect(page).toHaveURL(/#body$/);
+  await expect(page.locator('[data-builder-panel="body"]')).toBeVisible();
+  await expect(page.locator("[data-builder-prev]")).toBeEnabled();
 
   await page.locator("[data-builder-next]").click();
   await expect(page).toHaveURL(/#brakes$/);
   await expect(page.locator('[data-builder-panel="brakes"]')).toBeVisible();
-  await expect(page.locator("[data-builder-prev]")).toBeEnabled();
 
   await page.locator("[data-builder-next]").click();
   await expect(page).toHaveURL(/#setup$/);
@@ -88,6 +112,51 @@ test("steps through the builder and sends the user back to the generated checkli
 
   await page.locator("[data-builder-next]").click();
   await expect(page).toHaveURL(/\/delivery-prep\.html#generated-checklist$/);
+});
+
+test("generates a keep-seat path when helmet clearance is already 5 cm or more", async ({ page }) => {
+  await page.goto("/delivery-prep-builder.html#fit");
+
+  await page.locator('[data-driver-fit-choice="clearance"][value="pass"]').check();
+  await page.locator('[data-driver-fit-choice="seatPlan"][value="keep-tillett"]').first().check();
+
+  await expect(page.locator('[data-driver-fit-conditional="clearance-pass"]')).toBeVisible();
+  await expect(page.locator("[data-driver-fit-summary]").first()).toHaveText(
+    "Helmet clearance is 5 cm or more; keeping the original Tillett seat.",
+  );
+
+  await page.goto("/delivery-prep.html#generated-checklist");
+
+  await expect(page.locator("[data-driver-fit-summary]")).toHaveText(
+    "Helmet clearance is 5 cm or more; keeping the original Tillett seat.",
+  );
+  await expect(page.getByText("Confirm helmet-to-roll-cage clearance is at least 5 cm")).toBeVisible();
+  await expect(page.getByText("Keep the original Tillett seat")).toBeVisible();
+  await expect(page.getByText("Fit front seat spacers to tilt the seat back")).toHaveCount(0);
+  await expect(page.getByText("Book bead seat fitting and covering")).toHaveCount(0);
+});
+
+test("generates a spacer and bead-seat path when clearance remains below 5 cm", async ({ page }) => {
+  await page.goto("/delivery-prep-builder.html#fit");
+
+  await page.locator('[data-driver-fit-choice="clearance"][value="fail"]').check();
+  await page.locator('[data-driver-fit-choice="adjustedClearance"][value="fail"]').check();
+
+  await expect(page.locator('[data-driver-fit-conditional="clearance-fail"]')).toBeVisible();
+  await expect(page.locator("[data-driver-fit-summary]").first()).toHaveText(
+    "Helmet clearance remains under 5 cm after front spacers; bead seat required.",
+  );
+
+  await page.goto("/delivery-prep.html#generated-checklist");
+
+  await expect(page.locator("[data-driver-fit-summary]")).toHaveText(
+    "Helmet clearance remains under 5 cm after front spacers; bead seat required.",
+  );
+  await expect(page.getByText("Record helmet-to-roll-cage clearance below 5 cm")).toBeVisible();
+  await expect(page.getByText("Fit front seat spacers to tilt the seat back")).toBeVisible();
+  await expect(page.getByText("Recheck helmet clearance after fitting spacers")).toBeVisible();
+  await expect(page.getByText("Book bead seat fitting and covering")).toBeVisible();
+  await expect(page.getByText("Keep the original Tillett seat")).toHaveCount(0);
 });
 
 test("clears saved prep jobs and keeps the delivery checklist editable", async ({ page }) => {
@@ -147,4 +216,20 @@ test("expands saved dependencies when rendering the delivery checklist", async (
   await expect(page.locator('[data-fit-summary-mode="selected"]')).toHaveText("2 prep jobs selected.");
   await expect(page.locator('[data-fit-summary-mode="shown"]')).toHaveText("2 fitment jobs shown.");
   expect(await visibleFitParts(page)).toEqual(["half-sidescreens", "race-mirror"]);
+});
+
+test("expands saved driver fit state when rendering the delivery checklist", async ({ page }) => {
+  await seedDriverFitStorage(page, {
+    clearance: "fail",
+    adjustedClearance: "pass",
+    seatPlan: "bead-seat",
+  });
+
+  await page.goto("/delivery-prep.html#generated-checklist");
+
+  await expect(page.locator("[data-driver-fit-summary]")).toHaveText(
+    "Helmet clearance reaches 5 cm or more after front spacers; fitting a bead seat by choice.",
+  );
+  await expect(page.getByText("Fit front seat spacers to tilt the seat back")).toBeVisible();
+  await expect(page.getByText("Book bead seat fitting and covering")).toBeVisible();
 });
