@@ -178,6 +178,178 @@
           </article>
         </div>
 
+        <div class="delivery-builder" data-delivery-builder aria-labelledby="delivery-builder-heading">
+          <div class="delivery-builder-heading">
+            <div>
+              <p class="section-kicker">Checklist builder</p>
+              <h3 id="delivery-builder-heading">Pick The Prep Work You Plan To Do</h3>
+              <p>
+                Start with the recommended Academy prep set, remove anything you are not
+                doing, then use the generated workshop checklist below.
+              </p>
+            </div>
+            <div class="delivery-builder-actions">
+              <button type="button" data-fit-select-all>Recommended preset</button>
+              <button type="button" data-fit-clear>Clear optional parts</button>
+              <a href="#generated-checklist">Show generated checklist</a>
+            </div>
+          </div>
+
+          <div class="delivery-builder-steps" aria-label="Delivery prep builder steps">
+            <article class="delivery-builder-step">
+              <div class="delivery-builder-step-heading">
+                <span>1</span>
+                <div>
+                  <h4>Driver Fit &amp; Safety</h4>
+                  <p>Core driver-fit checks are always included in the generated checklist.</p>
+                </div>
+              </div>
+              <div class="delivery-builder-options">
+                <label class="builder-choice builder-choice-static">
+                  <input type="checkbox" checked disabled />
+                  <span class="todo-copy">
+                    <span class="todo-title">Core driver fit checks</span>
+                    <span class="todo-context">Seat, belts, FHR, helmet clearance, head restraint, arm restraints, and cage padding remain in the checklist.</span>
+                  </span>
+                </label>
+              </div>
+            </article>
+
+            <article class="delivery-builder-step">
+              <div class="delivery-builder-step-heading">
+                <span>2</span>
+                <div>
+                  <h4>Body &amp; Cockpit</h4>
+                  <p>Choose the body, cockpit, and visibility jobs you are fitting after handover.</p>
+                </div>
+              </div>
+              <div class="delivery-builder-options">
+                <label class="builder-choice">
+                  <input type="checkbox" data-builder-choice="impact-bar" data-fit-requires="anti-slip-tape" checked />
+                  <span class="todo-copy">
+                    <span class="todo-title">Passenger side impact bar</span>
+                    <span class="todo-context">Adds side impact protection; includes anti-slip tape for the impact bars.</span>
+                  </span>
+                </label>
+                <label class="builder-choice">
+                  <input type="checkbox" data-builder-choice="half-sidescreens" data-fit-requires="race-mirror" checked />
+                  <span class="todo-copy">
+                    <span class="todo-title">Half sidescreens</span>
+                    <span class="todo-context">Common race-prep upgrade from full sidescreens; includes the required race mirror package.</span>
+                  </span>
+                </label>
+                <label class="builder-choice">
+                  <input type="checkbox" data-builder-choice="race-mirror" checked />
+                  <span class="todo-copy">
+                    <span class="todo-title">Caterham race mirror package</span>
+                    <span class="todo-context">Required with half sidescreens; left, right, and centre visibility must be effective.</span>
+                  </span>
+                </label>
+                <label class="builder-choice">
+                  <input type="checkbox" data-builder-choice="centre-mirror" checked />
+                  <span class="todo-copy">
+                    <span class="todo-title">Pitking centre mirror</span>
+                    <span class="todo-context">Optional centre mirror choice to improve rear visibility.</span>
+                  </span>
+                </label>
+                <label class="builder-choice">
+                  <input type="checkbox" data-builder-choice="steering-wheel" checked />
+                  <span class="todo-copy">
+                    <span class="todo-title">Optional steering wheel</span>
+                    <span class="todo-context">Choose the Momo suede wheel or another compliant option based on driver fit.</span>
+                  </span>
+                </label>
+              </div>
+            </article>
+
+            <article class="delivery-builder-step">
+              <div class="delivery-builder-step-heading">
+                <span>3</span>
+                <div>
+                  <h4>Brakes, Fuel &amp; Data</h4>
+                  <p>Pick the common brake, fuel, timing, and camera jobs.</p>
+                </div>
+              </div>
+              <div class="delivery-builder-options">
+                <label class="builder-choice">
+                  <input type="checkbox" data-builder-choice="brake-pads" checked />
+                  <span class="todo-copy">
+                    <span class="todo-title">Competition brake pads</span>
+                    <span class="todo-context">Front and rear race pad fitment before shakedown or testing.</span>
+                  </span>
+                </label>
+                <label class="builder-choice">
+                  <input type="checkbox" data-builder-choice="master-cylinder-cap" checked />
+                  <span class="todo-copy">
+                    <span class="todo-title">Race master cylinder cap</span>
+                    <span class="todo-context">Permitted race cap option; removes the low-fluid warning.</span>
+                  </span>
+                </label>
+                <label class="builder-choice">
+                  <input type="checkbox" data-builder-choice="fuel-drain" checked />
+                  <span class="todo-copy">
+                    <span class="todo-title">Mocal fuel drain hose</span>
+                    <span class="todo-context">Fuel draining aid; confirm the route against permitted fuel-drain rules.</span>
+                  </span>
+                </label>
+                <label class="builder-choice">
+                  <input type="checkbox" data-builder-choice="dash-timer" checked />
+                  <span class="todo-copy">
+                    <span class="todo-title">Dash timer</span>
+                    <span class="todo-context">Simple Salter-style timer for stint, race, or session timing.</span>
+                  </span>
+                </label>
+                <label class="builder-choice">
+                  <input type="checkbox" data-builder-choice="foot-camera" checked />
+                  <span class="todo-copy">
+                    <span class="todo-title">Additional foot camera mount</span>
+                    <span class="todo-context">Adds a dedicated pedal/footwork camera angle.</span>
+                  </span>
+                </label>
+                <label class="builder-choice">
+                  <input type="checkbox" data-builder-choice="camera-lens" checked />
+                  <span class="todo-copy">
+                    <span class="todo-title">Camera lens protection</span>
+                    <span class="todo-context">Protects exposed camera lenses from stones, debris, and paddock handling.</span>
+                  </span>
+                </label>
+              </div>
+            </article>
+
+            <article class="delivery-builder-step">
+              <div class="delivery-builder-step-heading">
+                <span>4</span>
+                <div>
+                  <h4>Setup &amp; Service</h4>
+                  <p>Choose the setup parts you want included in the generated work list.</p>
+                </div>
+              </div>
+              <div class="delivery-builder-options">
+                <label class="builder-choice">
+                  <input type="checkbox" data-builder-choice="front-arb" checked />
+                  <span class="todo-copy">
+                    <span class="todo-title">Front anti-roll bar</span>
+                    <span class="todo-context">Permitted front ARB option for tuning balance before setup work.</span>
+                  </span>
+                </label>
+                <label class="builder-choice">
+                  <input type="checkbox" data-builder-choice="anti-slip-tape" checked />
+                  <span class="todo-copy">
+                    <span class="todo-title">Impact bar anti-slip tape</span>
+                    <span class="todo-context">Applied to impact bars because you stand on the bar when climbing over the cage.</span>
+                  </span>
+                </label>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div id="generated-checklist" class="generated-checklist-heading">
+          <p class="section-kicker">Generated workshop list</p>
+          <h3>5. Your Delivery Prep Checklist</h3>
+          <p class="fit-summary" data-fit-summary role="status" aria-live="polite">Showing the recommended prep list.</p>
+        </div>
+
         <div class="todo-grid delivery-todo-grid">
           <article class="todo-card">
             <div class="todo-card-heading">
@@ -254,12 +426,7 @@
           <article class="todo-card">
             <div class="todo-card-heading">
               <h3>Parts To Fit</h3>
-              <p>Tick the matching rows in Prep Parts below to customise this fitment list.</p>
-              <p class="fit-summary" data-fit-summary role="status" aria-live="polite">Showing the common fit list.</p>
-              <div class="fit-actions">
-                <button type="button" data-fit-select-all>Select all</button>
-                <button type="button" data-fit-clear>Clear parts</button>
-              </div>
+              <p>This section is generated from the builder choices above.</p>
             </div>
             <div class="todo-list">
               <label class="todo-item" data-fit-item="brake-pads">
@@ -561,8 +728,7 @@
                   <div><dt>Timing</dt><dd>Order from Caterham Parts; fit after handover.</dd></div>
                 </dl>
               </article>
-              <article class="prep-item" data-fit-choice="impact-bar" data-fit-requires="anti-slip-tape">
-                <label class="prep-fit-choice"><input type="checkbox" data-fit-choice="impact-bar" data-fit-requires="anti-slip-tape" /> Include in fit list</label>
+              <article class="prep-item">
                 <h4>Passenger side impact protection bar</h4>
                 <dl>
                   <div><dt>Part</dt><dd><a href="https://caterhamparts.co.uk/side-intrusion-bars/8018-side-impact-bar-lh-s3-metric-chassis.html">30P307E</a>, superseding regulation-listed 30P307A</dd></div>
@@ -602,8 +768,7 @@
           <article class="prep-group">
             <h3>Cockpit Protection And Visibility</h3>
             <div class="prep-card-grid">
-              <article class="prep-item prep-item-wide" data-fit-choice="half-sidescreens" data-fit-requires="race-mirror">
-                <label class="prep-fit-choice"><input type="checkbox" data-fit-choice="half-sidescreens" data-fit-requires="race-mirror" /> Include in fit list</label>
+              <article class="prep-item prep-item-wide">
                 <h4>Half sidescreen kit</h4>
                 <dl>
                   <div><dt>Part</dt><dd><a href="https://caterhamparts.co.uk/sidescreens/172-half-sidescreen-kit-for-s3-cars.html">WE67K</a></dd></div>
@@ -629,8 +794,7 @@
                   <div><dt>Timing</dt><dd>During driver fit setup.</dd></div>
                 </dl>
               </article>
-              <article class="prep-item" data-fit-choice="steering-wheel">
-                <label class="prep-fit-choice"><input type="checkbox" data-fit-choice="steering-wheel" /> Include in fit list</label>
+              <article class="prep-item">
                 <h4>Momo suede steering wheel, optional</h4>
                 <dl>
                   <div><dt>Part</dt><dd><a href="https://caterhamparts.co.uk/wheels/1358-momo-steering-wheel-260mm-suede.html">30S038A</a></dd></div>
@@ -655,8 +819,7 @@
                   <div><dt>Timing</dt><dd>Delivery inspection and final driver fit.</dd></div>
                 </dl>
               </article>
-              <article class="prep-item" data-fit-choice="race-mirror">
-                <label class="prep-fit-choice"><input type="checkbox" data-fit-choice="race-mirror" /> Include in fit list</label>
+              <article class="prep-item">
                 <h4>Caterham race mirror package</h4>
                 <div class="status-badges"><span class="source-badge required">Required with half sidescreens</span></div>
                 <dl>
@@ -665,8 +828,7 @@
                   <div><dt>Timing</dt><dd>Fit with half sidescreens.</dd></div>
                 </dl>
               </article>
-              <article class="prep-item" data-fit-choice="centre-mirror">
-                <label class="prep-fit-choice"><input type="checkbox" data-fit-choice="centre-mirror" /> Include in fit list</label>
+              <article class="prep-item">
                 <h4>Pitking centre mirror</h4>
                 <dl>
                   <div><dt>Source</dt><dd><a href="https://www.demon-tweeks.com/pitking-products-caterham-race-car-centre-mirror-pkpcatrvmk-akn/">Pitking Caterham centre mirror</a></dd></div>
@@ -682,8 +844,7 @@
                   <div><dt>Timing</dt><dd>Check at delivery; keep spare tape in the event kit.</dd></div>
                 </dl>
               </article>
-              <article class="prep-item" data-fit-choice="anti-slip-tape">
-                <label class="prep-fit-choice"><input type="checkbox" data-fit-choice="anti-slip-tape" /> Include in fit list</label>
+              <article class="prep-item">
                 <h4>Impact bar anti-slip tape</h4>
                 <dl>
                   <div><dt>Source</dt><dd>50 mm anti-slip tape</dd></div>
@@ -697,8 +858,7 @@
           <article class="prep-group">
             <h3>Fuel, Catch Tank, Brakes, And Data</h3>
             <div class="prep-card-grid">
-              <article class="prep-item" data-fit-choice="fuel-drain">
-                <label class="prep-fit-choice"><input type="checkbox" data-fit-choice="fuel-drain" /> Include in fit list</label>
+              <article class="prep-item">
                 <h4>Mocal fuel drain hose with stop tap</h4>
                 <dl>
                   <div><dt>Source</dt><dd><a href="https://www.demon-tweeks.com/mocal-caterham-fuel-drain-hose-with-stop-tap-mocfdkhose1/">Mocal fuel drain hose</a></dd></div>
@@ -714,8 +874,7 @@
                   <div><dt>Timing</dt><dd>Check during catch-tank inspection.</dd></div>
                 </dl>
               </article>
-              <article class="prep-item" data-fit-choice="master-cylinder-cap">
-                <label class="prep-fit-choice"><input type="checkbox" data-fit-choice="master-cylinder-cap" /> Include in fit list</label>
+              <article class="prep-item">
                 <h4>Race master cylinder cap</h4>
                 <dl>
                   <div><dt>Part</dt><dd><a href="https://caterhamparts.co.uk/master-cylinder/914-brake-master-cylinder-cap-race-no-float-switch.html">77175</a> or <a href="https://caterhamparts.co.uk/master-cylinder/6971-clutch-master-cylinder-cap.html">300B0043A</a></dd></div>
@@ -723,8 +882,7 @@
                   <div><dt>Timing</dt><dd>After handover, before race use.</dd></div>
                 </dl>
               </article>
-              <article class="prep-item" data-fit-choice="brake-pads">
-                <label class="prep-fit-choice"><input type="checkbox" data-fit-choice="brake-pads" /> Include in fit list</label>
+              <article class="prep-item">
                 <h4>Competition front brake pads</h4>
                 <dl>
                   <div><dt>Part</dt><dd><a href="https://caterhamparts.co.uk/brake-pads/8220-brake-pad-front-fast-road-track-2-pot-caliper-2015.html">300B0067A</a></dd></div>
@@ -732,8 +890,7 @@
                   <div><dt>Timing</dt><dd>Before shakedown/testing.</dd></div>
                 </dl>
               </article>
-              <article class="prep-item" data-fit-choice="brake-pads">
-                <label class="prep-fit-choice"><input type="checkbox" data-fit-choice="brake-pads" /> Include in fit list</label>
+              <article class="prep-item">
                 <h4>Competition rear brake pads</h4>
                 <dl>
                   <div><dt>Part</dt><dd><a href="https://caterhamparts.co.uk/calipers-pads-discs/8658-brake-pads-rear-upgrade-academy-2026.html">3BAB0007A</a></dd></div>
@@ -757,8 +914,7 @@
                   <div><dt>Timing</dt><dd>Before testing and data setup.</dd></div>
                 </dl>
               </article>
-              <article class="prep-item" data-fit-choice="dash-timer">
-                <label class="prep-fit-choice"><input type="checkbox" data-fit-choice="dash-timer" /> Include in fit list</label>
+              <article class="prep-item">
                 <h4>Dash timer</h4>
                 <dl>
                   <div><dt>Source</dt><dd><a href="https://www.amazon.co.uk/Salter-355-BKXCDU-Adjustable-Standing-Black/dp/B07QLVLRBD/">Salter kitchen timer</a></dd></div>
@@ -780,8 +936,7 @@
           <article class="prep-group">
             <h3>Camera Accessories</h3>
             <div class="prep-card-grid">
-              <article class="prep-item" data-fit-choice="foot-camera">
-                <label class="prep-fit-choice"><input type="checkbox" data-fit-choice="foot-camera" /> Include in fit list</label>
+              <article class="prep-item">
                 <h4>Additional foot camera mount</h4>
                 <dl>
                   <div><dt>Source</dt><dd>Camera accessory</dd></div>
@@ -789,8 +944,7 @@
                   <div><dt>Timing</dt><dd>Before camera layout is finalised.</dd></div>
                 </dl>
               </article>
-              <article class="prep-item" data-fit-choice="camera-lens">
-                <label class="prep-fit-choice"><input type="checkbox" data-fit-choice="camera-lens" /> Include in fit list</label>
+              <article class="prep-item">
                 <h4>Camera lens protection pair</h4>
                 <dl>
                   <div><dt>Source</dt><dd>Camera accessory</dd></div>
@@ -804,8 +958,7 @@
           <article class="prep-group">
             <h3>Setup Parts</h3>
             <div class="prep-card-grid">
-              <article class="prep-item" data-fit-choice="front-arb">
-                <label class="prep-fit-choice"><input type="checkbox" data-fit-choice="front-arb" /> Include in fit list</label>
+              <article class="prep-item">
                 <h4>Front anti-roll bar, 5/8 inch, red</h4>
                 <dl>
                   <div><dt>Part</dt><dd><a href="https://caterhamparts.co.uk/anti-roll-bars/2675-anti-roll-bar-front-5-8-narrow-track-red-s3.html">72090</a></dd></div>
