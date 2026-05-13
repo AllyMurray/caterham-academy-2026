@@ -47,6 +47,7 @@
             <span>On this page</span>
             <a href="#guide">Guide</a>
             <a href="#todo">To-do list</a>
+            <a href="delivery-prep-builder.html#builder">Build checklist</a>
             <a href="#prep-mods">Prep parts</a>
           </nav>
         </div>
@@ -159,157 +160,28 @@
           </p>
         </div>
 
-        <div class="delivery-builder" data-delivery-builder aria-labelledby="delivery-builder-heading">
+        <div class="delivery-builder" aria-labelledby="delivery-builder-heading">
           <div class="delivery-builder-heading">
             <div>
-              <p class="section-kicker">Checklist builder</p>
-              <h3 id="delivery-builder-heading">Choose Optional Prep Jobs</h3>
+              <p class="section-kicker">Selected prep jobs</p>
+              <h3 id="delivery-builder-heading">Your Custom Prep List</h3>
               <p>
-                Tick the parts you are fitting after handover. Driver-fit and safety
-                checks stay in the workshop checklist automatically.
+                The checklist below uses the prep jobs saved in the builder. Driver-fit
+                and safety checks stay included automatically.
               </p>
+              <p class="fit-summary" data-fit-summary data-fit-summary-mode="selected" role="status" aria-live="polite">Showing the recommended prep list.</p>
             </div>
             <div class="delivery-builder-actions">
-              <button type="button" data-fit-select-all>Use recommended</button>
-              <button type="button" data-fit-clear>Clear choices</button>
-              <a href="#generated-checklist">Go to checklist</a>
+              <a href="delivery-prep-builder.html#builder">Edit prep jobs</a>
+              <a href="#generated-checklist">View checklist</a>
             </div>
-          </div>
-
-          <div class="todo-grid delivery-todo-grid delivery-builder-grid" aria-label="Delivery prep choices">
-            <article class="todo-card delivery-builder-step">
-              <div class="todo-card-heading delivery-builder-step-heading">
-                <span>1</span>
-                <div>
-                  <h3>Body &amp; Cockpit</h3>
-                  <p>Choose the body, cockpit, and visibility jobs you are fitting after handover.</p>
-                </div>
-              </div>
-              <div class="todo-list delivery-builder-options">
-                <label class="todo-item" data-builder-option>
-                  <input type="checkbox" data-builder-choice="impact-bar" data-fit-requires="anti-slip-tape" checked />
-                  <span class="todo-copy">
-                    <span class="todo-title">Passenger side impact bar</span>
-                    <span class="todo-context">Adds side impact protection; includes anti-slip tape for the impact bars.</span>
-                  </span>
-                </label>
-                <label class="todo-item" data-builder-option>
-                  <input type="checkbox" data-builder-choice="half-sidescreens" data-fit-requires="race-mirror" checked />
-                  <span class="todo-copy">
-                    <span class="todo-title">Half sidescreens</span>
-                    <span class="todo-context">Common race-prep upgrade from full sidescreens; includes the required race mirror package.</span>
-                  </span>
-                </label>
-                <label class="todo-item" data-builder-option>
-                  <input type="checkbox" data-builder-choice="race-mirror" checked />
-                  <span class="todo-copy">
-                    <span class="todo-title">Caterham race mirror package</span>
-                    <span class="todo-context">Required with half sidescreens; left, right, and centre visibility must be effective.</span>
-                  </span>
-                </label>
-                <label class="todo-item" data-builder-option>
-                  <input type="checkbox" data-builder-choice="centre-mirror" checked />
-                  <span class="todo-copy">
-                    <span class="todo-title">Pitking centre mirror</span>
-                    <span class="todo-context">Optional centre mirror choice to improve rear visibility.</span>
-                  </span>
-                </label>
-                <label class="todo-item" data-builder-option>
-                  <input type="checkbox" data-builder-choice="steering-wheel" checked />
-                  <span class="todo-copy">
-                    <span class="todo-title">Optional steering wheel</span>
-                    <span class="todo-context">Choose the Momo suede wheel or another compliant option based on driver fit.</span>
-                  </span>
-                </label>
-              </div>
-            </article>
-
-            <article class="todo-card delivery-builder-step">
-              <div class="todo-card-heading delivery-builder-step-heading">
-                <span>2</span>
-                <div>
-                  <h3>Brakes, Fuel &amp; Data</h3>
-                  <p>Pick the common brake, fuel, timing, and camera jobs.</p>
-                </div>
-              </div>
-              <div class="todo-list delivery-builder-options">
-                <label class="todo-item" data-builder-option>
-                  <input type="checkbox" data-builder-choice="brake-pads" checked />
-                  <span class="todo-copy">
-                    <span class="todo-title">Competition brake pads</span>
-                    <span class="todo-context">Front and rear race pad fitment before shakedown or testing.</span>
-                  </span>
-                </label>
-                <label class="todo-item" data-builder-option>
-                  <input type="checkbox" data-builder-choice="master-cylinder-cap" checked />
-                  <span class="todo-copy">
-                    <span class="todo-title">Race master cylinder cap</span>
-                    <span class="todo-context">Permitted race cap option; removes the low-fluid warning.</span>
-                  </span>
-                </label>
-                <label class="todo-item" data-builder-option>
-                  <input type="checkbox" data-builder-choice="fuel-drain" checked />
-                  <span class="todo-copy">
-                    <span class="todo-title">Mocal fuel drain hose</span>
-                    <span class="todo-context">Fuel draining aid; confirm the route against permitted fuel-drain rules.</span>
-                  </span>
-                </label>
-                <label class="todo-item" data-builder-option>
-                  <input type="checkbox" data-builder-choice="dash-timer" checked />
-                  <span class="todo-copy">
-                    <span class="todo-title">Dash timer</span>
-                    <span class="todo-context">Simple Salter-style timer for stint, race, or session timing.</span>
-                  </span>
-                </label>
-                <label class="todo-item" data-builder-option>
-                  <input type="checkbox" data-builder-choice="foot-camera" checked />
-                  <span class="todo-copy">
-                    <span class="todo-title">Additional foot camera mount</span>
-                    <span class="todo-context">Adds a dedicated pedal/footwork camera angle.</span>
-                  </span>
-                </label>
-                <label class="todo-item" data-builder-option>
-                  <input type="checkbox" data-builder-choice="camera-lens" checked />
-                  <span class="todo-copy">
-                    <span class="todo-title">Camera lens protection</span>
-                    <span class="todo-context">Protects exposed camera lenses from stones, debris, and paddock handling.</span>
-                  </span>
-                </label>
-              </div>
-            </article>
-
-            <article class="todo-card delivery-builder-step">
-              <div class="todo-card-heading delivery-builder-step-heading">
-                <span>3</span>
-                <div>
-                  <h3>Setup &amp; Service</h3>
-                  <p>Choose the setup parts you want included in the generated work list.</p>
-                </div>
-              </div>
-              <div class="todo-list delivery-builder-options">
-                <label class="todo-item" data-builder-option>
-                  <input type="checkbox" data-builder-choice="front-arb" checked />
-                  <span class="todo-copy">
-                    <span class="todo-title">Front anti-roll bar</span>
-                    <span class="todo-context">Permitted front ARB option for tuning balance before setup work.</span>
-                  </span>
-                </label>
-                <label class="todo-item" data-builder-option>
-                  <input type="checkbox" data-builder-choice="anti-slip-tape" checked />
-                  <span class="todo-copy">
-                    <span class="todo-title">Impact bar anti-slip tape</span>
-                    <span class="todo-context">Applied to impact bars because you stand on the bar when climbing over the cage.</span>
-                  </span>
-                </label>
-              </div>
-            </article>
           </div>
         </div>
 
         <div id="generated-checklist" class="generated-checklist-heading">
           <p class="section-kicker">Generated workshop list</p>
           <h3>Your Delivery Prep Checklist</h3>
-          <p class="fit-summary" data-fit-summary role="status" aria-live="polite">Showing the recommended prep list.</p>
+          <p class="fit-summary" data-fit-summary data-fit-summary-mode="shown" role="status" aria-live="polite">Showing the recommended prep list.</p>
         </div>
 
         <div class="todo-grid delivery-todo-grid">
@@ -388,7 +260,7 @@
           <article class="todo-card">
             <div class="todo-card-heading">
               <h3>Parts To Fit</h3>
-              <p>This section is generated from the builder choices above.</p>
+              <p>This section is generated from your saved builder choices. <a href="delivery-prep-builder.html#builder">Edit prep jobs</a>.</p>
             </div>
             <div class="todo-list">
               <label class="todo-item" data-fit-item="brake-pads">
@@ -475,7 +347,7 @@
                   <span class="todo-context">You stand on the impact bar when climbing over the cage into the car.</span>
                 </span>
               </label>
-              <p class="fit-empty is-fit-hidden" data-fit-empty>Pick one or more parts above to build this list.</p>
+              <p class="fit-empty is-fit-hidden" data-fit-empty>Use Edit prep jobs to add optional parts to this list.</p>
             </div>
           </article>
 

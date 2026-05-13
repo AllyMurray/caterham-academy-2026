@@ -28,6 +28,8 @@ function initialisePrimaryMenu() {
         ["driver-guide.html", "parts.html", "sources.html", "search.html"].includes(currentFile))
     ) {
       link.setAttribute("aria-current", "location");
+    } else if (linkFile === "delivery-prep.html" && currentFile === "delivery-prep-builder.html") {
+      link.setAttribute("aria-current", "location");
     }
   });
 
@@ -200,18 +202,39 @@ function initialiseChecklists() {
 
 initialiseChecklists();
 
+const DELIVERY_FIT_DEFAULT_PARTS = [
+  "impact-bar",
+  "half-sidescreens",
+  "race-mirror",
+  "centre-mirror",
+  "steering-wheel",
+  "brake-pads",
+  "master-cylinder-cap",
+  "fuel-drain",
+  "dash-timer",
+  "foot-camera",
+  "camera-lens",
+  "front-arb",
+  "anti-slip-tape",
+];
+
+const DELIVERY_FIT_DEPENDENCIES = {
+  "half-sidescreens": ["race-mirror"],
+  "impact-bar": ["anti-slip-tape"],
+};
+
 function initialiseDeliveryFitBuilder() {
   const builder = document.querySelector("[data-delivery-builder]");
-  if (!builder) return;
-
-  const choices = Array.from(builder.querySelectorAll("[data-builder-choice]"));
+  const choices = builder ? Array.from(builder.querySelectorAll("[data-builder-choice]")) : [];
   const fitItems = Array.from(document.querySelectorAll("[data-fit-item]"));
-  const summary = document.querySelector("[data-fit-summary]");
+  const summaries = Array.from(document.querySelectorAll("[data-fit-summary]"));
   const emptyMessage = document.querySelector("[data-fit-empty]");
   const selectAllButton = document.querySelector("[data-fit-select-all]");
   const clearButton = document.querySelector("[data-fit-clear]");
   const storageKey = "caterham-academy-2026:delivery-fit-builder:v2";
   const storage = getChecklistStorage();
+
+  if (!builder && !fitItems.length && !summaries.length) return;
 
   function readSelectedParts() {
     if (!storage) return null;
@@ -234,42 +257,84 @@ function initialiseDeliveryFitBuilder() {
     }
   }
 
+  function getDefaultSelection() {
+    return new Set(DELIVERY_FIT_DEFAULT_PARTS);
+  }
+
+  function getSavedOrDefaultSelection() {
+    return readSelectedParts() || getDefaultSelection();
+  }
+
   function getExplicitSelection() {
-    return new Set(choices.filter((choice) => choice.checked).map((choice) => choice.dataset.builderChoice));
+    return new Set(
+      choices
+        .filter((choice) => choice.checked && !choice.closest("[data-builder-option]")?.classList.contains("is-dependency-selected"))
+        .map((choice) => choice.dataset.builderChoice),
+    );
   }
 
-  function findChoice(part) {
-    return choices.find((choice) => choice.dataset.builderChoice === part);
+  function expandDependencies(selected) {
+    const expanded = new Set(selected);
+    let changed = true;
+
+    while (changed) {
+      changed = false;
+
+      Array.from(expanded).forEach((part) => {
+        (DELIVERY_FIT_DEPENDENCIES[part] || []).forEach((requiredPart) => {
+          if (expanded.has(requiredPart)) return;
+          expanded.add(requiredPart);
+          changed = true;
+        });
+      });
+    }
+
+    return expanded;
   }
 
-  function enforceDependencies() {
+  function enforceChoiceDependencies(selected, explicitSelection) {
+    if (!choices.length) return;
+
     choices.forEach((choice) => {
       choice.closest("[data-builder-option]")?.classList.remove("is-dependency-selected");
     });
 
     choices.forEach((choice) => {
-      if (!choice.checked || !choice.dataset.fitRequires) return;
-
-      choice.dataset.fitRequires
-        .split(/\s+/)
-        .filter(Boolean)
-        .forEach((requiredPart) => {
-          const requiredChoice = findChoice(requiredPart);
-          if (!requiredChoice) return;
-          requiredChoice.checked = true;
-          requiredChoice.closest("[data-builder-option]")?.classList.add("is-dependency-selected");
-        });
+      const part = choice.dataset.builderChoice;
+      const isDependency = selected.has(part) && !explicitSelection.has(part);
+      choice.checked = selected.has(part);
+      choice.closest("[data-builder-option]")?.classList.toggle("is-dependency-selected", isDependency);
     });
   }
 
-  function getSelectionWithDependencies() {
-    enforceDependencies();
-    return getExplicitSelection();
+  function getSelectionState() {
+    const explicitSelection = choices.length ? getExplicitSelection() : getSavedOrDefaultSelection();
+    const selected = expandDependencies(explicitSelection);
+    enforceChoiceDependencies(selected, explicitSelection);
+    return { explicitSelection, selected };
+  }
+
+  function renderSummaries(selected, visibleCount) {
+    summaries.forEach((summary) => {
+      const mode = summary.dataset.fitSummaryMode || (fitItems.length ? "shown" : "selected");
+      const storageNote = storage ? "" : " Selections will reset when you leave this page.";
+
+      if (mode === "selected") {
+        const selectedCount = selected.size;
+        summary.textContent =
+          selectedCount === 1
+            ? `1 prep job selected.${storageNote}`
+            : `${selectedCount} prep jobs selected.${storageNote}`;
+        return;
+      }
+
+      const itemText = visibleCount === 1 ? "1 fitment job" : `${visibleCount} fitment jobs`;
+      summary.textContent = `${itemText} shown.${storageNote}`;
+    });
   }
 
   function updateFitList() {
-    const selected = getSelectionWithDependencies();
-    const explicitSelection = getExplicitSelection();
+    const { explicitSelection, selected } = getSelectionState();
     let visibleCount = 0;
 
     fitItems.forEach((item) => {
@@ -280,20 +345,14 @@ function initialiseDeliveryFitBuilder() {
     });
 
     emptyMessage?.classList.toggle("is-fit-hidden", visibleCount !== 0);
+    renderSummaries(selected, visibleCount);
 
-    if (summary) {
-      const storageNote = storage ? "" : " Selections will reset when you leave this page.";
-      const itemText = visibleCount === 1 ? "1 fitment job" : `${visibleCount} fitment jobs`;
-
-      summary.textContent = `${itemText} shown.${storageNote}`;
-    }
-
-    writeSelectedParts(explicitSelection);
+    if (choices.length) writeSelectedParts(explicitSelection);
   }
 
-  const savedSelection = readSelectedParts();
+  const savedSelection = getSavedOrDefaultSelection();
   choices.forEach((choice) => {
-    choice.checked = savedSelection ? savedSelection.has(choice.dataset.builderChoice) : true;
+    choice.checked = savedSelection.has(choice.dataset.builderChoice);
   });
 
   choices.forEach((choice) => {
@@ -302,6 +361,7 @@ function initialiseDeliveryFitBuilder() {
 
   selectAllButton?.addEventListener("click", () => {
     choices.forEach((choice) => {
+      choice.closest("[data-builder-option]")?.classList.remove("is-dependency-selected");
       choice.checked = true;
     });
     updateFitList();
@@ -309,6 +369,7 @@ function initialiseDeliveryFitBuilder() {
 
   clearButton?.addEventListener("click", () => {
     choices.forEach((choice) => {
+      choice.closest("[data-builder-option]")?.classList.remove("is-dependency-selected");
       choice.checked = false;
     });
     updateFitList();
@@ -318,6 +379,80 @@ function initialiseDeliveryFitBuilder() {
 }
 
 initialiseDeliveryFitBuilder();
+
+function initialiseBuilderFlow() {
+  const flow = document.querySelector("[data-builder-flow]");
+  if (!flow) return;
+
+  const panels = Array.from(flow.querySelectorAll("[data-builder-panel]"));
+  const stepButtons = Array.from(flow.querySelectorAll("[data-builder-step-target]"));
+  const previousButton = flow.querySelector("[data-builder-prev]");
+  const nextButton = flow.querySelector("[data-builder-next]");
+  const checklistUrl = "delivery-prep.html#generated-checklist";
+
+  if (!panels.length) return;
+
+  function stepFromHash() {
+    const hashValue = window.location.hash.replace("#", "");
+    return panels.findIndex((panel) => panel.dataset.builderPanel === hashValue);
+  }
+
+  const initialHashIndex = stepFromHash();
+  let currentIndex = Math.max(0, initialHashIndex);
+
+  function setStep(index, updateHash = true) {
+    currentIndex = Math.min(Math.max(index, 0), panels.length - 1);
+
+    panels.forEach((panel, panelIndex) => {
+      panel.hidden = panelIndex !== currentIndex;
+    });
+
+    stepButtons.forEach((button) => {
+      const isCurrent = button.dataset.builderStepTarget === panels[currentIndex].dataset.builderPanel;
+      button.classList.toggle("is-current", isCurrent);
+      button.setAttribute("aria-current", isCurrent ? "step" : "false");
+    });
+
+    if (previousButton) previousButton.disabled = currentIndex === 0;
+    if (nextButton) nextButton.textContent = currentIndex === panels.length - 1 ? "View checklist" : "Next";
+
+    if (updateHash) {
+      const stepName = panels[currentIndex].dataset.builderPanel;
+      history.replaceState(null, "", `#${stepName}`);
+    }
+  }
+
+  stepButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const targetIndex = panels.findIndex(
+        (panel) => panel.dataset.builderPanel === button.dataset.builderStepTarget,
+      );
+      if (targetIndex >= 0) setStep(targetIndex);
+    });
+  });
+
+  previousButton?.addEventListener("click", () => {
+    setStep(currentIndex - 1);
+  });
+
+  nextButton?.addEventListener("click", () => {
+    if (currentIndex === panels.length - 1) {
+      window.location.href = checklistUrl;
+      return;
+    }
+
+    setStep(currentIndex + 1);
+  });
+
+  window.addEventListener("hashchange", () => {
+    const hashIndex = stepFromHash();
+    if (hashIndex >= 0) setStep(hashIndex, false);
+  });
+
+  setStep(currentIndex, initialHashIndex >= 0);
+}
+
+initialiseBuilderFlow();
 
 const searchInput = document.querySelector("#site-search");
 const statusNode = document.querySelector("#search-status");
@@ -422,6 +557,15 @@ const GLOBAL_SEARCH_INDEX = [
       "What to order, fit, and check after handover: ignition switch, transponder, brake pads, half sidescreens, mirrors, anti-roll bar, fuel drain, dash timer, handbrake cover, tape, and first shakedown items.",
     keywords:
       "delivery prep car handover modifications fitment competition pads half sidescreens race mirror centre mirror front anti roll bar fuel drain dash timer handbrake cover 50mm tape anti slip gaffer",
+  },
+  {
+    title: "Delivery Prep Checklist Builder",
+    url: "delivery-prep-builder.html#builder",
+    section: "Custom prep jobs",
+    summary:
+      "Step through body, cockpit, brakes, fuel, data, setup, and service choices to build a saved delivery prep checklist.",
+    keywords:
+      "delivery prep builder custom checklist choose prep jobs optional parts selected fitment edit prep jobs",
   },
   {
     title: "Prep Parts And Why They Matter",

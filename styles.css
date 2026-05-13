@@ -700,16 +700,81 @@ main {
   background: #f8faf8;
 }
 
-.delivery-builder-grid {
+[data-builder-option].is-dependency-selected {
+  background: #f8faf8;
+}
+
+.builder-step-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
   border-top: 1px solid var(--line);
 }
 
-.delivery-builder-step-heading > span {
-  display: none;
+.builder-step-tabs button {
+  min-height: 48px;
+  border: 0;
+  border-right: 1px solid var(--line);
+  background: #fff;
+  padding: 10px 14px;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 900;
+  text-align: left;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
-[data-builder-option].is-dependency-selected {
-  background: #f8faf8;
+.builder-step-tabs button:last-child {
+  border-right: 0;
+}
+
+.builder-step-tabs button:hover,
+.builder-step-tabs button.is-current {
+  background: #f1f6d8;
+  color: var(--track);
+}
+
+.builder-flow-card {
+  display: grid;
+  grid-template-columns: minmax(190px, 0.28fr) minmax(0, 1fr);
+  gap: 28px;
+  border-top: 1px solid var(--line);
+  padding-top: 26px;
+  padding-bottom: 26px;
+}
+
+.builder-step-label {
+  margin: 0 0 8px;
+  color: var(--track-2);
+  font-size: 0.72rem;
+  font-weight: 900;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.builder-review-body {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+}
+
+.builder-review-body .delivery-builder-actions {
+  justify-content: start;
+}
+
+.builder-flow-controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid var(--line);
+  padding: 16px 26px;
+}
+
+.builder-flow-controls button[disabled] {
+  cursor: not-allowed;
+  opacity: 0.48;
 }
 
 .generated-checklist-heading {
@@ -1411,6 +1476,28 @@ tr.is-hidden {
   .delivery-builder-actions button,
   .delivery-builder-actions a {
     justify-content: center;
+  }
+
+  .builder-step-tabs {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .builder-step-tabs button:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .builder-step-tabs button:nth-child(n + 3) {
+    border-top: 1px solid var(--line);
+  }
+
+  .builder-flow-card {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .builder-flow-controls {
+    padding-right: 18px;
+    padding-left: 18px;
   }
 
   .compact-guide .guide-step + .guide-step {
