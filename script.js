@@ -200,6 +200,118 @@ function initialiseChecklists() {
 
 initialiseChecklists();
 
+function initialiseDeliveryFitBuilder() {
+  const builder = document.querySelector("[data-fit-builder]");
+  if (!builder) return;
+
+  const choices = Array.from(builder.querySelectorAll("[data-fit-choice]"));
+  const fitItems = Array.from(document.querySelectorAll("[data-fit-item]"));
+  const summary = builder.querySelector("[data-fit-summary]");
+  const emptyMessage = document.querySelector("[data-fit-empty]");
+  const selectAllButton = builder.querySelector("[data-fit-select-all]");
+  const clearButton = builder.querySelector("[data-fit-clear]");
+  const storageKey = "caterham-academy-2026:delivery-fit-list:v1";
+  const storage = getChecklistStorage();
+
+  function readSelectedParts() {
+    if (!storage) return null;
+
+    try {
+      const saved = JSON.parse(storage.getItem(storageKey));
+      return Array.isArray(saved) ? new Set(saved) : null;
+    } catch {
+      return null;
+    }
+  }
+
+  function writeSelectedParts(selected) {
+    if (!storage) return;
+
+    try {
+      storage.setItem(storageKey, JSON.stringify(Array.from(selected)));
+    } catch {
+      // The builder still works for the current page view if storage is unavailable.
+    }
+  }
+
+  function getExplicitSelection() {
+    return new Set(choices.filter((choice) => choice.checked).map((choice) => choice.dataset.fitChoice));
+  }
+
+  function getSelectionWithDependencies() {
+    const selected = getExplicitSelection();
+
+    choices.forEach((choice) => {
+      if (!choice.checked || !choice.dataset.fitRequires) return;
+
+      choice.dataset.fitRequires
+        .split(/\s+/)
+        .filter(Boolean)
+        .forEach((requiredPart) => selected.add(requiredPart));
+    });
+
+    return selected;
+  }
+
+  function updateFitList() {
+    const explicitSelection = getExplicitSelection();
+    const selected = getSelectionWithDependencies();
+    let visibleCount = 0;
+
+    fitItems.forEach((item) => {
+      const itemParts = item.dataset.fitItem.split(/\s+/).filter(Boolean);
+      const isVisible = itemParts.some((part) => selected.has(part));
+      item.classList.toggle("is-fit-hidden", !isVisible);
+      if (isVisible) visibleCount += 1;
+    });
+
+    emptyMessage?.classList.toggle("is-fit-hidden", visibleCount !== 0);
+
+    if (summary) {
+      const dependencyCount = selected.size - explicitSelection.size;
+      const storageNote = storage ? "" : " Selections will reset when you leave this page.";
+      const itemText = visibleCount === 1 ? "1 fitment job" : `${visibleCount} fitment jobs`;
+      const dependencyText =
+        dependencyCount > 0
+          ? ` Includes ${dependencyCount === 1 ? "1 required linked item" : `${dependencyCount} required linked items`}.`
+          : "";
+
+      summary.textContent = `${itemText} shown.${dependencyText}${storageNote}`;
+    }
+
+    writeSelectedParts(explicitSelection);
+  }
+
+  const savedSelection = readSelectedParts();
+  if (savedSelection) {
+    choices.forEach((choice) => {
+      choice.checked = savedSelection.has(choice.dataset.fitChoice);
+    });
+  }
+
+  choices.forEach((choice) => {
+    choice.addEventListener("change", updateFitList);
+  });
+
+  selectAllButton?.addEventListener("click", () => {
+    choices.forEach((choice) => {
+      choice.checked = true;
+    });
+    updateFitList();
+  });
+
+  clearButton?.addEventListener("click", () => {
+    choices.forEach((choice) => {
+      choice.checked = false;
+    });
+    updateFitList();
+  });
+
+  updateFitList();
+}
+
+initialiseDeliveryFitBuilder();
+
 const searchInput = document.querySelector("#site-search");
 const statusNode = document.querySelector("#search-status");
 const searchableSections = Array.from(document.querySelectorAll(".searchable"));
@@ -216,15 +328,23 @@ if (searchInput && statusNode) {
     return value.toLowerCase().trim();
   }
 
+  function isSearchVisible(item) {
+    return !item.classList.contains("is-hidden") && !item.classList.contains("is-fit-hidden");
+  }
+
   function sectionHasVisibleContent(section, query) {
-    const visibleRows = Array.from(section.querySelectorAll("tbody tr")).some(
-      (row) => !row.classList.contains("is-hidden"),
-    );
+    const rows = Array.from(section.querySelectorAll("tbody tr"));
+    const visibleRows = rows.some((row) => !row.classList.contains("is-hidden"));
     const textBlocks = Array.from(
       section.querySelectorAll("li, .todo-item, .prep-item, .coverage-row"),
     );
-    const visibleText = textBlocks.some((item) => !item.classList.contains("is-hidden"));
-    return visibleRows || visibleText || Boolean(query && normalise(section.textContent).includes(query));
+    const visibleText = textBlocks.some(isSearchVisible);
+    const hasStructuredContent = rows.length > 0 || textBlocks.length > 0;
+    return (
+      visibleRows ||
+      visibleText ||
+      (!hasStructuredContent && Boolean(query && normalise(section.textContent).includes(query)))
+    );
   }
 
   function applySearch() {
@@ -240,7 +360,7 @@ if (searchInput && statusNode) {
     listItems.forEach((item) => {
       const isMatch = !query || normalise(item.textContent).includes(query);
       item.classList.toggle("is-hidden", !isMatch);
-      if (isMatch && query) matches += 1;
+      if (isMatch && query && !item.classList.contains("is-fit-hidden")) matches += 1;
     });
 
     prepGroups.forEach((group) => {

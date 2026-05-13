@@ -178,6 +178,35 @@
           </article>
         </div>
 
+        <div class="fit-builder" data-fit-builder aria-labelledby="fit-builder-heading">
+          <div class="fit-builder-heading">
+            <div>
+              <p class="section-kicker">Custom fit list</p>
+              <h3 id="fit-builder-heading">Pick The Parts You Are Fitting</h3>
+            </div>
+            <p data-fit-summary role="status" aria-live="polite">Showing the common fit list.</p>
+          </div>
+          <div class="fit-builder-options">
+            <label><input type="checkbox" data-fit-choice="brake-pads" checked /> Competition brake pads</label>
+            <label><input type="checkbox" data-fit-choice="master-cylinder-cap" checked /> Race master cylinder cap</label>
+            <label><input type="checkbox" data-fit-choice="impact-bar" data-fit-requires="anti-slip-tape" checked /> Passenger impact bar</label>
+            <label><input type="checkbox" data-fit-choice="half-sidescreens" data-fit-requires="race-mirror" checked /> Half sidescreens</label>
+            <label><input type="checkbox" data-fit-choice="race-mirror" checked /> Race mirror package</label>
+            <label><input type="checkbox" data-fit-choice="centre-mirror" checked /> Pitking centre mirror</label>
+            <label><input type="checkbox" data-fit-choice="steering-wheel" checked /> Optional steering wheel</label>
+            <label><input type="checkbox" data-fit-choice="front-arb" checked /> Front anti-roll bar</label>
+            <label><input type="checkbox" data-fit-choice="fuel-drain" checked /> Fuel drain hose</label>
+            <label><input type="checkbox" data-fit-choice="dash-timer" checked /> Dash timer</label>
+            <label><input type="checkbox" data-fit-choice="foot-camera" checked /> Foot camera mount</label>
+            <label><input type="checkbox" data-fit-choice="camera-lens" checked /> Camera lens protection</label>
+            <label><input type="checkbox" data-fit-choice="anti-slip-tape" checked /> Impact bar anti-slip tape</label>
+          </div>
+          <div class="fit-builder-actions">
+            <button type="button" data-fit-select-all>Select all</button>
+            <button type="button" data-fit-clear>Clear parts</button>
+          </div>
+        </div>
+
         <div class="todo-grid delivery-todo-grid">
           <article class="todo-card">
             <div class="todo-card-heading">
@@ -257,97 +286,91 @@
               <p>These are the practical fitment jobs and useful parts to have on the car before proper testing starts.</p>
             </div>
             <div class="todo-list">
-              <label class="todo-item">
+              <label class="todo-item" data-fit-item="brake-pads">
                 <input type="checkbox" />
                 <span class="todo-copy">
                   <span class="todo-title">Fit competition brake pads, front and rear</span>
                 </span>
               </label>
-              <label class="todo-item">
+              <label class="todo-item" data-fit-item="master-cylinder-cap">
                 <input type="checkbox" />
                 <span class="todo-copy">
                   <span class="todo-title">Fit race master cylinder cap</span>
                   <span class="todo-context">Permitted race cap option; it removes the low-fluid warning, so treat it as post-handover race prep.</span>
                 </span>
               </label>
-              <label class="todo-item">
+              <label class="todo-item" data-fit-item="impact-bar">
                 <input type="checkbox" />
                 <span class="todo-copy">
                   <span class="todo-title">Fit passenger side impact bar</span>
                 </span>
               </label>
-              <label class="todo-item">
+              <label class="todo-item" data-fit-item="half-sidescreens">
                 <input type="checkbox" />
                 <span class="todo-copy">
                   <span class="todo-title">Fit half sidescreens</span>
                   <span class="todo-context">Full sidescreens come with the car; half sidescreens are the common race-prep upgrade.</span>
                 </span>
               </label>
-              <label class="todo-item">
+              <label class="todo-item" data-fit-item="race-mirror">
                 <input type="checkbox" />
                 <span class="todo-copy">
                   <span class="todo-title">Fit Caterham race mirror package</span>
                   <span class="todo-context">Required when using half sidescreens. The car needs three or more effective mirrors; without full doors, fit left and right side mirrors plus a centre mirror.</span>
                 </span>
               </label>
-              <label class="todo-item">
+              <label class="todo-item" data-fit-item="centre-mirror">
                 <input type="checkbox" />
                 <span class="todo-copy">
                   <span class="todo-title">Fit Pitking centre mirror</span>
                 </span>
               </label>
-              <label class="todo-item">
+              <label class="todo-item" data-fit-item="steering-wheel">
                 <input type="checkbox" />
                 <span class="todo-copy">
                   <span class="todo-title">Choose optional steering wheel</span>
                   <span class="todo-context">The Momo suede wheel is one option; other compliant wheels are allowed.</span>
                 </span>
               </label>
-              <label class="todo-item">
+              <label class="todo-item" data-fit-item="front-arb">
                 <input type="checkbox" />
                 <span class="todo-copy">
                   <span class="todo-title">Fit front anti-roll bar</span>
                 </span>
               </label>
-              <label class="todo-item">
+              <label class="todo-item" data-fit-item="fuel-drain">
                 <input type="checkbox" />
                 <span class="todo-copy">
                   <span class="todo-title">Fit Mocal fuel drain hose with stop tap</span>
                 </span>
               </label>
-              <label class="todo-item">
+              <label class="todo-item" data-fit-item="dash-timer">
                 <input type="checkbox" />
                 <span class="todo-copy">
                   <span class="todo-title">Fit dash timer</span>
                   <span class="todo-context">Simple Salter-style timer for stint/race timing.</span>
                 </span>
               </label>
-              <label class="todo-item">
+              <label class="todo-item" data-fit-item="foot-camera">
                 <input type="checkbox" />
                 <span class="todo-copy">
                   <span class="todo-title">Fit additional foot camera mount</span>
                 </span>
               </label>
-              <label class="todo-item">
+              <label class="todo-item" data-fit-item="camera-lens">
                 <input type="checkbox" />
                 <span class="todo-copy">
                   <span class="todo-title">Fit camera lens protection pair</span>
                 </span>
               </label>
-              <label class="todo-item">
-                <input type="checkbox" />
-                <span class="todo-copy">
-                  <span class="todo-title">Prepare windscreen-to-roll-cage tape</span>
-                  <span class="todo-context">Use 50 mm gaffer tape from the windscreen back to the front hoop to reduce rain ingress. It should not extend further backwards or down the side of the screen/cage; keep a roll in the event kit.</span>
-                </span>
-              </label>
-              <label class="todo-item">
+              <label class="todo-item" data-fit-item="anti-slip-tape">
                 <input type="checkbox" />
                 <span class="todo-copy">
                   <span class="todo-title">Apply 50 mm anti-slip tape to both impact bars</span>
                   <span class="todo-context">You stand on the impact bar when climbing over the cage into the car.</span>
                 </span>
               </label>
+              <p class="fit-empty is-fit-hidden" data-fit-empty>Pick one or more parts above to build this list.</p>
             </div>
           </article>
 
@@ -458,6 +481,13 @@
               <label class="todo-item">
                 <input type="checkbox" />
                 <span class="todo-copy">
+                  <span class="todo-title">Check supplied windscreen-to-roll-cage tape</span>
+                  <span class="todo-context">Cars are now arriving with tape already fitted between the windscreen and front cage hoop. Check it is secure and only covers that gap; keep a spare roll of 50 mm gaffer tape in the event kit.</span>
+                </span>
+              </label>
+              <label class="todo-item">
+                <input type="checkbox" />
+                <span class="todo-copy">
                   <span class="todo-title">Confirm fuel sampling kit status</span>
                   <span class="todo-context">The ARDS presentation calls out a fuel sampling kit, but the current notes do not confirm whether it is supplied or already fitted. Confirm with Caterham before the first event.</span>
                 </span>
@@ -465,8 +495,8 @@
               <label class="todo-item">
                 <input type="checkbox" />
                 <span class="todo-copy">
-                  <span class="todo-title">Confirm boot floor sealing requirement</span>
-                  <span class="todo-context">The ARDS presentation calls out boot floor sealing but does not explain the detail in the extracted text. Confirm what needs sealing and why before modifying the boot floor.</span>
+                  <span class="todo-title">Check supplied boot-floor tape</span>
+                  <span class="todo-context">Cars are now arriving with the boot already taped. Check the tape is present and secure before the first event; do not add extra boot-floor sealing unless Caterham gives a specific reason.</span>
                 </span>
               </label>
               <label class="todo-item">
@@ -667,8 +697,8 @@
                 <h4>Windscreen-to-roll-cage tape</h4>
                 <dl>
                   <div><dt>Source</dt><dd>50 mm gaffer tape</dd></div>
-                  <div><dt>Benefit</dt><dd>Permitted from the windscreen back to the front hoop of the roll cage to reduce rain ingress. Keep the tape within that area: do not run it further backwards or down the side of the screen/cage.</dd></div>
-                  <div><dt>Timing</dt><dd>Keep in the event kit; fit when conditions require it.</dd></div>
+                  <div><dt>Benefit</dt><dd>Now expected to be supplied between the windscreen and front hoop of the roll cage to reduce rain ingress. Keep the tape within that area: do not run it further backwards or down the side of the screen/cage.</dd></div>
+                  <div><dt>Timing</dt><dd>Check at delivery; keep spare tape in the event kit.</dd></div>
                 </dl>
               </article>
               <article class="prep-item">
