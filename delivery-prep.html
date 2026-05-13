@@ -178,35 +178,6 @@
           </article>
         </div>
 
-        <div class="fit-builder" data-fit-builder aria-labelledby="fit-builder-heading">
-          <div class="fit-builder-heading">
-            <div>
-              <p class="section-kicker">Custom fit list</p>
-              <h3 id="fit-builder-heading">Pick The Parts You Are Fitting</h3>
-            </div>
-            <p data-fit-summary role="status" aria-live="polite">Showing the common fit list.</p>
-          </div>
-          <div class="fit-builder-options">
-            <label><input type="checkbox" data-fit-choice="brake-pads" checked /> Competition brake pads</label>
-            <label><input type="checkbox" data-fit-choice="master-cylinder-cap" checked /> Race master cylinder cap</label>
-            <label><input type="checkbox" data-fit-choice="impact-bar" data-fit-requires="anti-slip-tape" checked /> Passenger impact bar</label>
-            <label><input type="checkbox" data-fit-choice="half-sidescreens" data-fit-requires="race-mirror" checked /> Half sidescreens</label>
-            <label><input type="checkbox" data-fit-choice="race-mirror" checked /> Race mirror package</label>
-            <label><input type="checkbox" data-fit-choice="centre-mirror" checked /> Pitking centre mirror</label>
-            <label><input type="checkbox" data-fit-choice="steering-wheel" checked /> Optional steering wheel</label>
-            <label><input type="checkbox" data-fit-choice="front-arb" checked /> Front anti-roll bar</label>
-            <label><input type="checkbox" data-fit-choice="fuel-drain" checked /> Fuel drain hose</label>
-            <label><input type="checkbox" data-fit-choice="dash-timer" checked /> Dash timer</label>
-            <label><input type="checkbox" data-fit-choice="foot-camera" checked /> Foot camera mount</label>
-            <label><input type="checkbox" data-fit-choice="camera-lens" checked /> Camera lens protection</label>
-            <label><input type="checkbox" data-fit-choice="anti-slip-tape" checked /> Impact bar anti-slip tape</label>
-          </div>
-          <div class="fit-builder-actions">
-            <button type="button" data-fit-select-all>Select all</button>
-            <button type="button" data-fit-clear>Clear parts</button>
-          </div>
-        </div>
-
         <div class="todo-grid delivery-todo-grid">
           <article class="todo-card">
             <div class="todo-card-heading">
@@ -283,7 +254,12 @@
           <article class="todo-card">
             <div class="todo-card-heading">
               <h3>Parts To Fit</h3>
-              <p>These are the practical fitment jobs and useful parts to have on the car before proper testing starts.</p>
+              <p>Tick the matching rows in Prep Parts below to customise this fitment list.</p>
+              <p class="fit-summary" data-fit-summary role="status" aria-live="polite">Showing the common fit list.</p>
+              <div class="fit-actions">
+                <button type="button" data-fit-select-all>Select all</button>
+                <button type="button" data-fit-clear>Clear parts</button>
+              </div>
             </div>
             <div class="todo-list">
               <label class="todo-item" data-fit-item="brake-pads">
@@ -585,7 +561,7 @@
                   <div><dt>Timing</dt><dd>Order from Caterham Parts; fit after handover.</dd></div>
                 </dl>
               </article>
-              <article class="prep-item">
+              <article class="prep-item" data-fit-choice="impact-bar" data-fit-requires="anti-slip-tape">
                 <h4>Passenger side impact protection bar</h4>
                 <dl>
                   <div><dt>Part</dt><dd><a href="https://caterhamparts.co.uk/side-intrusion-bars/8018-side-impact-bar-lh-s3-metric-chassis.html">30P307E</a>, superseding regulation-listed 30P307A</dd></div>
@@ -625,7 +601,7 @@
           <article class="prep-group">
             <h3>Cockpit Protection And Visibility</h3>
             <div class="prep-card-grid">
-              <article class="prep-item prep-item-wide">
+              <article class="prep-item prep-item-wide" data-fit-choice="half-sidescreens" data-fit-requires="race-mirror">
                 <h4>Half sidescreen kit</h4>
                 <dl>
                   <div><dt>Part</dt><dd><a href="https://caterhamparts.co.uk/sidescreens/172-half-sidescreen-kit-for-s3-cars.html">WE67K</a></dd></div>
@@ -651,7 +627,7 @@
                   <div><dt>Timing</dt><dd>During driver fit setup.</dd></div>
                 </dl>
               </article>
-              <article class="prep-item">
+              <article class="prep-item" data-fit-choice="steering-wheel">
                 <h4>Momo suede steering wheel, optional</h4>
                 <dl>
                   <div><dt>Part</dt><dd><a href="https://caterhamparts.co.uk/wheels/1358-momo-steering-wheel-260mm-suede.html">30S038A</a></dd></div>
@@ -676,7 +652,7 @@
                   <div><dt>Timing</dt><dd>Delivery inspection and final driver fit.</dd></div>
                 </dl>
               </article>
-              <article class="prep-item">
+              <article class="prep-item" data-fit-choice="race-mirror">
                 <h4>Caterham race mirror package</h4>
                 <div class="status-badges"><span class="source-badge required">Required with half sidescreens</span></div>
                 <dl>
@@ -685,7 +661,7 @@
                   <div><dt>Timing</dt><dd>Fit with half sidescreens.</dd></div>
                 </dl>
               </article>
-              <article class="prep-item">
+              <article class="prep-item" data-fit-choice="centre-mirror">
                 <h4>Pitking centre mirror</h4>
                 <dl>
                   <div><dt>Source</dt><dd><a href="https://www.demon-tweeks.com/pitking-products-caterham-race-car-centre-mirror-pkpcatrvmk-akn/">Pitking Caterham centre mirror</a></dd></div>
@@ -701,7 +677,7 @@
                   <div><dt>Timing</dt><dd>Check at delivery; keep spare tape in the event kit.</dd></div>
                 </dl>
               </article>
-              <article class="prep-item">
+              <article class="prep-item" data-fit-choice="anti-slip-tape">
                 <h4>Impact bar anti-slip tape</h4>
                 <dl>
                   <div><dt>Source</dt><dd>50 mm anti-slip tape</dd></div>
@@ -715,7 +691,7 @@
           <article class="prep-group">
             <h3>Fuel, Catch Tank, Brakes, And Data</h3>
             <div class="prep-card-grid">
-              <article class="prep-item">
+              <article class="prep-item" data-fit-choice="fuel-drain">
                 <h4>Mocal fuel drain hose with stop tap</h4>
                 <dl>
                   <div><dt>Source</dt><dd><a href="https://www.demon-tweeks.com/mocal-caterham-fuel-drain-hose-with-stop-tap-mocfdkhose1/">Mocal fuel drain hose</a></dd></div>
@@ -731,7 +707,7 @@
                   <div><dt>Timing</dt><dd>Check during catch-tank inspection.</dd></div>
                 </dl>
               </article>
-              <article class="prep-item">
+              <article class="prep-item" data-fit-choice="master-cylinder-cap">
                 <h4>Race master cylinder cap</h4>
                 <dl>
                   <div><dt>Part</dt><dd><a href="https://caterhamparts.co.uk/master-cylinder/914-brake-master-cylinder-cap-race-no-float-switch.html">77175</a> or <a href="https://caterhamparts.co.uk/master-cylinder/6971-clutch-master-cylinder-cap.html">300B0043A</a></dd></div>
@@ -739,7 +715,7 @@
                   <div><dt>Timing</dt><dd>After handover, before race use.</dd></div>
                 </dl>
               </article>
-              <article class="prep-item">
+              <article class="prep-item" data-fit-choice="brake-pads">
                 <h4>Competition front brake pads</h4>
                 <dl>
                   <div><dt>Part</dt><dd><a href="https://caterhamparts.co.uk/brake-pads/8220-brake-pad-front-fast-road-track-2-pot-caliper-2015.html">300B0067A</a></dd></div>
@@ -747,7 +723,7 @@
                   <div><dt>Timing</dt><dd>Before shakedown/testing.</dd></div>
                 </dl>
               </article>
-              <article class="prep-item">
+              <article class="prep-item" data-fit-choice="brake-pads">
                 <h4>Competition rear brake pads</h4>
                 <dl>
                   <div><dt>Part</dt><dd><a href="https://caterhamparts.co.uk/calipers-pads-discs/8658-brake-pads-rear-upgrade-academy-2026.html">3BAB0007A</a></dd></div>
@@ -771,7 +747,7 @@
                   <div><dt>Timing</dt><dd>Before testing and data setup.</dd></div>
                 </dl>
               </article>
-              <article class="prep-item">
+              <article class="prep-item" data-fit-choice="dash-timer">
                 <h4>Dash timer</h4>
                 <dl>
                   <div><dt>Source</dt><dd><a href="https://www.amazon.co.uk/Salter-355-BKXCDU-Adjustable-Standing-Black/dp/B07QLVLRBD/">Salter kitchen timer</a></dd></div>
@@ -793,7 +769,7 @@
           <article class="prep-group">
             <h3>Camera Accessories</h3>
             <div class="prep-card-grid">
-              <article class="prep-item">
+              <article class="prep-item" data-fit-choice="foot-camera">
                 <h4>Additional foot camera mount</h4>
                 <dl>
                   <div><dt>Source</dt><dd>Camera accessory</dd></div>
@@ -801,7 +777,7 @@
                   <div><dt>Timing</dt><dd>Before camera layout is finalised.</dd></div>
                 </dl>
               </article>
-              <article class="prep-item">
+              <article class="prep-item" data-fit-choice="camera-lens">
                 <h4>Camera lens protection pair</h4>
                 <dl>
                   <div><dt>Source</dt><dd>Camera accessory</dd></div>
@@ -815,7 +791,7 @@
           <article class="prep-group">
             <h3>Setup Parts</h3>
             <div class="prep-card-grid">
-              <article class="prep-item">
+              <article class="prep-item" data-fit-choice="front-arb">
                 <h4>Front anti-roll bar, 5/8 inch, red</h4>
                 <dl>
                   <div><dt>Part</dt><dd><a href="https://caterhamparts.co.uk/anti-roll-bars/2675-anti-roll-bar-front-5-8-narrow-track-red-s3.html">72090</a></dd></div>

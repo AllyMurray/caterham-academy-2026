@@ -201,15 +201,31 @@ function initialiseChecklists() {
 initialiseChecklists();
 
 function initialiseDeliveryFitBuilder() {
-  const builder = document.querySelector("[data-fit-builder]");
-  if (!builder) return;
+  const choiceRows = Array.from(document.querySelectorAll(".prep-item[data-fit-choice]"));
+  if (!choiceRows.length) return;
 
-  const choices = Array.from(builder.querySelectorAll("[data-fit-choice]"));
+  choiceRows.forEach((row) => {
+    const label = document.createElement("label");
+    const input = document.createElement("input");
+    const text = document.createElement("span");
+
+    label.className = "prep-fit-choice";
+    input.type = "checkbox";
+    input.dataset.fitChoice = row.dataset.fitChoice;
+    if (row.dataset.fitRequires) input.dataset.fitRequires = row.dataset.fitRequires;
+    text.textContent = "Fit";
+
+    label.append(input, text);
+    row.prepend(label);
+    row.classList.add("prep-item-selectable");
+  });
+
+  const choices = Array.from(document.querySelectorAll(".prep-fit-choice [data-fit-choice]"));
   const fitItems = Array.from(document.querySelectorAll("[data-fit-item]"));
-  const summary = builder.querySelector("[data-fit-summary]");
+  const summary = document.querySelector("[data-fit-summary]");
   const emptyMessage = document.querySelector("[data-fit-empty]");
-  const selectAllButton = builder.querySelector("[data-fit-select-all]");
-  const clearButton = builder.querySelector("[data-fit-clear]");
+  const selectAllButton = document.querySelector("[data-fit-select-all]");
+  const clearButton = document.querySelector("[data-fit-clear]");
   const storageKey = "caterham-academy-2026:delivery-fit-list:v1";
   const storage = getChecklistStorage();
 
@@ -236,6 +252,13 @@ function initialiseDeliveryFitBuilder() {
 
   function getExplicitSelection() {
     return new Set(choices.filter((choice) => choice.checked).map((choice) => choice.dataset.fitChoice));
+  }
+
+  function syncMatchingChoices(changedChoice) {
+    choices.forEach((choice) => {
+      if (choice === changedChoice || choice.dataset.fitChoice !== changedChoice.dataset.fitChoice) return;
+      choice.checked = changedChoice.checked;
+    });
   }
 
   function getSelectionWithDependencies() {
@@ -283,14 +306,15 @@ function initialiseDeliveryFitBuilder() {
   }
 
   const savedSelection = readSelectedParts();
-  if (savedSelection) {
-    choices.forEach((choice) => {
-      choice.checked = savedSelection.has(choice.dataset.fitChoice);
-    });
-  }
+  choices.forEach((choice) => {
+    choice.checked = savedSelection ? savedSelection.has(choice.dataset.fitChoice) : true;
+  });
 
   choices.forEach((choice) => {
-    choice.addEventListener("change", updateFitList);
+    choice.addEventListener("change", () => {
+      syncMatchingChoices(choice);
+      updateFitList();
+    });
   });
 
   selectAllButton?.addEventListener("click", () => {
