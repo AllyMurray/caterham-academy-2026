@@ -187,6 +187,14 @@ test("does not include immobiliser bypass as a routine checklist job", async ({ 
   await expect(page.locator("#prep-mods").getByText("Immobiliser bypass")).toHaveCount(1);
 });
 
+test("includes catch tank cap drilling and oil-resistant sponge prep", async ({ page }) => {
+  await page.goto("/delivery-prep.html#todo");
+
+  await expect(page.getByText("Drill catch tank cap and fit oil-resistant sponge")).toBeVisible();
+  await expect(page.getByText("The catch tank cap is not drilled as supplied.")).toBeVisible();
+  await expect(page.getByText("The drilling is expected from the factory now")).toHaveCount(0);
+});
+
 test("adds required dependent jobs without saving them as explicit choices", async ({ page }) => {
   await page.goto("/delivery-prep-builder.html#review");
   await page.getByRole("button", { name: "Clear choices" }).click();
