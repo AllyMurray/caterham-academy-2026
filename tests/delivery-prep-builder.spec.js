@@ -180,6 +180,13 @@ test("clears saved prep jobs and keeps the delivery checklist editable", async (
   await expect(page).toHaveURL(/\/delivery-prep-builder\.html#builder$/);
 });
 
+test("does not include immobiliser bypass as a routine checklist job", async ({ page }) => {
+  await page.goto("/delivery-prep.html#todo");
+
+  await expect(page.locator("#todo").getByText("Arrange immobiliser bypass")).toHaveCount(0);
+  await expect(page.locator("#prep-mods").getByText("Immobiliser bypass")).toHaveCount(1);
+});
+
 test("adds required dependent jobs without saving them as explicit choices", async ({ page }) => {
   await page.goto("/delivery-prep-builder.html#review");
   await page.getByRole("button", { name: "Clear choices" }).click();
