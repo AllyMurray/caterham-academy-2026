@@ -195,6 +195,14 @@ test("includes catch tank cap drilling and oil-resistant sponge prep", async ({ 
   await expect(page.getByText("The drilling is expected from the factory now")).toHaveCount(0);
 });
 
+test("uses key barrel removal rather than unsupported ignition switch reversal", async ({ page }) => {
+  await page.goto("/delivery-prep.html#todo");
+
+  await expect(page.getByText("Reverse the ignition switch")).toHaveCount(0);
+  await expect(page.locator("#todo").getByText("Remove key barrel and fit ignition switch")).toBeVisible();
+  await expect(page.locator("#todo").getByText("replacing the key barrel with an ignition switch")).toBeVisible();
+});
+
 test("adds required dependent jobs without saving them as explicit choices", async ({ page }) => {
   await page.goto("/delivery-prep-builder.html#review");
   await page.getByRole("button", { name: "Clear choices" }).click();
