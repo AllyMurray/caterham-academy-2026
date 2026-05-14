@@ -200,7 +200,9 @@ test("uses key barrel removal rather than unsupported ignition switch reversal",
 
   await expect(page.getByText("Reverse the ignition switch")).toHaveCount(0);
   await expect(page.locator("#todo").getByText("Remove key barrel and fit ignition switch")).toBeVisible();
-  await expect(page.locator("#todo").getByText("replacing the key barrel with an ignition switch")).toBeVisible();
+  await expect(page.locator("#todo").getByText("replacing the key barrel with a dashboard ignition switch")).toBeVisible();
+  await expect(page.locator("#todo").getByText("down is OFF and up is ON")).toBeVisible();
+  await expect(page.locator("#todo").getByText("mark the OFF position")).toBeVisible();
 });
 
 test("adds required dependent jobs without saving them as explicit choices", async ({ page }) => {
