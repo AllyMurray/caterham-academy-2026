@@ -202,7 +202,7 @@ test("uses key barrel removal rather than unsupported ignition switch reversal",
   await expect(page.locator("#todo").getByText("Remove key barrel and fit ignition switch")).toBeVisible();
   await expect(page.locator("#todo").getByText("replacing the key barrel with a dashboard ignition switch")).toBeVisible();
   await expect(page.locator("#todo").getByText("down as OFF and up as ON")).toBeVisible();
-  await expect(page.locator("#todo").getByText("closing it switches ignition OFF, never ON")).toBeVisible();
+  await expect(page.locator("#todo").getByText("must not be able to fall or bounce shut")).toBeVisible();
   await expect(page.locator("#todo").getByText("Mark the OFF position")).toBeVisible();
 });
 
