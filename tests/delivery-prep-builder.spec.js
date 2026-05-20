@@ -195,6 +195,16 @@ test("includes catch tank cap drilling and oil-resistant sponge prep", async ({ 
   await expect(page.getByText("The drilling is expected from the factory now")).toHaveCount(0);
 });
 
+test("uses supplied roll cage padding trimming guidance without impact PPF", async ({ page }) => {
+  await page.goto("/delivery-prep.html#todo");
+
+  const todo = page.locator("#todo");
+  await expect(todo.getByText("Trim and tape roll cage padding")).toBeVisible();
+  await expect(todo.getByText("Remove the tie wraps")).toBeVisible();
+  await expect(todo.getByText("trim the foam ends")).toBeVisible();
+  await expect(page.getByText("impact PPF")).toHaveCount(0);
+});
+
 test("uses key barrel removal rather than unsupported ignition switch reversal", async ({ page }) => {
   await page.goto("/delivery-prep.html#todo");
 
