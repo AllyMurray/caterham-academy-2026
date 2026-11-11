@@ -34,7 +34,12 @@ for (const width of [1440, 1060, 820, 390]) {
         await expect(page.locator("#primary-menu")).not.toBeVisible();
         await expect(page.locator("main")).not.toHaveAttribute("inert", "");
       } else {
+        await expect(page.locator(".primary-shortcuts")).toBeVisible();
+        await expect(page.locator("#primary-menu")).not.toBeVisible();
+        await page.getByRole("button", { name: "Open navigation", exact: true }).click();
         await expect(page.locator("#primary-menu")).toBeVisible();
+        await page.keyboard.press("Escape");
+        await expect(page.locator("#primary-menu")).not.toBeVisible();
       }
       await page.screenshot({ path: `/tmp/academy-redesign-${width}-${file}.png`, fullPage: true });
     }

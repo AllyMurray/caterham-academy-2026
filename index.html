@@ -29,6 +29,13 @@
           <span class="brand-mark" aria-hidden="true">7</span>
           <span>Caterham <small>Academy 2026</small></span>
         </a>
+        <div class="primary-shortcuts" aria-label="Main pages">
+          <a href="delivery-prep.html">Delivery prep</a>
+          <a href="race-prep.html">Race prep</a>
+          <a href="spanner-checks.html">Spanner checks</a>
+          <a href="driver-guide.html">Driver guide</a>
+          <a href="parts.html">Parts</a>
+        </div>
         <form class="nav-search" action="search.html" role="search">
           <label class="visually-hidden" for="nav-query">Search the whole guide</label>
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
@@ -38,9 +45,9 @@
         <a class="mobile-search" href="search.html" aria-label="Search the whole guide"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg></a>
         <span class="season-label">2026 season</span>
         <button class="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false" aria-label="Open navigation">
-          <span class="menu-toggle-icon" aria-hidden="true"></span><span>Menu</span>
+          <span class="menu-toggle-icon" aria-hidden="true"></span><span>Browse</span>
         </button>
-        <div id="primary-menu" class="topbar-links site-sidebar" data-primary-menu>
+        <div id="primary-menu" class="topbar-links site-directory" data-primary-menu>
           <a class="nav-home" href="index.html">Overview</a>
           <div class="nav-group"><p>Prepare</p>
             <a href="delivery-prep.html">Delivery prep</a>
@@ -68,28 +75,38 @@
 
       <section id="top" class="hero home-hero">
         <div class="hero-copy">
-          <p class="breadcrumb">2026 prep &amp; race reference</p>
-          <h1>Caterham Academy</h1>
-          <p class="lead">Delivery prep, race-weekend checks and workshop guidance for your 2026 Caterham Academy.</p>
-          <form class="home-search" action="search.html" role="search">
-            <label class="visually-hidden" for="home-query">Find a check, part or answer</label>
-            <input id="home-query" type="search" name="q" placeholder="Try wheel nuts, helmet clearance or a part number" />
-            <button type="submit">Search</button>
-          </form>
-          <nav class="home-quick-links" aria-label="Quick access"><a href="race-prep.html#before-going-out">Before a session</a><a href="spanner-checks.html#before-every-session">Wheel nuts</a><a href="guide-safety.html#belting-in">Belting in</a></nav>
+          <p class="season-heading">2026 Academy</p>
+          <h1>Prepare.<br>Drive.<br>Race.</h1>
+          <p class="lead">Your Caterham Academy field guide.<br>From the garage to the grid.</p>
+          <nav class="home-quick-links" aria-label="Quick access">
+            <a class="session-link" href="race-prep.html#before-going-out">Before your next session <span aria-hidden="true">↗</span></a>
+            <a href="spanner-checks.html#before-every-session">Wheel-nut check</a>
+          </nav>
         </div>
+        <figure class="race-photograph">
+          <img src="assets/academy-racing.jpg" alt="Caterham Academy cars racing together at Donington Park" width="1920" height="1280" fetchpriority="high" />
+          <figcaption>Donington Park <span>Academy racing</span></figcaption>
+        </figure>
       </section>
     </header>
 
     <main id="main-content" class="home-body" tabindex="-1">
       <div class="home-resume" data-resume hidden><div><small>Pick up where you left off</small><a data-resume-link href="delivery-prep.html">Continue reading</a></div><span aria-hidden="true">↗</span></div>
       <section class="home-section" aria-labelledby="choose-a-job">
-        <h2 id="choose-a-job">What are you working on?</h2>
+        <h2 id="choose-a-job">Get ready for the track.</h2>
         <div class="home-workflows">
-          <a class="workflow-link" href="delivery-prep.html"><span class="workflow-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16v13H4zM8 7V4h8v3M8 12h8M8 16h5"/></svg></span><strong>Get the car ready</strong><p>Plan your prep, choose the parts to fit and work through your delivery checklist.</p><span class="workflow-meta">Delivery prep &amp; checklist builder</span></a>
-          <a class="workflow-link" href="race-prep.html"><span class="workflow-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 21V3m0 1c5-4 9 4 15 0v10c-6 4-10-4-15 0"/></svg></span><strong>Prepare for a race</strong><p>Paperwork, kit, safety and the checks to make before and after each session.</p><span class="workflow-meta" data-home-progress="race-prep">Race weekend checklist</span></a>
-          <a class="workflow-link" href="spanner-checks.html"><span class="workflow-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 5a6 6 0 0 0-7 7L3 17a2.8 2.8 0 0 0 4 4l5-5a6 6 0 0 0 7-7l-4 4-4-4 4-4z"/></svg></span><strong>Check the car</strong><p>Work around the car with torque settings, tool sizes and mechanical checks.</p><span class="workflow-meta" data-home-progress="spanner-checks">Workshop checklist</span></a>
+          <a class="workflow-link" href="delivery-prep.html"><span class="workflow-stage">In the garage</span><strong>Delivery<br>prep.</strong><p>Driver fit, parts to fit and your first shakedown.</p><span class="workflow-meta">Open delivery checklist <span aria-hidden="true">↗</span></span></a>
+          <a class="workflow-link" href="race-prep.html"><span class="workflow-stage">At the circuit</span><strong>Race<br>prep.</strong><p>Kit, paperwork and the checks for every session.</p><span class="workflow-meta" data-home-progress="race-prep">Open race checklist <span aria-hidden="true">↗</span></span></a>
+          <a class="workflow-link" href="spanner-checks.html"><span class="workflow-stage">Around the car</span><strong>Spanner<br>checks.</strong><p>Torque settings, tool sizes and mechanical checks.</p><span class="workflow-meta" data-home-progress="spanner-checks">Open workshop checklist <span aria-hidden="true">↗</span></span></a>
         </div>
+      </section>
+      <section class="home-find" aria-labelledby="find-in-the-guide">
+        <div><h2 id="find-in-the-guide">Know what you need?</h2><p>Find a part, a torque setting or the answer to a question.</p></div>
+        <form class="home-search" action="search.html" role="search">
+          <label class="visually-hidden" for="home-query">Find a check, part or answer</label>
+          <input id="home-query" type="search" name="q" placeholder="Search the guide…" />
+          <button type="submit">Search</button>
+        </form>
       </section>
       <div class="home-columns">
         <section class="home-section" aria-labelledby="at-the-circuit">
@@ -115,6 +132,7 @@
     </main>
 
     <footer class="site-footer">
+      <p class="photo-credit">Race photograph: <a href="https://caterhamcars.com/en/motorsport/championships/academy-championship">Caterham Cars</a>.</p>
       <p>
         Built as a quick reference for the 2026 Caterham Academy. Always check the current
         regulations, final instructions, bulletins, and official guidance before acting.

@@ -20,8 +20,8 @@ knowledge, race prep, spanner checks, and permitted parts reference.
 ## Local Preview
 
 The shared navigation is present in every HTML page. `styles.css` holds the content
-components; `layout.css` defines the responsive sidebar, page headers, reading layout,
-and mobile tables. Checklist storage keys and list order must stay stable so saved
+components; `layout.css` defines the responsive website header, browse directory,
+page headers, reading layout, and mobile tables. Checklist storage keys and list order must stay stable so saved
 progress survives presentation changes.
 
 Site search indexes the actual section content and links directly to heading IDs.

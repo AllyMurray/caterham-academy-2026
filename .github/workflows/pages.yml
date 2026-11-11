@@ -55,8 +55,9 @@ jobs:
 
       - name: Prepare static site
         run: |
-          mkdir _site
+          mkdir -p _site/assets
           cp *.html styles.css layout.css script.js search-index.js manifest.webmanifest icon.svg icon-192.png icon-512.png service-worker.js .nojekyll _site/
+          cp assets/academy-racing.jpg _site/assets/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

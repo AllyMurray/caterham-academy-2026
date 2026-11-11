@@ -17,7 +17,7 @@ function initialisePrimaryMenu() {
   const links = Array.from(menu.querySelectorAll("a"));
   const currentFile = currentPageFile;
 
-  links.forEach((link) => {
+  [...links, ...document.querySelectorAll(".primary-shortcuts a")].forEach((link) => {
     const linkFile = new URL(link.href, window.location.href).pathname.split("/").pop() || "index.html";
 
     if (linkFile === currentFile) link.setAttribute("aria-current", "page");
@@ -76,7 +76,7 @@ function initialisePrimaryMenu() {
 
   const desktopQuery = window.matchMedia("(min-width: 1060px)");
   const closeOnDesktop = () => {
-    if (desktopQuery.matches) setOpen(false);
+    setOpen(false);
   };
 
   if (desktopQuery.addEventListener) {
