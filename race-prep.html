@@ -13,47 +13,66 @@
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="icon-192.png" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="layout.css" />
     <script src="script.js" defer></script>
   </head>
   <body data-checklist-storage-key="caterham-academy-2026:race-prep:v1">
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header">
       <nav class="topbar" aria-label="Primary">
         <a class="brand" href="index.html" aria-label="Caterham Academy 2026 home">
-          <span class="brand-mark">7</span>
-          <span>Caterham Academy 2026</span>
+          <span class="brand-mark" aria-hidden="true">7</span>
+          <span>Academy <small>2026 field guide</small></span>
         </a>
-        <button class="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false">
-          <span class="menu-toggle-icon" aria-hidden="true"></span>
-          <span>Menu</span>
+        <form class="nav-search" action="search.html" role="search">
+          <label class="visually-hidden" for="nav-query">Search the whole guide</label>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+          <input id="nav-query" name="q" type="search" placeholder="Find a check, part or answer…" autocomplete="off" />
+          <button type="submit">Search</button>
+        </form>
+        <a class="mobile-search" href="search.html" aria-label="Search the whole guide"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg></a>
+        <span class="season-label">2026 season</span>
+        <button class="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false" aria-label="Open navigation">
+          <span class="menu-toggle-icon" aria-hidden="true"></span><span>Menu</span>
         </button>
-        <div id="primary-menu" class="topbar-links" data-primary-menu>
-          <a href="index.html">Start</a>
-          <a href="delivery-prep.html">Delivery prep</a>
-          <a href="race-prep.html">Race prep</a>
-          <a href="spanner-checks.html">Spanner checks</a>
-          <a href="reference.html">Reference</a>
+        <div id="primary-menu" class="topbar-links site-sidebar" data-primary-menu>
+          <a class="nav-home" href="index.html">Overview</a>
+          <div class="nav-group"><p>Prepare</p>
+            <a href="delivery-prep.html">Delivery prep</a>
+            <a href="delivery-prep-builder.html">Checklist builder</a>
+            <a href="race-prep.html">Race prep</a>
+            <a href="spanner-checks.html">Spanner checks</a>
+          </div>
+          <div class="nav-group"><p>Driver guide</p>
+            <a href="guide-basics.html">Basics &amp; terms</a>
+            <a href="guide-car-prep.html">Car preparation</a>
+            <a href="guide-safety.html">Harness &amp; safety</a>
+            <a href="guide-setup-maintenance.html">Setup &amp; maintenance</a>
+            <a href="guide-events-rules.html">Events &amp; rules</a>
+            <a href="guide-racecraft.html">Racecraft</a>
+          </div>
+          <div class="nav-group"><p>Reference</p>
+            <a href="parts.html">Parts &amp; regulations</a>
+            <a href="sources.html">Sources &amp; open questions</a>
+            <a href="reference.html">Reference overview</a>
+          </div>
+          <div class="nav-footer"><a href="driver-guide.html">Browse the driver guide</a><span>Independent Academy reference</span></div>
         </div>
       </nav>
+      <button class="nav-backdrop" type="button" tabindex="-1" aria-label="Close navigation"></button>
 
       <section id="top" class="hero">
         <div class="hero-copy">
+          <p class="breadcrumb"><a href="index.html">Overview</a><span aria-hidden="true">/</span>Prepare</p>
           <p class="eyebrow">Event checklist</p>
-          <h1>Race Prep</h1>
+          <h1>Race prep</h1>
           <p class="lead">
             A practical checklist for the things that matter at a race meeting: driver
             safety, before-session prep, paddock reset, road-driving changes, and common
             scrutineering risks.
           </p>
-          <nav class="on-page-nav" aria-label="On this page">
-            <span>On this page</span>
-            <a href="#event-admin">Event admin</a>
-            <a href="#driver-safety">Driver safety</a>
-            <a href="#before-going-out">Before going out</a>
-            <a href="#trackside-notes">Trackside notes</a>
-            <a href="#scrutineering">Scrutineering</a>
-          </nav>
         </div>
-        <aside class="source-card" aria-label="Source details">
+        <details class="source-card" aria-label="Source details"><summary>Page details &amp; sources</summary>
           <dl>
             <div>
               <dt>Source</dt>
@@ -68,11 +87,13 @@
               <dd>Torque values and physical nut-and-bolt checks</dd>
             </div>
           </dl>
-        </aside>
+        </details>
       </section>
     </header>
+    <div class="page-jump"><nav class="on-page-nav" aria-label="On this page"><span>On this page</span><a href="#event-admin">Event admin</a><a href="#driver-safety">Driver safety</a><a href="#before-going-out">Before going out</a><a href="#back-in">When You Come Back In</a><a href="#trackside-notes">Trackside notes</a><a href="#road-driving">Before Driving On The Road</a><a href="#scrutineering">Scrutineering</a></nav></div>
 
-    <main>
+
+    <main id="main-content" tabindex="-1">
       <section class="notice" aria-label="Important note">
         <strong>Event aid.</strong> This checklist is based on the ARDS presentation,
         Driver Guide, prep notes, and the 2026 regulations. It is not a substitute for live
@@ -91,20 +112,23 @@
           autocomplete="off"
         />
         <p id="search-status" role="status" aria-live="polite">Showing all entries.</p>
+        <progress class="checklist-meter" value="0" max="100" aria-label="Checklist completion"></progress>
         <div class="checklist-actions">
           <p id="checklist-progress" class="checklist-progress" role="status" aria-live="polite">
             0 checks complete.
           </p>
+          <label class="remaining-toggle"><input type="checkbox" id="remaining-only" /> Show remaining</label>
           <button id="reset-checklist" class="secondary-button" type="button">
             Reset checklist
           </button>
         </div>
       </section>
+      <div id="filter-empty" class="notice" hidden><strong>No entries match your filter.</strong> Try a component name or <button type="button" class="secondary-button" data-clear-filter>Clear filter</button>.</div>
 
       <section id="event-admin" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Event admin</p>
-          <h2>Paperwork, Kit, And Arrival Prep</h2>
+          <h2 id="paperwork-kit-and-arrival-prep">Paperwork, Kit, And Arrival Prep</h2>
           <p>
             The Driver Guide is clear that race weekends run to tight timetables. Treat
             paperwork, kit, fuel, and presentation as part of race prep, not background
@@ -112,8 +136,8 @@
           </p>
         </div>
 
-        <div class="plain-list">
-          <h3>Week Before</h3>
+        <details class="plain-list checklist-group" open>
+          <summary><h3 id="week-before">Week Before</h3><span class="group-progress" aria-label="Group progress"></span></summary>
           <ul class="checklist-list" data-checklist="event-admin-week">
             <li>Read the Supplementary Regulations and final instructions carefully and note briefing, sign-on, scrutineering, assembly, qualifying, and race times.</li>
             <li>Attend mandatory briefings and listen for paddock announcements; race meeting timetables can run early.</li>
@@ -123,10 +147,10 @@
             <li>Check decals are fitted to the supplied plan and replace any missing championship decals before scrutineering.</li>
             <li>Clean the car: cockpit, engine bay, suspension, wheels, and bodywork.</li>
           </ul>
-        </div>
+        </details>
 
-        <div class="plain-list">
-          <h3>Kit Bag And Documents</h3>
+        <details class="plain-list checklist-group" open>
+          <summary><h3 id="kit-bag-and-documents">Kit Bag And Documents</h3><span class="group-progress" aria-label="Group progress"></span></summary>
           <ul class="checklist-list" data-checklist="event-admin-kit">
             <li>Pack race licence.</li>
             <li>Pack upgrade card for race meetings where required.</li>
@@ -137,30 +161,30 @@
             <li>Pack the car registration document if driving the race car on the road.</li>
             <li>Take any scrutineering slip to the scrutineering bay if one is issued at sign-on.</li>
           </ul>
-        </div>
+        </details>
 
-        <div class="plain-list">
-          <h3>If Towing</h3>
+        <details class="plain-list checklist-group" open>
+          <summary><h3 id="if-towing">If Towing</h3><span class="group-progress" aria-label="Group progress"></span></summary>
           <ul class="checklist-list" data-checklist="event-admin-towing">
             <li>Check trailer tyre pressure and tread.</li>
             <li>Check trailer wheel nuts, brakes, number plate, tie-down straps, and lights.</li>
             <li>Pack the Caterham steering wheel, ignition key, and electrical cut-off key.</li>
           </ul>
-        </div>
+        </details>
       </section>
 
       <section id="driver-safety" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Driver safety</p>
-          <h2>Fit And Wear The Safety Kit Correctly</h2>
+          <h2 id="fit-and-wear-the-safety-kit-correctly">Fit And Wear The Safety Kit Correctly</h2>
           <p>
             These are not just build checks. They need to be right every time the car
             goes on track.
           </p>
         </div>
 
-        <div class="plain-list">
-          <h3>Harness, FHR, And Arm Restraints</h3>
+        <details class="plain-list checklist-group" open>
+          <summary><h3 id="harness-fhr-and-arm-restraints">Harness, FHR, And Arm Restraints</h3><span class="group-progress" aria-label="Group progress"></span></summary>
           <ul class="checklist-list" data-checklist="driver-safety">
             <li>Check the harness is routed correctly through the seat and around the FHR/HANS.</li>
             <li>Check shoulder straps do not run upwards from the shoulder slots; FHR/HANS use should be no more than 20 degrees below horizontal.</li>
@@ -170,31 +194,31 @@
             <li>Confirm the seat-back void is filled and the seat foam/filler is still in place.</li>
             <li>If a bead seat has been fitted or adjusted, confirm it does not restrict arm or leg movement.</li>
           </ul>
-        </div>
+        </details>
 
-        <div class="plain-list">
-          <h3>Helmet And Cage</h3>
+        <details class="plain-list checklist-group" open>
+          <summary><h3 id="helmet-and-cage">Helmet And Cage</h3><span class="group-progress" aria-label="Group progress"></span></summary>
           <ul class="checklist-list" data-checklist="helmet-cage">
             <li>Confirm the delivery-prep helmet-to-roll-cage clearance check has been completed.</li>
             <li>Before going on track, check the driver's helmet still has clear space to the roll cage when belted in.</li>
             <li>Check roll cage padding is fitted wherever the driver can contact the cage.</li>
             <li>Check roll cage padding is secure and has not moved during previous sessions.</li>
           </ul>
-        </div>
+        </details>
       </section>
 
       <section id="before-going-out" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Session prep</p>
-          <h2>Before Going Out</h2>
+          <h2 id="before-going-out-2">Before Going Out</h2>
           <p>
             These are the quick checks to complete before joining the assembly area or
             leaving the paddock for a session.
           </p>
         </div>
 
-        <div class="plain-list">
-          <h3>Car And Driver</h3>
+        <details class="plain-list checklist-group" open>
+          <summary><h3 id="car-and-driver">Car And Driver</h3><span class="group-progress" aria-label="Group progress"></span></summary>
           <ul class="checklist-list" data-checklist="before-going-out">
             <li>Torque the wheel nuts to 85 Nm / 65 lb ft.</li>
             <li>Check tyre pressures.</li>
@@ -210,10 +234,10 @@
             <li>Pull the fire extinguisher pin just before going out on track.</li>
             <li><span class="source-badge mandatory">Mandatory track prep</span> Remove the front number plate before competition or track use for intercooler airflow.</li>
           </ul>
-        </div>
+        </details>
 
-        <div class="plain-list">
-          <h3>Lights And Tape</h3>
+        <details class="plain-list checklist-group" open>
+          <summary><h3 id="lights-and-tape">Lights And Tape</h3><span class="group-progress" aria-label="Group progress"></span></summary>
           <ul class="checklist-list" data-checklist="lights-tape">
             <li><span class="source-badge mandatory">NCR requirement</span> Apply headlight tape so it crosses the glass and helps stop broken glass scattering into small pieces.</li>
             <li>Electrical insulation tape generally works best. Black tape is fine; the issue is whether the tape actually crosses the glass and does the job.</li>
@@ -223,21 +247,21 @@
             <li>Apply 50 mm gaffer tape from the windscreen back to the front hoop of the roll cage if needed to reduce rain ingress.</li>
             <li>Check rear warning light, brake lights, and indicators are secure and working where required.</li>
           </ul>
-        </div>
+        </details>
       </section>
 
       <section id="back-in" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Paddock reset</p>
-          <h2>When You Come Back In</h2>
+          <h2 id="when-you-come-back-in">When You Come Back In</h2>
           <p>
             Do the simple reset work immediately, while the session is fresh and before
             the next timetable pressure arrives.
           </p>
         </div>
 
-        <div class="plain-list">
-          <h3>After Session</h3>
+        <details class="plain-list checklist-group" open>
+          <summary><h3 id="after-session">After Session</h3><span class="group-progress" aria-label="Group progress"></span></summary>
           <ul class="checklist-list" data-checklist="back-in">
             <li>Refit the fire extinguisher pin when you get back in.</li>
             <li>Check tyres for pressure, wear, and pickup.</li>
@@ -246,20 +270,20 @@
             <li>Review camera/data equipment while the session details are still fresh.</li>
             <li>Put the extinguisher pin somewhere safe in the car when it is out, and refit it when not in use.</li>
           </ul>
-        </div>
+        </details>
       </section>
 
       <section id="trackside-notes" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Event practicalities</p>
-          <h2>Trackside Notes</h2>
+          <h2 id="trackside-notes-2">Trackside Notes</h2>
           <p>
             Small preparation items that help between sessions and during a race weekend.
           </p>
         </div>
 
-        <div class="plain-list">
-          <h3>Useful Trackside Prep</h3>
+        <details class="plain-list checklist-group" open>
+          <summary><h3 id="useful-trackside-prep">Useful Trackside Prep</h3><span class="group-progress" aria-label="Group progress"></span></summary>
           <ul class="checklist-list" data-checklist="trackside-notes">
             <li>Carry cable ties for the cycle wings in case one is lost or needs temporary securing.</li>
             <li>Use Rain-X on the windscreen and visor, inside and outside.</li>
@@ -269,30 +293,30 @@
             <li>Carry a funnel or spout, engine oil, coolant, brake fluid, and at least one spare wheel.</li>
             <li>Carry cleaning kit: bucket, sponge, car shampoo, leather, and polish.</li>
           </ul>
-        </div>
+        </details>
 
-        <div class="plain-list">
-          <h3>Fuel Rules</h3>
+        <details class="plain-list checklist-group" open>
+          <summary><h3 id="fuel-rules">Fuel Rules</h3><span class="group-progress" aria-label="Group progress"></span></summary>
           <ul class="checklist-list" data-checklist="fuel-rules">
             <li><span class="source-badge mandatory">Fuel rule</span> Use commercially available pump fuel from normal forecourt pumps or circuit pumps.</li>
             <li>Do not use illegal fuels or additives.</li>
             <li>The Driver Guide says the HORSE HR13 mapping was carried out on 95 RON regular unleaded, so super unleaded gives no performance advantage.</li>
           </ul>
-        </div>
+        </details>
       </section>
 
       <section id="road-driving" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Road use</p>
-          <h2>Before Driving On The Road</h2>
+          <h2 id="before-driving-on-the-road">Before Driving On The Road</h2>
           <p>
             Some event markings and competition setup details make sense on track but
             need changing before road use.
           </p>
         </div>
 
-        <div class="plain-list">
-          <h3>Road Reset</h3>
+        <details class="plain-list checklist-group" open>
+          <summary><h3 id="road-reset">Road Reset</h3><span class="group-progress" aria-label="Group progress"></span></summary>
           <ul class="checklist-list" data-checklist="road-driving">
             <li>Cover or remove race numbers before driving the car on the road.</li>
             <li>Remove tape from all lights before driving on the road.</li>
@@ -301,20 +325,20 @@
             <li>Check all lights are working, especially rear fog and brake lights.</li>
             <li>Check lights, mirrors, and number plates are road-appropriate before road driving.</li>
           </ul>
-        </div>
+        </details>
       </section>
 
       <section id="scrutineering" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Scrutineering risks</p>
-          <h2>Numbers That Can End A Result</h2>
+          <h2 id="numbers-that-can-end-a-result">Numbers That Can End A Result</h2>
           <p>
             These are worth treating as measured checks, not vague reminders.
           </p>
         </div>
 
-        <div class="plain-list">
-          <h3>Measured Checks</h3>
+        <details class="plain-list checklist-group" open>
+          <summary><h3 id="measured-checks">Measured Checks</h3><span class="group-progress" aria-label="Group progress"></span></summary>
           <ul class="checklist-list" data-checklist="scrutineering">
             <li><span class="source-badge mandatory">Mandatory</span> Check ground clearance is at least 140 mm at the exposed lower chassis side-rail reference point, with the driver in full racing kit seated normally.</li>
             <li><span class="source-badge mandatory">Mandatory</span> Check minimum weight is at least 635 kg including the driver and full racing kit.</li>
@@ -327,7 +351,7 @@
             <li>Check race numbers are proper numbers, not made from tape.</li>
             <li>After qualifying or a race, go directly to Parc Ferme and stay with the car until released by the scrutineer.</li>
           </ul>
-        </div>
+        </details>
       </section>
     </main>
 

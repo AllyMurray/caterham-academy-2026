@@ -13,45 +13,65 @@
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="icon-192.png" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="layout.css" />
     <script src="script.js" defer></script>
   </head>
   <body data-checklist-storage-key="caterham-academy-2026:spanner-checks:v1">
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header">
       <nav class="topbar" aria-label="Primary">
         <a class="brand" href="index.html" aria-label="Caterham Academy 2026 home">
-          <span class="brand-mark">7</span>
-          <span>Caterham Academy 2026</span>
+          <span class="brand-mark" aria-hidden="true">7</span>
+          <span>Academy <small>2026 field guide</small></span>
         </a>
-        <button class="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false">
-          <span class="menu-toggle-icon" aria-hidden="true"></span>
-          <span>Menu</span>
+        <form class="nav-search" action="search.html" role="search">
+          <label class="visually-hidden" for="nav-query">Search the whole guide</label>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+          <input id="nav-query" name="q" type="search" placeholder="Find a check, part or answer…" autocomplete="off" />
+          <button type="submit">Search</button>
+        </form>
+        <a class="mobile-search" href="search.html" aria-label="Search the whole guide"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg></a>
+        <span class="season-label">2026 season</span>
+        <button class="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false" aria-label="Open navigation">
+          <span class="menu-toggle-icon" aria-hidden="true"></span><span>Menu</span>
         </button>
-        <div id="primary-menu" class="topbar-links" data-primary-menu>
-          <a href="index.html">Start</a>
-          <a href="delivery-prep.html">Delivery prep</a>
-          <a href="race-prep.html">Race prep</a>
-          <a href="spanner-checks.html">Spanner checks</a>
-          <a href="reference.html">Reference</a>
+        <div id="primary-menu" class="topbar-links site-sidebar" data-primary-menu>
+          <a class="nav-home" href="index.html">Overview</a>
+          <div class="nav-group"><p>Prepare</p>
+            <a href="delivery-prep.html">Delivery prep</a>
+            <a href="delivery-prep-builder.html">Checklist builder</a>
+            <a href="race-prep.html">Race prep</a>
+            <a href="spanner-checks.html">Spanner checks</a>
+          </div>
+          <div class="nav-group"><p>Driver guide</p>
+            <a href="guide-basics.html">Basics &amp; terms</a>
+            <a href="guide-car-prep.html">Car preparation</a>
+            <a href="guide-safety.html">Harness &amp; safety</a>
+            <a href="guide-setup-maintenance.html">Setup &amp; maintenance</a>
+            <a href="guide-events-rules.html">Events &amp; rules</a>
+            <a href="guide-racecraft.html">Racecraft</a>
+          </div>
+          <div class="nav-group"><p>Reference</p>
+            <a href="parts.html">Parts &amp; regulations</a>
+            <a href="sources.html">Sources &amp; open questions</a>
+            <a href="reference.html">Reference overview</a>
+          </div>
+          <div class="nav-footer"><a href="driver-guide.html">Browse the driver guide</a><span>Independent Academy reference</span></div>
         </div>
       </nav>
+      <button class="nav-backdrop" type="button" tabindex="-1" aria-label="Close navigation"></button>
 
       <section id="top" class="hero">
         <div class="hero-copy">
+          <p class="breadcrumb"><a href="index.html">Overview</a><span aria-hidden="true">/</span>Prepare</p>
           <p class="eyebrow">Workshop checklist</p>
-          <h1>Spanner Checks</h1>
+          <h1>Spanner checks</h1>
           <p class="lead">
             A workshop checklist for support points, torque values, nut-and-bolt
             checks, visual checks, and practical notes before taking the car on track.
           </p>
-          <nav class="on-page-nav" aria-label="On this page">
-            <span>On this page</span>
-            <a href="#support-points">Support points</a>
-            <a href="#torque-checks">Torque checks</a>
-            <a href="#walkaround">Walkaround checks</a>
-            <a href="#top-tips">Top tips</a>
-          </nav>
         </div>
-        <aside class="source-card" aria-label="Source details">
+        <details class="source-card" aria-label="Source details"><summary>Page details &amp; sources</summary>
           <dl>
             <div>
               <dt>Source</dt>
@@ -66,11 +86,12 @@
               <dd>Torque wheel nuts before every session</dd>
             </div>
           </dl>
-        </aside>
+        </details>
       </section>
     </header>
+    <div class="page-jump"><nav class="on-page-nav" aria-label="On this page"><span>On this page</span><a href="#torque-checks">Torque checks</a><a href="#front-suspension">Front</a><a href="#rear-suspension">Rear</a><a href="#steering">Steering</a><a href="#engine">Engine</a><a href="#gearbox">Gearbox</a><a href="#before-every-session">Every session</a><a href="#support-points">Support points</a><a href="#walkaround">Walkaround checks</a><a href="#tool-sizes">Tool sizes</a><a href="#top-tips">Top tips</a></nav></div>
 
-    <main>
+    <main id="main-content" tabindex="-1">
       <section class="notice" aria-label="Important note">
         <strong>Workshop aid.</strong> Torque values and checks are transcribed from the
         supplied spanner-check PDF. Confirm critical values against current Caterham
@@ -85,24 +106,112 @@
         <input
           id="site-search"
           type="search"
-          placeholder="Try wheel nuts, radius arms, 81 Nm, brake pads..."
+          placeholder="Filter checks: wheel nuts, radius arms, 17 mm…"
           autocomplete="off"
         />
         <p id="search-status" role="status" aria-live="polite">Showing all entries.</p>
+        <progress class="checklist-meter" value="0" max="100" aria-label="Checklist completion"></progress>
         <div class="checklist-actions">
           <p id="checklist-progress" class="checklist-progress" role="status" aria-live="polite">
             0 checks complete.
           </p>
+          <label class="remaining-toggle"><input type="checkbox" id="remaining-only" /> Show remaining</label>
           <button id="reset-checklist" class="secondary-button" type="button">
             Reset checklist
           </button>
         </div>
       </section>
+      <div id="filter-empty" class="notice" hidden><strong>No entries match your filter.</strong> Try a component name or <button type="button" class="secondary-button" data-clear-filter>Clear filter</button>.</div>
+
+      <section id="torque-checks" class="content-section searchable">
+        <div class="section-heading">
+          <p class="section-kicker">Nuts and bolts</p>
+          <h2 id="torque-checks-2">Torque Checks</h2>
+          <p>
+            Work through these checks before the car goes on track. The list is grouped
+            by area so it can be used around the car in a sensible workshop order.
+            <a href="#support-points">Check the support points</a> before working underneath;
+            <a href="#tool-sizes">Sigma tool references</a> must match the fasteners on your car.
+          </p>
+        </div>
+
+        <details class="plain-list checklist-group" open>
+          <summary><h3 id="front-suspension">Front Suspension</h3><span class="group-progress" aria-label="Group progress"></span></summary>
+          <ol class="checklist-list" data-checklist="front-suspension">
+            <li>Upper wishbones: 47 Nm.<span class="tool-note">Sigma reference: 17 mm socket and spanner. <a href="https://caterhamcars.com/assets/Documents/Owner-Downloads/Assembly_Guide_SIGMA_Edition_2.2..pdf#page=17">Sigma pp. 8–9</a>.</span></li>
+            <li>Lower wishbones: 81 Nm.<span class="tool-note">Sigma reference: 19 mm socket and spanner. <a href="https://caterhamcars.com/assets/Documents/Owner-Downloads/Assembly_Guide_SIGMA_Edition_2.2..pdf#page=17">Sigma pp. 8–9</a>.</span></li>
+            <li>Dampers: 25 Nm.<span class="tool-note">Sigma reference: 6 mm Allen key / hex bit. <a href="https://caterhamcars.com/assets/Documents/Owner-Downloads/Assembly_Guide_SIGMA_Edition_2.2..pdf#page=21">Sigma pp. 12–13</a>.</span></li>
+            <li>Top wishbone ball joints and locknuts: 54 Nm. Locknuts can only be hand-checked with a spanner.<span class="tool-note">Partial Sigma reference: assembly lists 22 mm tools for ball-joint work; the locknut tool size is not separately identified. <a href="https://caterhamcars.com/assets/Documents/Owner-Downloads/Assembly_Guide_SIGMA_Edition_2.2..pdf#page=23">Sigma pp. 14–15</a>.</span></li>
+            <li>Brake calipers to hubs: 60 Nm.<span class="tool-note">Tool size unconfirmed: the Sigma guide supplies the front brake/upright assembly preassembled and does not specify this fixing’s tool. <a href="https://caterhamcars.com/assets/Documents/Owner-Downloads/Assembly_Guide_SIGMA_Edition_2.2..pdf#page=23">Sigma pp. 14–15</a>.</span></li>
+            <li>Hubs to lower wishbones: 54 Nm.<span class="tool-note">Partial Sigma reference: assembly lists ¾ inch and 22 mm tools, with different standard-track and wide-track fixings. Match the nut on your car. <a href="https://caterhamcars.com/assets/Documents/Owner-Downloads/Assembly_Guide_SIGMA_Edition_2.2..pdf#page=23">Sigma pp. 14–15</a>.</span></li>
+            <li>Wingstays to uprights: 81 Nm.<span class="tool-note">Sigma reference: assembly lists 19 mm / ¾ inch tools for the ½ inch fixing. Check the fit on your nut. <a href="https://caterhamcars.com/assets/Documents/Owner-Downloads/Assembly_Guide_SIGMA_Edition_2.2..pdf#page=23">Sigma pp. 14–15</a>.</span></li>
+            <li>Wheel bearings: ensure wheels spin freely with no lateral play. Check the large centre nut with split pin.</li>
+          </ol>
+        </details>
+
+        <details class="plain-list checklist-group" open>
+          <summary><h3 id="rear-suspension">Rear Suspension</h3><span class="group-progress" aria-label="Group progress"></span></summary>
+          <ol class="checklist-list" data-checklist="rear-suspension">
+            <li>Radius arms to chassis: 47 Nm.<span class="tool-note">Tools: 8 mm Allen key / hex bit and 17 mm socket. Radius-arm compatibility confirmed by the owner; a shortened 8 mm Allen key helps access. <a href="https://caterhamcars.com/assets/Documents/Owner-Downloads/Assembly_Guide_SIGMA_Edition_2.2..pdf#page=115">Sigma pp. 106–107</a>.</span></li>
+            <li>Radius arms to De Dion tube: 81 Nm.<span class="tool-note">Tools: 19 mm socket and spanner. Radius-arm compatibility confirmed by the owner. <a href="https://caterhamcars.com/assets/Documents/Owner-Downloads/Assembly_Guide_SIGMA_Edition_2.2..pdf#page=115">Sigma pp. 106–107</a>.</span></li>
+            <li>De Dion tube aluminium endplate and bearing: 47 Nm.<span class="tool-note">Sigma reference: 17 mm socket and spanners for the endplate / bearing-carrier fixings. <a href="https://caterhamcars.com/assets/Documents/Owner-Downloads/Assembly_Guide_SIGMA_Edition_2.2..pdf#page=123">Sigma pp. 114–115</a>.</span></li>
+            <li>Check welds on both De Dion tube and radius arms for cracking or fatigue.</li>
+            <li>Dampers to De Dion tube: 81 Nm.<span class="tool-note">Sigma reference: 19 mm socket for the lower damper mounting bolt. <a href="https://caterhamcars.com/assets/Documents/Owner-Downloads/Assembly_Guide_SIGMA_Edition_2.2..pdf#page=113">Sigma pp. 104–105</a>.</span></li>
+            <li>A-frame mountings, two outer and one centre: 81 Nm.<span class="tool-note">Sigma reference: 19 mm socket and spanner; the guide lists two 19 mm sockets. <a href="https://caterhamcars.com/assets/Documents/Owner-Downloads/Assembly_Guide_SIGMA_Edition_2.2..pdf#page=117">Sigma pp. 108–109</a>.</span></li>
+            <li>Differential cage to differential: 81 Nm cap-head bolts and 47 Nm M10 bolt.<span class="tool-note">Tool sizes unconfirmed: the Sigma differential section does not clearly document the same cage-to-differential arrangement. <a href="https://caterhamcars.com/assets/Documents/Owner-Downloads/Assembly_Guide_SIGMA_Edition_2.2..pdf#page=105">Sigma pp. 96–97</a>.</span></li>
+            <li>Differential cage to chassis: 81 Nm lower bolts and 54 Nm upper bolt.<span class="tool-note">Sigma reference: 10 mm hex bit for the lower M12 cap-head bolts; 19 mm socket and spanner for the upper through-bolt. Verify the cage and fasteners match. <a href="https://caterhamcars.com/assets/Documents/Owner-Downloads/Assembly_Guide_SIGMA_Edition_2.2..pdf#page=105">Sigma pp. 96–97</a>.</span></li>
+            <li>Check wheel bearings rotate smoothly.</li>
+          </ol>
+        </details>
+
+        <details class="plain-list checklist-group" open>
+          <summary><h3 id="steering">Steering</h3><span class="group-progress" aria-label="Group progress"></span></summary>
+          <ol class="checklist-list" data-checklist="steering">
+            <li>Track rod ends to steering arms: 41 Nm.<span class="tool-note">Tool size unconfirmed: the Sigma assembly tool list does not clearly identify this individual nut. Do not confuse it with the track-rod adjustment locknut. <a href="https://caterhamcars.com/assets/Documents/Owner-Downloads/Assembly_Guide_SIGMA_Edition_2.2..pdf#page=19">Sigma pp. 10–15</a>.</span></li>
+            <li>Steering rack clamp bolts: 11 Nm.<span class="tool-note">Sigma reference: 5 mm Allen key / hex bit and 10 mm spanner for the M6 nuts. <a href="https://caterhamcars.com/assets/Documents/Owner-Downloads/Assembly_Guide_SIGMA_Edition_2.2..pdf#page=19">Sigma pp. 10–11</a>.</span></li>
+            <li>Check lower-to-upper steering column clamp bolts and grub screw, with no play.<span class="tool-note">Partial Sigma reference: the assembly lists a 7/16 inch spanner, 7/32 inch hex bit, 13 mm tools and an 11/16 inch socket. Individual tool assignments are not all clear; verify each fixing. <a href="https://caterhamcars.com/assets/Documents/Owner-Downloads/Assembly_Guide_SIGMA_Edition_2.2..pdf#page=97">Sigma pp. 88–89</a>.</span></li>
+            <li>Check for no movement in the column bushes by moving the wheel up and down.</li>
+          </ol>
+        </details>
+
+        <details class="plain-list checklist-group" open>
+          <summary><h3 id="engine">Engine</h3><span class="group-progress" aria-label="Group progress"></span></summary>
+          <ol class="checklist-list" data-checklist="engine">
+            <li>Engine mounting rubbers to chassis: 20 Nm.<span class="tool-note">Sigma engine reference only: 13 mm tools for M8 fixings. Confirm against the 2026 engine installation. <a href="https://caterhamcars.com/assets/Documents/Owner-Downloads/Assembly_Guide_SIGMA_Edition_2.2..pdf#page=49">Sigma pp. 40–41</a>.</span></li>
+            <li>Engine mounting rubbers to engine mounting brackets: 81 Nm.<span class="tool-note">Sigma engine reference only: the assembly lists a ⅜ inch hex bit for the imperial cap-head fixing. Confirm against the 2026 engine installation. <a href="https://caterhamcars.com/assets/Documents/Owner-Downloads/Assembly_Guide_SIGMA_Edition_2.2..pdf#page=49">Sigma pp. 40–41</a>.</span></li>
+            <li>Engine mounting brackets to engine block: 25 Nm M8 bolts and 47 Nm M10 bolts.<span class="tool-note">Sigma engine reference only: 6 mm hex bit for M8 cap-head bolts; 8 mm hex bit for M10 cap-head bolts. Confirm against the 2026 engine installation. <a href="https://caterhamcars.com/assets/Documents/Owner-Downloads/Assembly_Guide_SIGMA_Edition_2.2..pdf#page=49">Sigma pp. 40–41</a>.</span></li>
+            <li>Starter motor to engine: 47 Nm.<span class="tool-note">Sigma engine reference only: 8 mm hex bit. Confirm the starter fixings on the 2026 engine. <a href="https://caterhamcars.com/assets/Documents/Owner-Downloads/Assembly_Guide_SIGMA_Edition_2.2..pdf#page=47">Sigma pp. 38–39</a>.</span></li>
+            <li>Air filter: check it is not dusty or dirty.</li>
+            <li>Bellhousing to engine: 47 Nm.<span class="tool-note">Sigma engine reference only: 8 mm hex bit. Confirm the bellhousing fixings on the 2026 engine. <a href="https://caterhamcars.com/assets/Documents/Owner-Downloads/Assembly_Guide_SIGMA_Edition_2.2..pdf#page=47">Sigma pp. 38–39</a>.</span></li>
+            <li>Check oil level with the engine warm, then switched off; wipe and refit the dipstick, wait 20 seconds, then read it.</li>
+            <li>Ensure the dipstick is fully pushed home; the Driver Guide recommends securing it so it cannot come out on track.</li>
+            <li>Check oil pressure behaviour: red at hot idle can be normal, but above 2000 rpm it should not stay in the red.</li>
+          </ol>
+        </details>
+
+        <details class="plain-list checklist-group" open>
+          <summary><h3 id="gearbox">Gearbox</h3><span class="group-progress" aria-label="Group progress"></span></summary>
+          <ol class="checklist-list" data-checklist="gearbox">
+            <li>Gearbox mount to gearbox: 54 Nm.<span class="tool-note">Sigma gearbox reference only: 22 mm socket for its five-speed installation, or 19 mm for its six-speed installation. Confirm the 2026 gearbox and mount match. <a href="https://caterhamcars.com/assets/Documents/Owner-Downloads/Assembly_Guide_SIGMA_Edition_2.2..pdf#page=51">Sigma pp. 42–43</a>.</span></li>
+            <li>Gearbox mount to chassis: 20 Nm.<span class="tool-note">Sigma gearbox reference only: 6 mm hex bit and 13 mm tools. Confirm the 2026 mount fixings. <a href="https://caterhamcars.com/assets/Documents/Owner-Downloads/Assembly_Guide_SIGMA_Edition_2.2..pdf#page=51">Sigma pp. 42–43</a>.</span></li>
+          </ol>
+        </details>
+      </section>
+
+      <section id="before-every-session" class="rule-card searchable">
+        <h2 id="before-every-session-2">Before Every Session</h2>
+        <ul class="checklist-list" data-checklist="before-every-session">
+          <li><strong>Torque the wheel nuts before every session:</strong> 85 Nm or 65 lb ft.<span class="tool-note">Tool: 19 mm deep socket and torque wrench, as listed in the 2026 Driver Guide (p. 11).</span></li>
+          <li>Check oil level and wheel nuts again before going back on track.</li>
+          <li>Start each weekend with enough brake pad material to last. If in doubt, change pads before the final practice session.</li>
+          <li>Check the inner rear brake pads carefully; the Driver Guide notes they are likely to wear first.</li>
+        </ul>
+      </section>
 
       <section id="support-points" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Workshop position</p>
-          <h2>Jacking And Axle Stands</h2>
+          <h2 id="jacking-and-axle-stands">Jacking And Axle Stands</h2>
           <p>
             Get the car supported correctly before working through the spanner checks.
             These notes are about where the car is lifted and supported, not the torque
@@ -111,7 +220,7 @@
         </div>
 
         <div class="plain-list">
-          <h3>Support Points</h3>
+          <h3 id="support-points-2">Support Points</h3>
           <ul>
             <li>Use the front towing eye as the front jacking point.</li>
             <li>Use a trolley jack at the rear in the centre under the A-frame.</li>
@@ -123,150 +232,103 @@
         </div>
       </section>
 
-      <section id="torque-checks" class="content-section searchable">
+      <section id="tool-sizes" class="content-section searchable">
         <div class="section-heading">
-          <p class="section-kicker">Nuts and bolts</p>
-          <h2>Torque Checks</h2>
+          <p class="section-kicker">Choosing tools</p>
+          <h2 id="tool-sizes-and-sources">Tool Sizes And Sources</h2>
           <p>
-            Work through these checks before the car goes on track. The list is grouped
-            by area so it can be used around the car in a sensible workshop order.
+            Tool sizes appear alongside the checks below. Torque settings remain from
+            the 2026 Academy checklist; the Sigma assembly guide is used only to
+            cross-reference tools and fasteners.
           </p>
         </div>
-
         <div class="plain-list">
-          <h3>Front Suspension</h3>
-          <ol class="checklist-list" data-checklist="front-suspension">
-            <li>Upper wishbones: 47 Nm.</li>
-            <li>Lower wishbones: 81 Nm.</li>
-            <li>Dampers: 25 Nm.</li>
-            <li>Top wishbone ball joints and locknuts: 54 Nm. Locknuts can only be hand-checked with a spanner.</li>
-            <li>Brake calipers to hubs: 60 Nm.</li>
-            <li>Hubs to lower wishbones: 54 Nm.</li>
-            <li>Wingstays to uprights: 81 Nm.</li>
-            <li>Wheel bearings: ensure wheels spin freely with no lateral play. Check the large centre nut with split pin.</li>
-          </ol>
+          <p>
+            <strong>Sigma reference:</strong> match the illustrated fastener to your car
+            before using the listed tool. Radius-arm compatibility has been confirmed
+            by the owner. Other Sigma references remain to be checked on the 2026 car,
+            especially engine, bellhousing, starter and gearbox fittings.
+          </p>
+          <p>
+            <strong>Partial reference:</strong> the guide lists tools for an assembly
+            without identifying every individual fixing. Where the mapping is unclear,
+            the check says so rather than assigning a size.
+          </p>
+          <p>
+            <a href="https://caterhamcars.com/assets/Documents/Owner-Downloads/Assembly_Guide_SIGMA_Edition_2.2..pdf">Open the Sigma assembly guide, Edition 2.2 (PDF)</a>.
+            References below use printed page numbers; PDF viewer page numbers are
+            nine higher. External PDFs require an internet connection.
+          </p>
+          <p>
+            <strong>Keep the Academy torque values.</strong> For example, the Sigma
+            radius-arm chassis drawing gives 34 Nm, while the Academy checklist gives
+            47 Nm. Do not substitute the Sigma torque when using its tool reference.
+            M8 and M10 describe thread sizes, not socket or spanner sizes.
+          </p>
         </div>
-
-        <div class="plain-list">
-          <h3>Rear Suspension</h3>
-          <ol class="checklist-list" data-checklist="rear-suspension">
-            <li>Radius arms to chassis: 47 Nm.</li>
-            <li>Radius arms to De Dion tube: 81 Nm.</li>
-            <li>De Dion tube aluminium endplate and bearing: 47 Nm.</li>
-            <li>Check welds on both De Dion tube and radius arms for cracking or fatigue.</li>
-            <li>Dampers to De Dion tube: 81 Nm.</li>
-            <li>A-frame mountings, two outer and one centre: 81 Nm.</li>
-            <li>Differential cage to differential: 81 Nm cap-head bolts and 47 Nm M10 bolt.</li>
-            <li>Differential cage to chassis: 81 Nm lower bolts and 54 Nm upper bolt.</li>
-            <li>Check wheel bearings rotate smoothly.</li>
-          </ol>
-        </div>
-
-        <div class="plain-list">
-          <h3>Steering</h3>
-          <ol class="checklist-list" data-checklist="steering">
-            <li>Track rod ends to steering arms: 41 Nm.</li>
-            <li>Steering rack clamp bolts: 11 Nm.</li>
-            <li>Check lower-to-upper steering column clamp bolts and grub screw, with no play.</li>
-            <li>Check for no movement in the column bushes by moving the wheel up and down.</li>
-          </ol>
-        </div>
-
-        <div class="plain-list">
-          <h3>Engine</h3>
-          <ol class="checklist-list" data-checklist="engine">
-            <li>Engine mounting rubbers to chassis: 20 Nm.</li>
-            <li>Engine mounting rubbers to engine mounting brackets: 81 Nm.</li>
-            <li>Engine mounting brackets to engine block: 25 Nm M8 bolts and 47 Nm M10 bolts.</li>
-            <li>Starter motor to engine: 47 Nm.</li>
-            <li>Air filter: check it is not dusty or dirty.</li>
-            <li>Bellhousing to engine: 47 Nm.</li>
-            <li>Check oil level with the engine warm, then switched off; wipe and refit the dipstick, wait 20 seconds, then read it.</li>
-            <li>Ensure the dipstick is fully pushed home; the Driver Guide recommends securing it so it cannot come out on track.</li>
-            <li>Check oil pressure behaviour: red at hot idle can be normal, but above 2000 rpm it should not stay in the red.</li>
-          </ol>
-        </div>
-
-        <div class="plain-list">
-          <h3>Gearbox</h3>
-          <ol class="checklist-list" data-checklist="gearbox">
-            <li>Gearbox mount to gearbox: 54 Nm.</li>
-            <li>Gearbox mount to chassis: 20 Nm.</li>
-          </ol>
-        </div>
-      </section>
-
-      <section id="before-every-session" class="rule-card searchable">
-        <h2>Before Every Session</h2>
-        <ul class="checklist-list" data-checklist="before-every-session">
-          <li><strong>Torque the wheel nuts before every session:</strong> 85 Nm or 65 lb ft.</li>
-          <li>Check oil level and wheel nuts again before going back on track.</li>
-          <li>Start each weekend with enough brake pad material to last. If in doubt, change pads before the final practice session.</li>
-          <li>Check the inner rear brake pads carefully; the Driver Guide notes they are likely to wear first.</li>
-        </ul>
       </section>
 
       <section id="walkaround" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Visual checks</p>
-          <h2>Walkaround Checks</h2>
+          <h2 id="walkaround-checks">Walkaround Checks</h2>
           <p>
             These are quick physical and visual checks to run alongside the spanner work.
           </p>
         </div>
 
-        <div class="plain-list">
-          <h3>Lighting</h3>
+        <details class="plain-list checklist-group" open>
+          <summary><h3 id="lighting">Lighting</h3><span class="group-progress" aria-label="Group progress"></span></summary>
           <ul class="checklist-list" data-checklist="lighting">
             <li>Check all lights are working.</li>
             <li>Check all lights are fixed securely.</li>
             <li>Check lights are taped where required.</li>
             <li>Check rear bulbs are not touching the lenses.</li>
           </ul>
-        </div>
+        </details>
 
-        <div class="plain-list">
-          <h3>Cooling System</h3>
+        <details class="plain-list checklist-group" open>
+          <summary><h3 id="cooling-system">Cooling System</h3><span class="group-progress" aria-label="Group progress"></span></summary>
           <ol class="checklist-list" data-checklist="cooling-system">
             <li>Visually check hose clips and connections for leaks.</li>
             <li>Check coolant level visually.</li>
             <li>Check radiator mountings and condition visually.</li>
           </ol>
-        </div>
+        </details>
 
-        <div class="plain-list">
-          <h3>Wheels And Tyres</h3>
+        <details class="plain-list checklist-group" open>
+          <summary><h3 id="wheels-and-tyres">Wheels And Tyres</h3><span class="group-progress" aria-label="Group progress"></span></summary>
           <ol class="checklist-list" data-checklist="wheels-tyres">
             <li>Check tyre pressures.</li>
             <li>Check wheel weights are secure and taped.</li>
           </ol>
-        </div>
+        </details>
 
-        <div class="plain-list">
-          <h3>Fibreglass</h3>
+        <details class="plain-list checklist-group" open>
+          <summary><h3 id="fibreglass">Fibreglass</h3><span class="group-progress" aria-label="Group progress"></span></summary>
           <ol class="checklist-list" data-checklist="fibreglass">
             <li>Check front wing fixings.</li>
             <li>Check rear wing fixings.</li>
             <li>Check nose cone fasteners.</li>
             <li>Check the grille is secure in the nose cone.</li>
           </ol>
-        </div>
+        </details>
 
-        <div class="plain-list">
-          <h3>Other Checks</h3>
+        <details class="plain-list checklist-group" open>
+          <summary><h3 id="other-checks">Other Checks</h3><span class="group-progress" aria-label="Group progress"></span></summary>
           <ol class="checklist-list" data-checklist="other-checks">
             <li>Check race numbers and sponsor logos.</li>
             <li>Clean the car.</li>
             <li>Check brake pad material.</li>
             <li>Check that you have good pedal feel.</li>
           </ol>
-        </div>
+        </details>
       </section>
 
       <section id="top-tips" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Workshop notes</p>
-          <h2>Top Tips</h2>
+          <h2 id="top-tips-2">Top Tips</h2>
           <p>
             Practical notes from the supplied checklist. Treat these as prompts to check
             against your own car and current championship guidance.
@@ -274,7 +336,7 @@
         </div>
 
         <div class="plain-list">
-          <h3>Tools And Access</h3>
+          <h3 id="tools-and-access">Tools And Access</h3>
           <ul>
             <li>Cut down an 8 mm Allen key for easier access on the radius arms.</li>
             <li>Do not use impact guns or impact wrenches.</li>
@@ -283,7 +345,7 @@
         </div>
 
         <div class="plain-list">
-          <h3>Basic Workshop Kit</h3>
+          <h3 id="basic-workshop-kit">Basic Workshop Kit</h3>
           <ul>
             <li>Low-profile trolley jack rated for at least 1.5 tonnes.</li>
             <li>Three axle stands so the car can be supported level for spanner checks.</li>
@@ -297,7 +359,7 @@
         </div>
 
         <div class="plain-list">
-          <h3>Consumables To Carry</h3>
+          <h3 id="consumables-to-carry">Consumables To Carry</h3>
           <ul>
             <li>50 mm gaffer tape for the windscreen-to-roll-cage gap.</li>
             <li>Headlight tape, avoiding red and blue.</li>
@@ -312,7 +374,7 @@
         </div>
 
         <div class="plain-list">
-          <h3>Trackside Fixes</h3>
+          <h3 id="trackside-fixes">Trackside Fixes</h3>
           <ul>
             <li>Carry cable ties for the cycle wings in case one is lost or needs temporary securing.</li>
             <li>Side repeaters are not required on race cars.</li>
@@ -321,7 +383,7 @@
         </div>
 
         <div class="plain-list">
-          <h3>Driver And Session Reminders</h3>
+          <h3 id="driver-and-session-reminders">Driver And Session Reminders</h3>
           <ul>
             <li>Keep a short list on the dash for session reminders.</li>
             <li>Use Rain-X on the windscreen and visor, inside and outside.</li>
@@ -329,7 +391,7 @@
         </div>
 
         <div class="plain-list">
-          <h3>Brake And Fluid Notes</h3>
+          <h3 id="brake-and-fluid-notes">Brake And Fluid Notes</h3>
           <ul>
             <li>Fit the race master cylinder cap, 77175, and use a sweatband to catch seepage.</li>
             <li>Buy a brake bleed kit or similar.</li>
@@ -338,7 +400,7 @@
         </div>
 
         <div class="plain-list">
-          <h3>Workshop Notes</h3>
+          <h3 id="workshop-notes">Workshop Notes</h3>
           <ul>
             <li>Do not over-torque wheel nuts; over-torque can stretch studs and make future loosening more likely.</li>
             <li>The Driver Guide notes that copper grease on wheel studs can help with frequent wheel removal; keep any grease away from braking surfaces.</li>

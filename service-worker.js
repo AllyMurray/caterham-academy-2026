@@ -1,4 +1,4 @@
-const CACHE_NAME = "caterham-academy-prep-v25";
+const CACHE_NAME = "caterham-academy-prep-v29";
 const CORE_ASSETS = [
   "./",
   "./index.html",
@@ -18,6 +18,8 @@ const CORE_ASSETS = [
   "./spanner-checks.html",
   "./parts.html",
   "./styles.css",
+  "./layout.css",
+  "./search-index.js",
   "./script.js",
   "./manifest.webmanifest",
   "./icon.svg",
@@ -65,7 +67,7 @@ self.addEventListener("fetch", (event) => {
           caches.open(CACHE_NAME).then((cache) => cache.put(request, responseClone));
           return response;
         })
-        .catch(() => caches.match(request).then((cached) => cached || caches.match("./index.html"))),
+        .catch(() => caches.match(request, { ignoreSearch: true }).then((cached) => cached || caches.match("./index.html"))),
     );
     return;
   }

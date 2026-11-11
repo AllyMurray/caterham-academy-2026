@@ -13,45 +13,65 @@
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="icon-192.png" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="layout.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header">
       <nav class="topbar" aria-label="Primary">
         <a class="brand" href="index.html" aria-label="Caterham Academy 2026 home">
-          <span class="brand-mark">7</span>
-          <span>Caterham Academy 2026</span>
+          <span class="brand-mark" aria-hidden="true">7</span>
+          <span>Academy <small>2026 field guide</small></span>
         </a>
-        <button class="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false">
-          <span class="menu-toggle-icon" aria-hidden="true"></span>
-          <span>Menu</span>
+        <form class="nav-search" action="search.html" role="search">
+          <label class="visually-hidden" for="nav-query">Search the whole guide</label>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+          <input id="nav-query" name="q" type="search" placeholder="Find a check, part or answer…" autocomplete="off" />
+          <button type="submit">Search</button>
+        </form>
+        <a class="mobile-search" href="search.html" aria-label="Search the whole guide"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg></a>
+        <span class="season-label">2026 season</span>
+        <button class="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false" aria-label="Open navigation">
+          <span class="menu-toggle-icon" aria-hidden="true"></span><span>Menu</span>
         </button>
-        <div id="primary-menu" class="topbar-links" data-primary-menu>
-          <a href="index.html">Start</a>
-          <a href="delivery-prep.html">Delivery prep</a>
-          <a href="race-prep.html">Race prep</a>
-          <a href="spanner-checks.html">Spanner checks</a>
-          <a href="reference.html">Reference</a>
+        <div id="primary-menu" class="topbar-links site-sidebar" data-primary-menu>
+          <a class="nav-home" href="index.html">Overview</a>
+          <div class="nav-group"><p>Prepare</p>
+            <a href="delivery-prep.html">Delivery prep</a>
+            <a href="delivery-prep-builder.html">Checklist builder</a>
+            <a href="race-prep.html">Race prep</a>
+            <a href="spanner-checks.html">Spanner checks</a>
+          </div>
+          <div class="nav-group"><p>Driver guide</p>
+            <a href="guide-basics.html">Basics &amp; terms</a>
+            <a href="guide-car-prep.html">Car preparation</a>
+            <a href="guide-safety.html">Harness &amp; safety</a>
+            <a href="guide-setup-maintenance.html">Setup &amp; maintenance</a>
+            <a href="guide-events-rules.html">Events &amp; rules</a>
+            <a href="guide-racecraft.html">Racecraft</a>
+          </div>
+          <div class="nav-group"><p>Reference</p>
+            <a href="parts.html">Parts &amp; regulations</a>
+            <a href="sources.html">Sources &amp; open questions</a>
+            <a href="reference.html">Reference overview</a>
+          </div>
+          <div class="nav-footer"><a href="driver-guide.html">Browse the driver guide</a><span>Independent Academy reference</span></div>
         </div>
       </nav>
+      <button class="nav-backdrop" type="button" tabindex="-1" aria-label="Close navigation"></button>
 
       <section id="top" class="hero">
         <div class="hero-copy">
+          <p class="breadcrumb"><a href="index.html">Overview</a><span aria-hidden="true">/</span>Prepare</p>
           <p class="eyebrow">2026 Caterham Academy</p>
-          <h1>Delivery Prep Guide</h1>
+          <h1>Delivery prep</h1>
           <p class="lead">
             A practical guide to what to order, fit, and check after the factory-handover
             car arrives, before you move on to event prep and spanner checks.
           </p>
-          <nav class="on-page-nav" aria-label="On this page">
-            <span>On this page</span>
-            <a href="#guide">Guide</a>
-            <a href="#todo">To-do list</a>
-            <a href="delivery-prep-builder.html#builder">Build checklist</a>
-            <a href="#prep-mods">Prep parts</a>
-          </nav>
         </div>
-        <aside class="source-card" aria-label="Source details">
+        <details class="source-card" aria-label="Source details"><summary>Page details &amp; sources</summary>
           <dl>
             <div>
               <dt>Use this page for</dt>
@@ -70,11 +90,13 @@
               </dd>
             </div>
           </dl>
-        </aside>
+        </details>
       </section>
     </header>
+    <div class="page-jump"><nav class="on-page-nav" aria-label="On this page"><span>On this page</span><a href="#generated-checklist">Your checklist</a><a href="#guide">Guide</a><a href="#todo">To-do list</a><a href="#prep-mods">Prep parts</a></nav></div>
 
-    <main>
+
+    <main id="main-content" tabindex="-1">
       <section class="notice" aria-label="Important note">
         <strong>Check before buying.</strong> This guide is a prep aid based on the 2026
         regulations. It is not a substitute for the current regulations, championship
@@ -94,64 +116,14 @@
         />
         <p id="search-status" role="status" aria-live="polite">Showing all entries.</p>
       </section>
+      <div id="filter-empty" class="notice" hidden><strong>No entries match your filter.</strong> Try a component name or <button type="button" class="secondary-button" data-clear-filter>Clear filter</button>.</div>
 
-      <section id="guide" class="content-section guide-section searchable">
-        <div class="section-heading">
-          <p class="section-kicker">Prep sequence</p>
-          <h2>Start With The Factory Car, Then Prep After Delivery</h2>
-          <p>
-            The useful way to think about Academy prep is not "what can I change?" but
-            "what should I order, and when should it be fitted?" The factory car is the
-            baseline; the useful prep list is the set of post-handover parts, setup
-            items, and checks to complete before testing.
-          </p>
-        </div>
 
-        <div class="guide-body compact-guide">
-          <article class="guide-step">
-            <p class="guide-step-number">1</p>
-            <div>
-              <h3>Inspect The Handover Car</h3>
-              <p>
-                Caterham handles IVA at the factory, so prep starts from the delivered
-                road-compliant car. Confirm what has arrived, keep factory-supplied
-                standard parts out of the shopping list, and use the full parts list
-                only when you need a regulation part-number check.
-              </p>
-            </div>
-          </article>
-
-          <article class="guide-step">
-            <p class="guide-step-number">2</p>
-            <div>
-              <h3>Fit The Useful Prep Parts</h3>
-              <p>
-                Work through the parts that make the car easier or safer to race:
-                driver fit, visibility, brakes, data, impact protection, controls, and
-                setup parts. Leave Service Centre-only jobs to Caterham or an appointed
-                Caterham Motorsport Service Centre.
-              </p>
-            </div>
-          </article>
-
-          <article class="guide-step">
-            <p class="guide-step-number">3</p>
-            <div>
-              <h3>Finish Driver Fit, Then Test</h3>
-              <p>
-                Set pedals, seat, belts, mirrors, head restraint, and helmet clearance
-                together before setup work. Once the car is fitted and shaken down, use
-                Race prep and Spanner checks for the repeated event jobs.
-              </p>
-            </div>
-          </article>
-        </div>
-      </section>
 
       <section id="todo" class="content-section todo-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Workshop checklist</p>
-          <h2>Delivery Prep To-Do List</h2>
+          <h2 id="delivery-prep-to-do-list">Delivery Prep To-Do List</h2>
           <p>
             This is the practical job list to work through after handover and before the
             first event. Some items are directly reflected in the permitted-parts
@@ -181,14 +153,14 @@
 
         <div id="generated-checklist" class="generated-checklist-heading">
           <p class="section-kicker">Generated workshop list</p>
-          <h3>Your Delivery Prep Checklist</h3>
+          <h3 id="your-delivery-prep-checklist">Your Delivery Prep Checklist</h3>
           <p class="fit-summary" data-fit-summary data-fit-summary-mode="shown" role="status" aria-live="polite">Showing the recommended prep list.</p>
         </div>
 
         <div class="todo-grid delivery-todo-grid">
           <article class="todo-card">
             <div class="todo-card-heading">
-              <h3>Driver Fit &amp; Safety</h3>
+              <h3 id="driver-fit-safety">Driver Fit &amp; Safety</h3>
               <p>Do this first. Seat position, belt geometry, visibility, and helmet clearance affect every other setup decision.</p>
             </div>
             <div class="todo-list">
@@ -240,7 +212,7 @@
 
           <article class="todo-card">
             <div class="todo-card-heading">
-              <h3>Parts To Fit</h3>
+              <h3 id="parts-to-fit">Parts To Fit</h3>
               <p>This section is generated from your saved builder choices. <a href="delivery-prep-builder.html#builder">Edit prep jobs</a>.</p>
             </div>
             <div class="todo-list">
@@ -334,7 +306,7 @@
 
           <article class="todo-card">
             <div class="todo-card-heading">
-              <h3>Controls, Data &amp; Wiring</h3>
+              <h3 id="controls-data-wiring">Controls, Data &amp; Wiring</h3>
               <p>Keep wiring changes deliberate. Some jobs are Service Centre work, and the inertia switch choice is one route or the other.</p>
             </div>
             <div class="todo-list">
@@ -371,7 +343,7 @@
 
           <article class="todo-card">
             <div class="todo-card-heading">
-              <h3>Factory Checks &amp; Setup</h3>
+              <h3 id="factory-checks-setup">Factory Checks &amp; Setup</h3>
               <p>Confirm factory-prepped items, then finish the service and setup baseline before the first serious test.</p>
             </div>
             <div class="todo-list">
@@ -495,10 +467,63 @@
         </div>
       </section>
 
+      <section id="guide" class="content-section guide-section searchable">
+        <div class="section-heading">
+          <p class="section-kicker">Prep sequence</p>
+          <h2 id="start-with-the-factory-car-then-prep-after-delivery">Start With The Factory Car, Then Prep After Delivery</h2>
+          <p>
+            The useful way to think about Academy prep is not "what can I change?" but
+            "what should I order, and when should it be fitted?" The factory car is the
+            baseline; the useful prep list is the set of post-handover parts, setup
+            items, and checks to complete before testing.
+          </p>
+        </div>
+
+        <div class="guide-body compact-guide">
+          <article class="guide-step">
+            <p class="guide-step-number">1</p>
+            <div>
+              <h3 id="inspect-the-handover-car">Inspect The Handover Car</h3>
+              <p>
+                Caterham handles IVA at the factory, so prep starts from the delivered
+                road-compliant car. Confirm what has arrived, keep factory-supplied
+                standard parts out of the shopping list, and use the full parts list
+                only when you need a regulation part-number check.
+              </p>
+            </div>
+          </article>
+
+          <article class="guide-step">
+            <p class="guide-step-number">2</p>
+            <div>
+              <h3 id="fit-the-useful-prep-parts">Fit The Useful Prep Parts</h3>
+              <p>
+                Work through the parts that make the car easier or safer to race:
+                driver fit, visibility, brakes, data, impact protection, controls, and
+                setup parts. Leave Service Centre-only jobs to Caterham or an appointed
+                Caterham Motorsport Service Centre.
+              </p>
+            </div>
+          </article>
+
+          <article class="guide-step">
+            <p class="guide-step-number">3</p>
+            <div>
+              <h3 id="finish-driver-fit-then-test">Finish Driver Fit, Then Test</h3>
+              <p>
+                Set pedals, seat, belts, mirrors, head restraint, and helmet clearance
+                together before setup work. Once the car is fitted and shaken down, use
+                Race prep and Spanner checks for the repeated event jobs.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
       <section id="prep-mods" class="content-section mod-summary searchable">
         <div class="section-heading">
           <p class="section-kicker">Quick reference</p>
-          <h2>Prep Parts And Why They Matter</h2>
+          <h2 id="prep-parts-and-why-they-matter">Prep Parts And Why They Matter</h2>
           <p>
             Open this only when you need part numbers, sources, or fitment notes. For
             the complete regulation reference, use the <a href="parts.html">full parts list</a>.
@@ -508,7 +533,7 @@
           <summary>Open prep parts reference</summary>
           <div class="prep-groups">
           <article class="prep-group">
-            <h3>Order Separately, Fit After Handover</h3>
+            <h3 id="order-separately-fit-after-handover">Order Separately, Fit After Handover</h3>
             <div class="prep-card-grid">
               <article class="prep-item">
                 <h4>Moulded FIA-FT3 fuel cell</h4>
@@ -565,7 +590,7 @@
           </article>
 
           <article class="prep-group">
-            <h3>Cockpit Protection And Visibility</h3>
+            <h3 id="cockpit-protection-and-visibility">Cockpit Protection And Visibility</h3>
             <div class="prep-card-grid">
               <article class="prep-item prep-item-wide">
                 <h4>Half sidescreen kit</h4>
@@ -655,7 +680,7 @@
           </article>
 
           <article class="prep-group">
-            <h3>Fuel, Catch Tank, Brakes, And Data</h3>
+            <h3 id="fuel-catch-tank-brakes-and-data">Fuel, Catch Tank, Brakes, And Data</h3>
             <div class="prep-card-grid">
               <article class="prep-item">
                 <h4>Mocal fuel drain hose with stop tap</h4>
@@ -733,7 +758,7 @@
           </article>
 
           <article class="prep-group">
-            <h3>Camera Accessories</h3>
+            <h3 id="camera-accessories">Camera Accessories</h3>
             <div class="prep-card-grid">
               <article class="prep-item">
                 <h4>Additional foot camera mount</h4>
@@ -755,7 +780,7 @@
           </article>
 
           <article class="prep-group">
-            <h3>Setup Parts</h3>
+            <h3 id="setup-parts">Setup Parts</h3>
             <div class="prep-card-grid">
               <article class="prep-item">
                 <h4>Front anti-roll bar, 5/8 inch, red</h4>
@@ -873,7 +898,7 @@
           </article>
 
           <article class="prep-group">
-            <h3>Data And Switches</h3>
+            <h3 id="data-and-switches">Data And Switches</h3>
             <div class="prep-card-grid">
               <article class="prep-item">
                 <h4>VBOX OBD adaptor lead</h4>
@@ -936,7 +961,7 @@
           </article>
 
           <article class="prep-group">
-            <h3>Roll Cage Protection</h3>
+            <h3 id="roll-cage-protection">Roll Cage Protection</h3>
             <div class="prep-card-grid">
               <article class="prep-item">
                 <h4>Roll cage foam fitting and aero shaping</h4>
@@ -958,7 +983,7 @@
           </article>
 
           <article class="prep-group">
-            <h3>Spares</h3>
+            <h3 id="spares">Spares</h3>
             <div class="prep-card-grid">
               <article class="prep-item">
                 <h4>Nylon rear wing screws</h4>
@@ -975,7 +1000,7 @@
       </section>
 
       <section class="rule-card">
-        <h2>Rules And Guardrails</h2>
+        <h2 id="rules-and-guardrails">Rules And Guardrails</h2>
         <ul>
           <li>Caterham may change part numbers during the life of the regulations.</li>
           <li>

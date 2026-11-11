@@ -13,45 +13,65 @@
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="icon-192.png" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="layout.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header">
       <nav class="topbar" aria-label="Primary">
         <a class="brand" href="index.html" aria-label="Caterham Academy 2026 home">
-          <span class="brand-mark">7</span>
-          <span>Caterham Academy 2026</span>
+          <span class="brand-mark" aria-hidden="true">7</span>
+          <span>Academy <small>2026 field guide</small></span>
         </a>
-        <button class="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false">
-          <span class="menu-toggle-icon" aria-hidden="true"></span>
-          <span>Menu</span>
+        <form class="nav-search" action="search.html" role="search">
+          <label class="visually-hidden" for="nav-query">Search the whole guide</label>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+          <input id="nav-query" name="q" type="search" placeholder="Find a check, part or answer…" autocomplete="off" />
+          <button type="submit">Search</button>
+        </form>
+        <a class="mobile-search" href="search.html" aria-label="Search the whole guide"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg></a>
+        <span class="season-label">2026 season</span>
+        <button class="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false" aria-label="Open navigation">
+          <span class="menu-toggle-icon" aria-hidden="true"></span><span>Menu</span>
         </button>
-        <div id="primary-menu" class="topbar-links" data-primary-menu>
-          <a href="index.html">Start</a>
-          <a href="delivery-prep.html">Delivery prep</a>
-          <a href="race-prep.html">Race prep</a>
-          <a href="spanner-checks.html">Spanner checks</a>
-          <a href="reference.html">Reference</a>
+        <div id="primary-menu" class="topbar-links site-sidebar" data-primary-menu>
+          <a class="nav-home" href="index.html">Overview</a>
+          <div class="nav-group"><p>Prepare</p>
+            <a href="delivery-prep.html">Delivery prep</a>
+            <a href="delivery-prep-builder.html">Checklist builder</a>
+            <a href="race-prep.html">Race prep</a>
+            <a href="spanner-checks.html">Spanner checks</a>
+          </div>
+          <div class="nav-group"><p>Driver guide</p>
+            <a href="guide-basics.html">Basics &amp; terms</a>
+            <a href="guide-car-prep.html">Car preparation</a>
+            <a href="guide-safety.html">Harness &amp; safety</a>
+            <a href="guide-setup-maintenance.html">Setup &amp; maintenance</a>
+            <a href="guide-events-rules.html">Events &amp; rules</a>
+            <a href="guide-racecraft.html">Racecraft</a>
+          </div>
+          <div class="nav-group"><p>Reference</p>
+            <a href="parts.html">Parts &amp; regulations</a>
+            <a href="sources.html">Sources &amp; open questions</a>
+            <a href="reference.html">Reference overview</a>
+          </div>
+          <div class="nav-footer"><a href="driver-guide.html">Browse the driver guide</a><span>Independent Academy reference</span></div>
         </div>
       </nav>
+      <button class="nav-backdrop" type="button" tabindex="-1" aria-label="Close navigation"></button>
 
       <section id="top" class="hero">
         <div class="hero-copy">
+          <p class="breadcrumb"><a href="index.html">Overview</a><span aria-hidden="true">/</span>Driver guide</p>
           <p class="eyebrow">Driver guide</p>
-          <h1>Basics &amp; Terms</h1>
+          <h1>Basics &amp; terms</h1>
           <p class="lead">
             The driver responsibilities, glossary, safety-kit shopping list, tools, and
             basic car notes that sit underneath the prep checklists.
           </p>
-          <nav class="on-page-nav" aria-label="On this page">
-            <span>On this page</span>
-            <a href="#responsibility">Responsibility</a>
-            <a href="#glossary">Glossary</a>
-            <a href="#safety-kit">Safety kit</a>
-            <a href="#car-basics">Car basics</a>
-          </nav>
         </div>
-        <aside class="source-card" aria-label="Source details">
+        <details class="source-card" aria-label="Source details"><summary>Page details &amp; sources</summary>
           <dl>
             <div>
               <dt>Source</dt>
@@ -62,51 +82,20 @@
               <dd>Terms, kit, tools, and basic car operation</dd>
             </div>
           </dl>
-        </aside>
+        </details>
       </section>
     </header>
+    <div class="page-jump"><nav class="on-page-nav" aria-label="On this page"><span>On this page</span><a href="#responsibility">Responsibility</a><a href="#glossary">Glossary</a><a href="#safety-kit">Safety kit</a><a href="#car-basics">Car basics</a></nav></div>
 
-    <main>
+
+    <main id="main-content" tabindex="-1">
       <section class="notice" aria-label="Important note">
         <strong>Guide, not rulebook.</strong> Always check the current regulations, NCR,
         final instructions, official bulletins, and scrutineer instructions.
         <a href="driver-guide.html">Back to Driver guide menu.</a>
       </section>
 
-      <section class="content-section guide-menu" aria-label="Driver guide menu">
-        <div class="guide-menu-grid">
-          <a class="guide-menu-card is-current" href="guide-basics.html">
-            <strong>Basics &amp; Terms</strong>
-            <span>Responsibilities, glossary, safety kit, tools, and the basic car notes.</span>
-          </a>
-          <a class="guide-menu-card" href="guide-car-prep.html">
-            <strong>Car Prep Knowledge</strong>
-            <span>Driver fit, controls, bodywork, compliance, fuel, data, and ARDS confirm items.</span>
-          </a>
-          <a class="guide-menu-card" href="guide-safety.html">
-            <strong>Harness &amp; Safety</strong>
-            <span>Harness setup, FHR/HANS notes, arm restraints, and belting-in order.</span>
-          </a>
-          <a class="guide-menu-card" href="guide-setup-maintenance.html">
-            <strong>Setup &amp; Maintenance</strong>
-            <span>Race setup basics, flat-floor process, oil checks, pads, bearings, and routine checks.</span>
-          </a>
-          <a class="guide-menu-card" href="guide-events-rules.html">
-            <strong>Events &amp; Rules</strong>
-            <span>Race-weekend process, sprint notes, first race, flags, Parc Ferme, and protests.</span>
-          </a>
-          <a class="guide-menu-card" href="guide-racecraft.html">
-            <strong>Racecraft</strong>
-            <span>Qualifying, starts, overtaking, defending, the tow, driving tips, and marshalling.</span>
-          </a>
-          <a class="guide-menu-card" href="sources.html">
-            <strong>Sources &amp; Coverage</strong>
-            <span>Where each PDF section is covered, what has been cross-checked, and what still needs confirmation.</span>
-          </a>
-        </div>
-      </section>
-
-      <section class="controls" aria-label="Search basics guide">
+<section class="controls" aria-label="Search basics guide">
         <label for="site-search">Search this guide page</label>
         <input
           id="site-search"
@@ -116,11 +105,12 @@
         />
         <p id="search-status" role="status" aria-live="polite">Showing all entries.</p>
       </section>
+      <div id="filter-empty" class="notice" hidden><strong>No entries match your filter.</strong> Try a component name or <button type="button" class="secondary-button" data-clear-filter>Clear filter</button>.</div>
 
       <section id="responsibility" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Start here</p>
-          <h2>Your Responsibilities</h2>
+          <h2 id="your-responsibilities">Your Responsibilities</h2>
           <p>
             The Academy is built around equal cars, tightly controlled rules, and novice
             drivers. Preparation and compliance are the driver's responsibility.
@@ -128,7 +118,7 @@
           <p class="source-note">Source: Driver Guide intro and regulations responsibility notes.</p>
         </div>
         <div class="plain-list">
-          <h3>What That Means</h3>
+          <h3 id="what-that-means">What That Means</h3>
           <ul>
             <li>Read the championship regulations, final instructions, and relevant NCR chapters before events.</li>
             <li>If a modification is not clearly permitted, assume it is not permitted.</li>
@@ -143,7 +133,7 @@
       <section id="glossary" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Language</p>
-          <h2>Key Terms</h2>
+          <h2 id="key-terms">Key Terms</h2>
           <p>Terms the Driver Guide expects you to understand before race weekends start moving quickly.</p>
           <p class="source-note">Source: Driver Guide glossary.</p>
         </div>
@@ -157,60 +147,60 @@
             </thead>
             <tbody>
               <tr>
-                <td>Assembly / collecting area</td>
-                <td>Where cars gather before qualifying or a race. It is rarely the pit lane, so identify it from the final instructions.</td>
+                <td data-label="Term">Assembly / collecting area</td>
+                <td data-label="What it means">Where cars gather before qualifying or a race. It is rarely the pit lane, so identify it from the final instructions.</td>
               </tr>
               <tr>
-                <td>Clerk of the Course</td>
-                <td>The event decision maker. You normally see the Clerk at briefings or if an incident needs discussion.</td>
+                <td data-label="Term">Clerk of the Course</td>
+                <td data-label="What it means">The event decision maker. You normally see the Clerk at briefings or if an incident needs discussion.</td>
               </tr>
               <tr>
-                <td>FIA / Motorsport UK / NCR</td>
-                <td>The FIA is the world governing body, Motorsport UK is the UK authority, and the National Competition Rules are the general UK motorsport rules. NCR references use chapter, appendix, and article numbers.</td>
+                <td data-label="Term">FIA / Motorsport UK / NCR</td>
+                <td data-label="What it means">The FIA is the world governing body, Motorsport UK is the UK authority, and the National Competition Rules are the general UK motorsport rules. NCR references use chapter, appendix, and article numbers.</td>
               </tr>
               <tr>
-                <td>Final instructions</td>
-                <td>Event-specific instructions covering timings, locations, briefings, passes, assembly, and procedures. Read them carefully.</td>
+                <td data-label="Term">Final instructions</td>
+                <td data-label="What it means">Event-specific instructions covering timings, locations, briefings, passes, assembly, and procedures. Read them carefully.</td>
               </tr>
               <tr>
-                <td>FHR / HANS / Hybrid</td>
-                <td>Frontal head restraint systems used with the helmet and harness to reduce head and neck movement in an impact. FHR use is mandatory.</td>
+                <td data-label="Term">FHR / HANS / Hybrid</td>
+                <td data-label="What it means">Frontal head restraint systems used with the helmet and harness to reduce head and neck movement in an impact. FHR use is mandatory.</td>
               </tr>
               <tr>
-                <td>Heel-and-toe</td>
-                <td>Blipping the throttle while braking and downshifting so engine speed matches wheel speed, reducing rear-wheel locking and instability.</td>
+                <td data-label="Term">Heel-and-toe</td>
+                <td data-label="What it means">Blipping the throttle while braking and downshifting so engine speed matches wheel speed, reducing rear-wheel locking and instability.</td>
               </tr>
               <tr>
-                <td>Judge of Fact</td>
-                <td>An official whose judgement is treated as fact unless formally appealed with strong evidence. Timekeepers and scrutineers can be Judges of Fact.</td>
+                <td data-label="Term">Judge of Fact</td>
+                <td data-label="What it means">An official whose judgement is treated as fact unless formally appealed with strong evidence. Timekeepers and scrutineers can be Judges of Fact.</td>
               </tr>
               <tr>
-                <td>Parc Ferme</td>
-                <td>Where cars go directly after qualifying or races for eligibility checks. Stay with the car until released by the scrutineer.</td>
+                <td data-label="Term">Parc Ferme</td>
+                <td data-label="What it means">Where cars go directly after qualifying or races for eligibility checks. Stay with the car until released by the scrutineer.</td>
               </tr>
               <tr>
-                <td>Regs / regulations</td>
-                <td>The sporting and technical rules. In Academy conversation, "the regs" usually means the technical rules.</td>
+                <td data-label="Term">Regs / regulations</td>
+                <td data-label="What it means">The sporting and technical rules. In Academy conversation, "the regs" usually means the technical rules.</td>
               </tr>
               <tr>
-                <td>Scrutineer</td>
-                <td>An official checking safety or eligibility. If they find a problem, the driver has to put it right or may not be able to compete.</td>
+                <td data-label="Term">Scrutineer</td>
+                <td data-label="What it means">An official checking safety or eligibility. If they find a problem, the driver has to put it right or may not be able to compete.</td>
               </tr>
               <tr>
-                <td>Testing</td>
-                <td>A circuit practice day for race licence holders in competition cars. Trackday overtaking conventions do not apply.</td>
+                <td data-label="Term">Testing</td>
+                <td data-label="What it means">A circuit practice day for race licence holders in competition cars. Trackday overtaking conventions do not apply.</td>
               </tr>
               <tr>
-                <td>Timekeepers / TSL</td>
-                <td>Officials and timing systems that produce qualifying times, grids, race times, and live timing, usually available through TSL Timing at race events.</td>
+                <td data-label="Term">Timekeepers / TSL</td>
+                <td data-label="What it means">Officials and timing systems that produce qualifying times, grids, race times, and live timing, usually available through TSL Timing at race events.</td>
               </tr>
               <tr>
-                <td>Track</td>
-                <td>The hard surface between the track limits. Kerbs count where permitted, but going beyond the white line or far edge of the kerb can be penalised.</td>
+                <td data-label="Term">Track</td>
+                <td data-label="What it means">The hard surface between the track limits. Kerbs count where permitted, but going beyond the white line or far edge of the kerb can be penalised.</td>
               </tr>
               <tr>
-                <td>Setup terms</td>
-                <td>Camber, caster, rake, ride height, tracking/toe, corner weights, and flat-floor setup describe how the car is adjusted to suit the driver and conditions.</td>
+                <td data-label="Term">Setup terms</td>
+                <td data-label="What it means">Camber, caster, rake, ride height, tracking/toe, corner weights, and flat-floor setup describe how the car is adjusted to suit the driver and conditions.</td>
               </tr>
             </tbody>
           </table>
@@ -220,7 +210,7 @@
       <section id="safety-kit" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Before the season</p>
-          <h2>Safety Kit And Tools</h2>
+          <h2 id="safety-kit-and-tools">Safety Kit And Tools</h2>
           <p>
             The Academy package includes the car safety hardware, but the driver still
             needs compliant personal kit and basic tools for the season.
@@ -228,7 +218,7 @@
           <p class="source-note">Source: Driver Guide shopping list and tools section.</p>
         </div>
         <div class="plain-list">
-          <h3>Personal Safety Kit</h3>
+          <h3 id="personal-safety-kit">Personal Safety Kit</h3>
           <ul>
             <li>Mandatory: helmet, FHR, race suit, gloves, race boots, and balaclava.</li>
             <li>Recommended: fireproof underwear, including top and long johns or shorts.</li>
@@ -239,7 +229,7 @@
           </ul>
         </div>
         <div class="plain-list">
-          <h3>Essential Tools And Supplies</h3>
+          <h3 id="essential-tools-and-supplies">Essential Tools And Supplies</h3>
           <ul>
             <li>Torque wrench capable of more than 85 Nm and a 19 mm deep socket.</li>
             <li>Jack and axle stands, using the correct support points from the spanner-check page.</li>
@@ -254,12 +244,12 @@
       <section id="car-basics" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">The car</p>
-          <h2>Getting To Know The Car</h2>
+          <h2 id="getting-to-know-the-car">Getting To Know The Car</h2>
           <p>Basic operating and inspection points from the Driver Guide before you start changing setup.</p>
           <p class="source-note">Source: Driver Guide getting-to-know-your-car section.</p>
         </div>
         <div class="plain-list">
-          <h3>Starting, Running, And Instruments</h3>
+          <h3 id="starting-running-and-instruments">Starting, Running, And Instruments</h3>
           <ul>
             <li>Start with the key and red start button. Shut down with the key.</li>
             <li>Do not press the red start button while the engine is running, because it engages the starter motor.</li>
@@ -270,7 +260,7 @@
           </ul>
         </div>
         <div class="plain-list">
-          <h3>Seats, Hood, Engine Seals, And Heater</h3>
+          <h3 id="seats-hood-engine-seals-and-heater">Seats, Hood, Engine Seals, And Heater</h3>
           <ul>
             <li>Choose a seat that lets the helmeted driver sit at least 50 mm below the top of the roll cage.</li>
             <li>The standard race seat may need supplied washers under the front runners to change rake.</li>

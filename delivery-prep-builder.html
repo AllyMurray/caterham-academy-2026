@@ -13,44 +13,65 @@
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="icon-192.png" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="layout.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header">
       <nav class="topbar" aria-label="Primary">
         <a class="brand" href="index.html" aria-label="Caterham Academy 2026 home">
-          <span class="brand-mark">7</span>
-          <span>Caterham Academy 2026</span>
+          <span class="brand-mark" aria-hidden="true">7</span>
+          <span>Academy <small>2026 field guide</small></span>
         </a>
-        <button class="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false">
-          <span class="menu-toggle-icon" aria-hidden="true"></span>
-          <span>Menu</span>
+        <form class="nav-search" action="search.html" role="search">
+          <label class="visually-hidden" for="nav-query">Search the whole guide</label>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+          <input id="nav-query" name="q" type="search" placeholder="Find a check, part or answer…" autocomplete="off" />
+          <button type="submit">Search</button>
+        </form>
+        <a class="mobile-search" href="search.html" aria-label="Search the whole guide"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg></a>
+        <span class="season-label">2026 season</span>
+        <button class="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false" aria-label="Open navigation">
+          <span class="menu-toggle-icon" aria-hidden="true"></span><span>Menu</span>
         </button>
-        <div id="primary-menu" class="topbar-links" data-primary-menu>
-          <a href="index.html">Start</a>
-          <a href="delivery-prep.html">Delivery prep</a>
-          <a href="race-prep.html">Race prep</a>
-          <a href="spanner-checks.html">Spanner checks</a>
-          <a href="reference.html">Reference</a>
+        <div id="primary-menu" class="topbar-links site-sidebar" data-primary-menu>
+          <a class="nav-home" href="index.html">Overview</a>
+          <div class="nav-group"><p>Prepare</p>
+            <a href="delivery-prep.html">Delivery prep</a>
+            <a href="delivery-prep-builder.html">Checklist builder</a>
+            <a href="race-prep.html">Race prep</a>
+            <a href="spanner-checks.html">Spanner checks</a>
+          </div>
+          <div class="nav-group"><p>Driver guide</p>
+            <a href="guide-basics.html">Basics &amp; terms</a>
+            <a href="guide-car-prep.html">Car preparation</a>
+            <a href="guide-safety.html">Harness &amp; safety</a>
+            <a href="guide-setup-maintenance.html">Setup &amp; maintenance</a>
+            <a href="guide-events-rules.html">Events &amp; rules</a>
+            <a href="guide-racecraft.html">Racecraft</a>
+          </div>
+          <div class="nav-group"><p>Reference</p>
+            <a href="parts.html">Parts &amp; regulations</a>
+            <a href="sources.html">Sources &amp; open questions</a>
+            <a href="reference.html">Reference overview</a>
+          </div>
+          <div class="nav-footer"><a href="driver-guide.html">Browse the driver guide</a><span>Independent Academy reference</span></div>
         </div>
       </nav>
+      <button class="nav-backdrop" type="button" tabindex="-1" aria-label="Close navigation"></button>
 
       <section id="top" class="hero">
         <div class="hero-copy">
+          <p class="breadcrumb"><a href="index.html">Overview</a><span aria-hidden="true">/</span>Prepare</p>
           <p class="eyebrow">2026 Caterham Academy</p>
-          <h1>Build Delivery Prep Checklist</h1>
+          <h1>Build your delivery checklist</h1>
           <p class="lead">
             Pick the driver-fit path and optional jobs you plan to complete after handover.
             Your choices are saved and used to generate the Delivery Prep checklist.
           </p>
-          <nav class="on-page-nav" aria-label="On this page">
-            <span>Steps</span>
-            <a href="#builder">Builder</a>
-            <a href="delivery-prep.html#generated-checklist">Checklist</a>
-            <a href="delivery-prep.html#prep-mods">Prep parts</a>
-          </nav>
         </div>
-        <aside class="source-card" aria-label="Builder details">
+        <details class="source-card" aria-label="Builder details"><summary>Page details &amp; sources</summary>
           <dl>
             <div>
               <dt>Choices</dt>
@@ -65,11 +86,11 @@
               <dd><a href="delivery-prep.html#generated-checklist">Open your generated checklist</a></dd>
             </div>
           </dl>
-        </aside>
+        </details>
       </section>
     </header>
 
-    <main>
+    <main id="main-content" tabindex="-1">
       <section class="notice" aria-label="Builder note">
         <strong>Use this when your plan changes.</strong> The Delivery Prep page links back
         here from the generated checklist, so you can add or remove prep jobs later.

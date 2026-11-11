@@ -13,44 +13,65 @@
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="icon-192.png" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="layout.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header">
       <nav class="topbar" aria-label="Primary">
         <a class="brand" href="index.html" aria-label="Caterham Academy 2026 home">
-          <span class="brand-mark">7</span>
-          <span>Caterham Academy 2026</span>
+          <span class="brand-mark" aria-hidden="true">7</span>
+          <span>Academy <small>2026 field guide</small></span>
         </a>
-        <button class="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false">
-          <span class="menu-toggle-icon" aria-hidden="true"></span>
-          <span>Menu</span>
+        <form class="nav-search" action="search.html" role="search">
+          <label class="visually-hidden" for="nav-query">Search the whole guide</label>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+          <input id="nav-query" name="q" type="search" placeholder="Find a check, part or answer…" autocomplete="off" />
+          <button type="submit">Search</button>
+        </form>
+        <a class="mobile-search" href="search.html" aria-label="Search the whole guide"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg></a>
+        <span class="season-label">2026 season</span>
+        <button class="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false" aria-label="Open navigation">
+          <span class="menu-toggle-icon" aria-hidden="true"></span><span>Menu</span>
         </button>
-        <div id="primary-menu" class="topbar-links" data-primary-menu>
-          <a href="index.html">Start</a>
-          <a href="delivery-prep.html">Delivery prep</a>
-          <a href="race-prep.html">Race prep</a>
-          <a href="spanner-checks.html">Spanner checks</a>
-          <a href="reference.html">Reference</a>
+        <div id="primary-menu" class="topbar-links site-sidebar" data-primary-menu>
+          <a class="nav-home" href="index.html">Overview</a>
+          <div class="nav-group"><p>Prepare</p>
+            <a href="delivery-prep.html">Delivery prep</a>
+            <a href="delivery-prep-builder.html">Checklist builder</a>
+            <a href="race-prep.html">Race prep</a>
+            <a href="spanner-checks.html">Spanner checks</a>
+          </div>
+          <div class="nav-group"><p>Driver guide</p>
+            <a href="guide-basics.html">Basics &amp; terms</a>
+            <a href="guide-car-prep.html">Car preparation</a>
+            <a href="guide-safety.html">Harness &amp; safety</a>
+            <a href="guide-setup-maintenance.html">Setup &amp; maintenance</a>
+            <a href="guide-events-rules.html">Events &amp; rules</a>
+            <a href="guide-racecraft.html">Racecraft</a>
+          </div>
+          <div class="nav-group"><p>Reference</p>
+            <a href="parts.html">Parts &amp; regulations</a>
+            <a href="sources.html">Sources &amp; open questions</a>
+            <a href="reference.html">Reference overview</a>
+          </div>
+          <div class="nav-footer"><a href="driver-guide.html">Browse the driver guide</a><span>Independent Academy reference</span></div>
         </div>
       </nav>
+      <button class="nav-backdrop" type="button" tabindex="-1" aria-label="Close navigation"></button>
 
       <section id="top" class="hero">
         <div class="hero-copy">
+          <p class="breadcrumb"><a href="index.html">Overview</a><span aria-hidden="true">/</span>Driver guide</p>
           <p class="eyebrow">Driver guide</p>
-          <h1>Setup &amp; Maintenance</h1>
+          <h1>Setup &amp; maintenance</h1>
           <p class="lead">
             Race setup concepts, flat-floor order, and routine maintenance checks from
             the Driver Guide.
           </p>
-          <nav class="on-page-nav" aria-label="On this page">
-            <span>On this page</span>
-            <a href="#setup">Setup</a>
-            <a href="#flat-floor">Flat floor</a>
-            <a href="#maintenance">Maintenance</a>
-          </nav>
         </div>
-        <aside class="source-card" aria-label="Source details">
+        <details class="source-card" aria-label="Source details"><summary>Page details &amp; sources</summary>
           <dl>
             <div>
               <dt>Source</dt>
@@ -61,51 +82,20 @@
               <dd><a href="spanner-checks.html">Torque and workshop checks</a></dd>
             </div>
           </dl>
-        </aside>
+        </details>
       </section>
     </header>
+    <div class="page-jump"><nav class="on-page-nav" aria-label="On this page"><span>On this page</span><a href="#setup">Setup</a><a href="#flat-floor">Flat floor</a><a href="#maintenance">Maintenance</a></nav></div>
 
-    <main>
+
+    <main id="main-content" tabindex="-1">
       <section class="notice" aria-label="Important note">
         <strong>Setup context.</strong> Use this page for what setup terms mean and use
         Spanner checks for torque values.
         <a href="driver-guide.html">Back to Driver guide menu.</a>
       </section>
 
-      <section class="content-section guide-menu" aria-label="Driver guide menu">
-        <div class="guide-menu-grid">
-          <a class="guide-menu-card" href="guide-basics.html">
-            <strong>Basics &amp; Terms</strong>
-            <span>Responsibilities, glossary, safety kit, tools, and the basic car notes.</span>
-          </a>
-          <a class="guide-menu-card" href="guide-car-prep.html">
-            <strong>Car Prep Knowledge</strong>
-            <span>Driver fit, controls, bodywork, compliance, fuel, data, and ARDS confirm items.</span>
-          </a>
-          <a class="guide-menu-card" href="guide-safety.html">
-            <strong>Harness &amp; Safety</strong>
-            <span>Harness setup, FHR/HANS notes, arm restraints, and belting-in order.</span>
-          </a>
-          <a class="guide-menu-card is-current" href="guide-setup-maintenance.html">
-            <strong>Setup &amp; Maintenance</strong>
-            <span>Race setup basics, flat-floor process, oil checks, pads, bearings, and routine checks.</span>
-          </a>
-          <a class="guide-menu-card" href="guide-events-rules.html">
-            <strong>Events &amp; Rules</strong>
-            <span>Race-weekend process, sprint notes, first race, flags, Parc Ferme, and protests.</span>
-          </a>
-          <a class="guide-menu-card" href="guide-racecraft.html">
-            <strong>Racecraft</strong>
-            <span>Qualifying, starts, overtaking, defending, the tow, driving tips, and marshalling.</span>
-          </a>
-          <a class="guide-menu-card" href="sources.html">
-            <strong>Sources &amp; Coverage</strong>
-            <span>Where each PDF section is covered, what has been cross-checked, and what still needs confirmation.</span>
-          </a>
-        </div>
-      </section>
-
-      <section class="controls" aria-label="Search setup and maintenance guide">
+<section class="controls" aria-label="Search setup and maintenance guide">
         <label for="site-search">Search this guide page</label>
         <input
           id="site-search"
@@ -115,11 +105,12 @@
         />
         <p id="search-status" role="status" aria-live="polite">Showing all entries.</p>
       </section>
+      <div id="filter-empty" class="notice" hidden><strong>No entries match your filter.</strong> Try a component name or <button type="button" class="secondary-button" data-clear-filter>Clear filter</button>.</div>
 
       <section id="setup" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Setup</p>
-          <h2>Race Setup Basics</h2>
+          <h2 id="race-setup-basics">Race Setup Basics</h2>
           <p>
             Setup should be done in race trim, with the driver or equivalent driver
             weight in the seat and tyres at hot running pressures.
@@ -127,7 +118,7 @@
           <p class="source-note">Source: Driver Guide race-setup section and 2026 regulations.</p>
         </div>
         <div class="plain-list">
-          <h3>Main Setup Areas</h3>
+          <h3 id="main-setup-areas">Main Setup Areas</h3>
           <ul>
             <li>The Academy car must run a front anti-roll bar. The orange and red options are chosen by preference, driver style, and conditions.</li>
             <li>The thicker front anti-roll bar can shift grip balance toward rear traction but may unload the inside front tyre.</li>
@@ -144,11 +135,11 @@
       <section id="flat-floor" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Flat floor</p>
-          <h2>Flat-Floor Procedure</h2>
+          <h2 id="flat-floor-procedure">Flat-Floor Procedure</h2>
           <p class="source-note">Source: Driver Guide flat-floor setup order.</p>
         </div>
         <div class="plain-list">
-          <h3>Order Of Work</h3>
+          <h3 id="order-of-work">Order Of Work</h3>
           <ol>
             <li>Put the car in race trim.</li>
             <li>Put the driver in race trim, or add equivalent weight.</li>
@@ -174,7 +165,7 @@
       <section id="maintenance" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Between events</p>
-          <h2>Maintenance And Checks</h2>
+          <h2 id="maintenance-and-checks">Maintenance And Checks</h2>
           <p>
             The Driver Guide repeats the spanner-check list because regular checking is
             what keeps the car reliable through race weekends.
@@ -182,7 +173,7 @@
           <p class="source-note">Source: Driver Guide maintenance section and Spanner Checks PDF.</p>
         </div>
         <div class="plain-list">
-          <h3>Core Maintenance Points</h3>
+          <h3 id="core-maintenance-points">Core Maintenance Points</h3>
           <ul>
             <li>Use the <a href="spanner-checks.html">Spanner checks</a> page for torque values and physical nut-and-bolt checks.</li>
             <li>Check front suspension, rear suspension, steering, engine, gearbox, wings, nose cone, lights, cooling, wheels, tyres, brake pads, and pedal feel.</li>

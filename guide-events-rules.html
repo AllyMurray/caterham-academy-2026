@@ -13,45 +13,65 @@
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="icon-192.png" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="layout.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header">
       <nav class="topbar" aria-label="Primary">
         <a class="brand" href="index.html" aria-label="Caterham Academy 2026 home">
-          <span class="brand-mark">7</span>
-          <span>Caterham Academy 2026</span>
+          <span class="brand-mark" aria-hidden="true">7</span>
+          <span>Academy <small>2026 field guide</small></span>
         </a>
-        <button class="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false">
-          <span class="menu-toggle-icon" aria-hidden="true"></span>
-          <span>Menu</span>
+        <form class="nav-search" action="search.html" role="search">
+          <label class="visually-hidden" for="nav-query">Search the whole guide</label>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+          <input id="nav-query" name="q" type="search" placeholder="Find a check, part or answer…" autocomplete="off" />
+          <button type="submit">Search</button>
+        </form>
+        <a class="mobile-search" href="search.html" aria-label="Search the whole guide"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg></a>
+        <span class="season-label">2026 season</span>
+        <button class="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false" aria-label="Open navigation">
+          <span class="menu-toggle-icon" aria-hidden="true"></span><span>Menu</span>
         </button>
-        <div id="primary-menu" class="topbar-links" data-primary-menu>
-          <a href="index.html">Start</a>
-          <a href="delivery-prep.html">Delivery prep</a>
-          <a href="race-prep.html">Race prep</a>
-          <a href="spanner-checks.html">Spanner checks</a>
-          <a href="reference.html">Reference</a>
+        <div id="primary-menu" class="topbar-links site-sidebar" data-primary-menu>
+          <a class="nav-home" href="index.html">Overview</a>
+          <div class="nav-group"><p>Prepare</p>
+            <a href="delivery-prep.html">Delivery prep</a>
+            <a href="delivery-prep-builder.html">Checklist builder</a>
+            <a href="race-prep.html">Race prep</a>
+            <a href="spanner-checks.html">Spanner checks</a>
+          </div>
+          <div class="nav-group"><p>Driver guide</p>
+            <a href="guide-basics.html">Basics &amp; terms</a>
+            <a href="guide-car-prep.html">Car preparation</a>
+            <a href="guide-safety.html">Harness &amp; safety</a>
+            <a href="guide-setup-maintenance.html">Setup &amp; maintenance</a>
+            <a href="guide-events-rules.html">Events &amp; rules</a>
+            <a href="guide-racecraft.html">Racecraft</a>
+          </div>
+          <div class="nav-group"><p>Reference</p>
+            <a href="parts.html">Parts &amp; regulations</a>
+            <a href="sources.html">Sources &amp; open questions</a>
+            <a href="reference.html">Reference overview</a>
+          </div>
+          <div class="nav-footer"><a href="driver-guide.html">Browse the driver guide</a><span>Independent Academy reference</span></div>
         </div>
       </nav>
+      <button class="nav-backdrop" type="button" tabindex="-1" aria-label="Close navigation"></button>
 
       <section id="top" class="hero">
         <div class="hero-copy">
+          <p class="breadcrumb"><a href="index.html">Overview</a><span aria-hidden="true">/</span>Driver guide</p>
           <p class="eyebrow">Driver guide</p>
-          <h1>Events &amp; Rules</h1>
+          <h1>Events &amp; rules</h1>
           <p class="lead">
             How race weekends run, what to do at the sprint and first race, and the
             rules and procedures that catch new drivers out.
           </p>
-          <nav class="on-page-nav" aria-label="On this page">
-            <span>On this page</span>
-            <a href="#events">Events</a>
-            <a href="#sprint">Sprint</a>
-            <a href="#first-race">First race</a>
-            <a href="#rules">Rules</a>
-          </nav>
         </div>
-        <aside class="source-card" aria-label="Source details">
+        <details class="source-card" aria-label="Source details"><summary>Page details &amp; sources</summary>
           <dl>
             <div>
               <dt>Source</dt>
@@ -62,51 +82,20 @@
               <dd><a href="race-prep.html">Race prep checks</a></dd>
             </div>
           </dl>
-        </aside>
+        </details>
       </section>
     </header>
+    <div class="page-jump"><nav class="on-page-nav" aria-label="On this page"><span>On this page</span><a href="#events">Events</a><a href="#sprint">Sprint</a><a href="#first-race">First race</a><a href="#rules">Rules</a></nav></div>
 
-    <main>
+
+    <main id="main-content" tabindex="-1">
       <section class="notice" aria-label="Important note">
         <strong>Procedures change by event.</strong> Final instructions, briefings, and
         official instructions take priority.
         <a href="driver-guide.html">Back to Driver guide menu.</a>
       </section>
 
-      <section class="content-section guide-menu" aria-label="Driver guide menu">
-        <div class="guide-menu-grid">
-          <a class="guide-menu-card" href="guide-basics.html">
-            <strong>Basics &amp; Terms</strong>
-            <span>Responsibilities, glossary, safety kit, tools, and the basic car notes.</span>
-          </a>
-          <a class="guide-menu-card" href="guide-car-prep.html">
-            <strong>Car Prep Knowledge</strong>
-            <span>Driver fit, controls, bodywork, compliance, fuel, data, and ARDS confirm items.</span>
-          </a>
-          <a class="guide-menu-card" href="guide-safety.html">
-            <strong>Harness &amp; Safety</strong>
-            <span>Harness setup, FHR/HANS notes, arm restraints, and belting-in order.</span>
-          </a>
-          <a class="guide-menu-card" href="guide-setup-maintenance.html">
-            <strong>Setup &amp; Maintenance</strong>
-            <span>Race setup basics, flat-floor process, oil checks, pads, bearings, and routine checks.</span>
-          </a>
-          <a class="guide-menu-card is-current" href="guide-events-rules.html">
-            <strong>Events &amp; Rules</strong>
-            <span>Race-weekend process, sprint notes, first race, flags, Parc Ferme, and protests.</span>
-          </a>
-          <a class="guide-menu-card" href="guide-racecraft.html">
-            <strong>Racecraft</strong>
-            <span>Qualifying, starts, overtaking, defending, the tow, driving tips, and marshalling.</span>
-          </a>
-          <a class="guide-menu-card" href="sources.html">
-            <strong>Sources &amp; Coverage</strong>
-            <span>Where each PDF section is covered, what has been cross-checked, and what still needs confirmation.</span>
-          </a>
-        </div>
-      </section>
-
-      <section class="controls" aria-label="Search events and rules guide">
+<section class="controls" aria-label="Search events and rules guide">
         <label for="site-search">Search this guide page</label>
         <input
           id="site-search"
@@ -116,16 +105,17 @@
         />
         <p id="search-status" role="status" aria-live="polite">Showing all entries.</p>
       </section>
+      <div id="filter-empty" class="notice" hidden><strong>No entries match your filter.</strong> Try a component name or <button type="button" class="secondary-button" data-clear-filter>Clear filter</button>.</div>
 
       <section id="events" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Race weekends</p>
-          <h2>Going Racing And Sprinting</h2>
+          <h2 id="going-racing-and-sprinting">Going Racing And Sprinting</h2>
           <p>Race weekends run to tight timetables. Prepare early and arrive with the car already ready.</p>
           <p class="source-note">Source: Driver Guide going-racing section and ARDS rules slides.</p>
         </div>
         <div class="plain-list">
-          <h3>The Week Before</h3>
+          <h3 id="the-week-before">The Week Before</h3>
           <ul>
             <li>Clean cockpit, engine bay, suspension, wheels, and bodywork.</li>
             <li>Spanner check the car and check brake pad wear.</li>
@@ -136,7 +126,7 @@
           </ul>
         </div>
         <div class="plain-list">
-          <h3>Documents And Kit Bag</h3>
+          <h3 id="documents-and-kit-bag">Documents And Kit Bag</h3>
           <ul>
             <li>Pack race licence and race upgrade card where required.</li>
             <li>Pack race suit, underwear, balaclava, gloves, arm restraints, boots, helmet, and FHR.</li>
@@ -146,7 +136,7 @@
           </ul>
         </div>
         <div class="plain-list">
-          <h3>At The Event</h3>
+          <h3 id="at-the-event">At The Event</h3>
           <ul>
             <li>Arrive early and park in the allocated paddock area.</li>
             <li>Sign on as early as possible, online or in person as instructed.</li>
@@ -165,12 +155,12 @@
       <section id="sprint" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">First competition</p>
-          <h2>Sprint Guidance</h2>
+          <h2 id="sprint-guidance">Sprint Guidance</h2>
           <p>The sprint is one car at a time, against the clock, with less traffic but the same need for preparation.</p>
           <p class="source-note">Source: Driver Guide sprint guidance.</p>
         </div>
         <div class="plain-list">
-          <h3>Sprint Day Notes</h3>
+          <h3 id="sprint-day-notes">Sprint Day Notes</h3>
           <ul>
             <li>Do as much car preparation as possible before travelling; the morning will disappear quickly.</li>
             <li>Read all event paperwork, supplementary regulations, and final instructions.</li>
@@ -190,12 +180,12 @@
       <section id="first-race" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">First race weekend</p>
-          <h2>Testing, Timetable, And Race Sessions</h2>
+          <h2 id="testing-timetable-and-race-sessions">Testing, Timetable, And Race Sessions</h2>
           <p>The first race adds testing, qualifying traffic, starts, race procedure, and Parc Ferme discipline.</p>
           <p class="source-note">Source: Driver Guide first-race section and ARDS pre-session checks.</p>
         </div>
         <div class="plain-list">
-          <h3>Testing</h3>
+          <h3 id="testing">Testing</h3>
           <ul>
             <li>Testing is for competition licence holders in competition cars. Trackday overtaking rules do not apply.</li>
             <li>Book pre-race test days early because places are limited.</li>
@@ -204,7 +194,7 @@
           </ul>
         </div>
         <div class="plain-list">
-          <h3>Race Weekend Discipline</h3>
+          <h3 id="race-weekend-discipline">Race Weekend Discipline</h3>
           <ul>
             <li>Read final instructions. Each circuit can have different procedures.</li>
             <li>Make a note of all relevant times and locations. Timetables can run ahead.</li>
@@ -222,12 +212,12 @@
       <section id="rules" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Rules on track</p>
-          <h2>Rules, Flags, Protests, And Standards</h2>
+          <h2 id="rules-flags-protests-and-standards">Rules, Flags, Protests, And Standards</h2>
           <p>The Driver Guide highlights these because they frequently catch new drivers out.</p>
           <p class="source-note">Source: Driver Guide rules section, NCR references, and ARDS rules slides.</p>
         </div>
         <div class="plain-list">
-          <h3>Flags And Procedures</h3>
+          <h3 id="flags-and-procedures">Flags And Procedures</h3>
           <ul>
             <li>Blue flag: a faster car is approaching. Use mirrors and be predictable.</li>
             <li>White flag: slow vehicle ahead.</li>
@@ -243,7 +233,7 @@
           </ul>
         </div>
         <div class="plain-list">
-          <h3>Track Limits And Judicial Process</h3>
+          <h3 id="track-limits-and-judicial-process">Track Limits And Judicial Process</h3>
           <ul>
             <li>Stay on the track. A single wheel beyond the line or far side of a kerb can count as leaving the track.</li>
             <li>Qualifying track-limits offences can delete the relevant lap time.</li>

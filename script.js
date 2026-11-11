@@ -20,17 +20,7 @@ function initialisePrimaryMenu() {
   links.forEach((link) => {
     const linkFile = new URL(link.href, window.location.href).pathname.split("/").pop() || "index.html";
 
-    if (linkFile === currentFile) {
-      link.setAttribute("aria-current", "page");
-    } else if (
-      linkFile === "reference.html" &&
-      (currentFile.startsWith("guide-") ||
-        ["driver-guide.html", "parts.html", "sources.html", "search.html"].includes(currentFile))
-    ) {
-      link.setAttribute("aria-current", "location");
-    } else if (linkFile === "delivery-prep.html" && currentFile === "delivery-prep-builder.html") {
-      link.setAttribute("aria-current", "location");
-    }
+    if (linkFile === currentFile) link.setAttribute("aria-current", "page");
   });
 
   function isOpen() {
@@ -39,11 +29,18 @@ function initialisePrimaryMenu() {
 
   function setOpen(open) {
     topbar.classList.toggle("is-menu-open", open);
+    document.body.classList.toggle("nav-open", open);
     toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
+    document.querySelectorAll(".hero, main, .page-jump, .site-footer").forEach((element) => {
+      element.inert = open;
+    });
   }
 
   toggle.addEventListener("click", () => {
-    setOpen(!isOpen());
+    const open = !isOpen();
+    setOpen(open);
+    if (open) links[0]?.focus();
   });
 
   links.forEach((link) => {
@@ -58,12 +55,26 @@ function initialisePrimaryMenu() {
   });
 
   document.addEventListener("keydown", (event) => {
-    if (event.key !== "Escape" || !isOpen()) return;
-    setOpen(false);
-    toggle.focus();
+    if (!isOpen()) return;
+    if (event.key === "Escape") {
+      setOpen(false);
+      toggle.focus();
+    }
+    if (event.key === "Tab") {
+      const items = [toggle, ...links];
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
   });
 
-  const desktopQuery = window.matchMedia("(min-width: 821px)");
+  const desktopQuery = window.matchMedia("(min-width: 1060px)");
   const closeOnDesktop = () => {
     if (desktopQuery.matches) setOpen(false);
   };
@@ -123,6 +134,24 @@ function updateChecklistProgress(inputs, storage) {
     checkedCount === 1
       ? `1 of ${inputs.length} checks complete.${storageNote}`
       : `${checkedCount} of ${inputs.length} checks complete.${storageNote}`;
+  const meter = document.querySelector(".checklist-meter");
+  if (meter) {
+    meter.max = inputs.length;
+    meter.value = checkedCount;
+  }
+  document.querySelectorAll(".checklist-group").forEach((group) => {
+    const boxes = Array.from(group.querySelectorAll('input[type="checkbox"]'));
+    const done = boxes.filter((box) => box.checked).length;
+    group.querySelector(".group-progress").textContent = `${done} / ${boxes.length}`;
+    let empty = group.querySelector(".group-empty");
+    if (!empty) {
+      empty = document.createElement("p");
+      empty.className = "group-empty";
+      empty.textContent = "All checks in this group are complete.";
+      group.append(empty);
+    }
+    empty.hidden = !(document.body.classList.contains("show-remaining") && done === boxes.length);
+  });
 }
 
 function initialiseChecklists() {
@@ -131,6 +160,11 @@ function initialiseChecklists() {
   const storage = getChecklistStorage();
   const state = readChecklistState(storage);
   const inputs = [];
+  document.querySelector("#remaining-only")?.addEventListener("change", (event) => {
+    document.body.classList.toggle("show-remaining", event.target.checked);
+    updateChecklistProgress(inputs, storage);
+    document.querySelector("#site-search")?.dispatchEvent(new Event("input"));
+  });
 
   checklistLists.forEach((list) => {
     const listId = list.dataset.checklist;
@@ -172,6 +206,7 @@ function initialiseChecklists() {
 
         writeChecklistState(storage, state);
         updateChecklistProgress(inputs, storage);
+        document.querySelector("#site-search")?.dispatchEvent(new Event("input"));
       });
     });
   });
@@ -195,6 +230,7 @@ function initialiseChecklists() {
     }
 
     updateChecklistProgress(inputs, storage);
+    document.querySelector("#site-search")?.dispatchEvent(new Event("input"));
   });
 
   updateChecklistProgress(inputs, storage);
@@ -716,14 +752,16 @@ const referenceDrawers = Array.from(document.querySelectorAll(".reference-drawer
 
 if (searchInput && statusNode) {
   function normalise(value) {
-    return value.toLowerCase().trim();
+    return value.toLowerCase().replace(/(\d)\s+(mm|nm)\b/g, "$1$2").trim();
   }
 
   function isSearchVisible(item) {
-    return !item.classList.contains("is-hidden") && !item.classList.contains("is-fit-hidden");
+    return !item.classList.contains("is-hidden") && !item.classList.contains("is-fit-hidden") &&
+      !(document.body.classList.contains("show-remaining") && item.classList.contains("is-complete"));
   }
 
   function sectionHasVisibleContent(section, query) {
+    if (!query) return true;
     const rows = Array.from(section.querySelectorAll("tbody tr"));
     const visibleRows = rows.some((row) => !row.classList.contains("is-hidden"));
     const textBlocks = Array.from(
@@ -749,9 +787,10 @@ if (searchInput && statusNode) {
     });
 
     listItems.forEach((item) => {
-      const isMatch = !query || normalise(item.textContent).includes(query);
+      const groupTitle = item.closest(".checklist-group")?.querySelector("h3")?.textContent || "";
+      const isMatch = !query || normalise(`${groupTitle} ${item.textContent}`).includes(query);
       item.classList.toggle("is-hidden", !isMatch);
-      if (isMatch && query && !item.classList.contains("is-fit-hidden")) matches += 1;
+      if (query && isSearchVisible(item)) matches += 1;
     });
 
     prepGroups.forEach((group) => {
@@ -771,6 +810,16 @@ if (searchInput && statusNode) {
       }
     });
 
+    document.querySelectorAll(".checklist-group").forEach((group) => {
+      const hasMatches = Array.from(group.querySelectorAll("li")).some(isSearchVisible);
+      const allDone = group.querySelector(".group-empty:not([hidden])");
+      group.classList.toggle("is-hidden", Boolean(query) && !hasMatches && !allDone);
+      if (query && hasMatches) group.open = true;
+    });
+
+    const empty = document.querySelector("#filter-empty");
+    if (empty) empty.hidden = !query || matches > 0;
+
     if (!query) {
       statusNode.textContent = "Showing all entries.";
       return;
@@ -781,6 +830,11 @@ if (searchInput && statusNode) {
   }
 
   searchInput.addEventListener("input", applySearch);
+  document.querySelector("[data-clear-filter]")?.addEventListener("click", () => {
+    searchInput.value = "";
+    applySearch();
+    searchInput.focus();
+  });
 }
 
 const globalSearchInput = document.querySelector("#global-search");
@@ -910,9 +964,9 @@ const GLOBAL_SEARCH_INDEX = [
     url: "spanner-checks.html",
     section: "Workshop checklist",
     summary:
-      "Torque checks, support points, pre-session checks, walkaround checks, top tips, tools, and consumables.",
+      "Torque checks with tool sizes and Sigma assembly guide references, support points, pre-session checks, walkaround checks, top tips, and consumables.",
     keywords:
-      "spanner checks torque wheel nuts 85Nm support points trolley jack axle stands front towing eye a frame radius arms 8mm allen key impact guns wrenches brake bleed kit cable ties tape brake cleaner glass cleaner Rain X consumables",
+      "spanner checks torque wheel nuts 85Nm support points trolley jack axle stands front towing eye a frame radius arms tool sizes socket spanner hex bit allen key Sigma assembly guide 5mm 6mm 8mm 10mm 13mm 17mm 19mm 22mm impact guns wrenches brake bleed kit cable ties tape brake cleaner glass cleaner Rain X consumables",
   },
   {
     title: "Parts List",
@@ -935,76 +989,168 @@ const GLOBAL_SEARCH_INDEX = [
 ];
 
 function normaliseGlobalValue(value) {
-  return value.toLowerCase().trim();
+  return value.toLowerCase().replace(/(\d)\s+(mm|nm)\b/g, "$1$2").trim();
+}
+
+function searchTerms(query) {
+  const stopWords = new Set(["the", "a", "of", "for", "to", "and", "with", "how", "what", "is"]);
+  return normaliseGlobalValue(query).split(/\s+/).filter((term) => term && !stopWords.has(term));
 }
 
 function scoreGlobalResult(entry, query) {
   if (!query) return 1;
+  const title = normaliseGlobalValue(entry.title);
+  const section = normaliseGlobalValue(entry.section);
+  const text = normaliseGlobalValue(`${entry.title} ${entry.section} ${entry.keywords} ${entry.summary}`);
+  const terms = searchTerms(query);
+  if (!terms.every((term) => text.includes(term))) return 0;
+  const phrase = normaliseGlobalValue(query);
+  const body = normaliseGlobalValue(entry.keywords || entry.summary);
+  const occurrences = Math.min(4, body.split(phrase).length - 1);
+  return 1 + terms.reduce((score, term) => score + (title.includes(term) ? 8 : section.includes(term) ? 3 : 1), 0)
+    + (title.includes(phrase) ? 12 : 0) + occurrences * 3 + (occurrences ? 6 / (1 + body.length / 600) : 0);
+}
 
-  const searchableText = normaliseGlobalValue(
-    `${entry.title} ${entry.section} ${entry.summary} ${entry.keywords}`,
-  );
-  const terms = query.split(/\s+/).filter(Boolean);
-  return terms.reduce((score, term) => score + (searchableText.includes(term) ? 1 : 0), 0);
+function appendHighlightedText(node, value, query) {
+  const terms = searchTerms(query);
+  const pattern = terms.map((term) => term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
+  if (!pattern) { node.textContent = value; return; }
+  const expression = new RegExp(pattern, "gi");
+  let last = 0;
+  for (const match of value.matchAll(expression)) {
+    node.append(document.createTextNode(value.slice(last, match.index)));
+    const mark = document.createElement("mark");
+    mark.textContent = match[0];
+    node.append(mark);
+    last = match.index + match[0].length;
+  }
+  node.append(document.createTextNode(value.slice(last)));
 }
 
 function renderGlobalSearchResults(query = "") {
   if (!globalSearchResults || !globalSearchStatus) return;
-
   const normalisedQuery = normaliseGlobalValue(query);
-  const matches = GLOBAL_SEARCH_INDEX.map((entry) => ({
-    ...entry,
-    score: scoreGlobalResult(entry, normalisedQuery),
-  }))
+  const index = normalisedQuery ? (window.SITE_SEARCH_INDEX || GLOBAL_SEARCH_INDEX) : GLOBAL_SEARCH_INDEX.slice(1, 7);
+  const matches = index.map((entry) => ({...entry, score: scoreGlobalResult(entry, normalisedQuery)}))
     .filter((entry) => entry.score > 0)
-    .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title));
-
-  const visibleMatches = normalisedQuery ? matches : GLOBAL_SEARCH_INDEX.slice(0, 6);
-
+    .sort((a, b) => b.score - a.score || a.section.localeCompare(b.section) || a.title.localeCompare(b.title));
+  const visibleMatches = normalisedQuery ? matches.slice(0, 30) : index;
   globalSearchResults.textContent = "";
-
   if (!visibleMatches.length) {
-    const empty = document.createElement("p");
-    empty.className = "plain-list";
-    empty.textContent = "No matching pages found.";
+    const empty = document.createElement("div");
+    empty.className = "empty-results";
+    const heading = document.createElement("h3");
+    heading.textContent = "No matching sections";
+    const help = document.createElement("p");
+    help.textContent = "Try fewer words, a component name such as radius arms, or a part number. You can also browse the sections in the navigation.";
+    empty.append(heading, help);
     globalSearchResults.append(empty);
-    globalSearchStatus.textContent = "No matching pages found.";
-    return;
   }
-
   visibleMatches.forEach((entry) => {
     const article = document.createElement("article");
+    article.className = "search-result";
     const heading = document.createElement("h3");
     const link = document.createElement("a");
-    const meta = document.createElement("p");
-    const summary = document.createElement("p");
-
-    article.className = "search-result";
-    meta.className = "search-result-meta";
     link.href = entry.url;
-    link.textContent = entry.title;
+    appendHighlightedText(link, entry.title, query);
     heading.append(link);
+    const meta = document.createElement("p");
+    meta.className = "search-result-meta";
     meta.textContent = entry.section;
-    summary.textContent = entry.summary;
-    article.append(heading, meta, summary);
+    const summary = document.createElement("p");
+    let snippet = entry.summary;
+    if (normalisedQuery && entry.keywords) {
+      const text = entry.keywords;
+      const positions = searchTerms(query).map((term) => text.toLowerCase().indexOf(term)).filter((position) => position >= 0);
+      const start = positions.length ? Math.max(0, Math.min(...positions) - 60) : 0;
+      snippet = (start ? "…" : "") + text.slice(start, start + 260) + (text.length > start + 260 ? "…" : "");
+    }
+    appendHighlightedText(summary, snippet, query);
+    article.append(meta, heading, summary);
     globalSearchResults.append(article);
   });
-
-  if (!normalisedQuery) {
-    globalSearchStatus.textContent = "Showing suggested pages.";
-  } else {
-    globalSearchStatus.textContent =
-      visibleMatches.length === 1
-        ? "Showing 1 matching page."
-        : `Showing ${visibleMatches.length} matching pages.`;
-  }
+  globalSearchStatus.textContent = normalisedQuery
+    ? `${matches.length} matching ${matches.length === 1 ? "section" : "sections"}${matches.length > 30 ? "; showing the first 30" : ""}.`
+    : "Suggested places to start.";
 }
 
 if (globalSearchInput && globalSearchResults) {
+  const params = new URLSearchParams(window.location.search);
+  globalSearchInput.value = params.get("q") || "";
   renderGlobalSearchResults(globalSearchInput.value);
   globalSearchInput.addEventListener("input", () => {
-    renderGlobalSearchResults(globalSearchInput.value);
+    const query = globalSearchInput.value;
+    const url = new URL(window.location.href);
+    if (query.trim()) url.searchParams.set("q", query); else url.searchParams.delete("q");
+    window.history.replaceState(null, "", url);
+    renderGlobalSearchResults(query);
   });
+}
+
+function revealHashTarget() {
+  let target;
+  try { target = document.getElementById(decodeURIComponent(window.location.hash.slice(1))); } catch { return; }
+  if (!target) return;
+  for (let parent = target.parentElement; parent; parent = parent.parentElement) {
+    if (parent.tagName === "DETAILS") parent.open = true;
+  }
+  if (target.matches("details")) target.open = true;
+  requestAnimationFrame(() => target.scrollIntoView({behavior: "instant", block: "start"}));
+}
+window.addEventListener("hashchange", revealHashTarget);
+if (window.location.hash && !document.querySelector("[data-builder-flow]")) revealHashTarget();
+
+const pageLinks = Array.from(document.querySelectorAll('.on-page-nav a[href^="#"]'));
+if (pageLinks.length && "IntersectionObserver" in window) {
+  const observer = new IntersectionObserver(() => {
+    let active = pageLinks[0];
+    let nearestTop = -Infinity;
+    pageLinks.forEach((link) => {
+      const target = document.getElementById(link.hash.slice(1));
+      const top = target?.getBoundingClientRect().top;
+      if (top !== undefined && top <= 170 && top > nearestTop) {
+        active = link;
+        nearestTop = top;
+      }
+    });
+    pageLinks.forEach((link) => {
+      if (link === active) link.setAttribute("aria-current", "location");
+      else link.removeAttribute("aria-current");
+    });
+    const nav = active.closest("nav");
+    const linkBounds = active.getBoundingClientRect();
+    const navBounds = nav.getBoundingClientRect();
+    if (linkBounds.left < navBounds.left || linkBounds.right > navBounds.right) {
+      nav.scrollLeft += linkBounds.left - navBounds.left - 8;
+    }
+  }, {rootMargin: "-130px 0px -60% 0px", threshold: [0, 1]});
+  pageLinks.forEach((link) => {
+    const target = document.getElementById(link.hash.slice(1));
+    if (target) observer.observe(target);
+  });
+}
+
+try {
+  const resumeKey = "caterham-academy-2026:last-page:v1";
+  const resume = document.querySelector("[data-resume]");
+  if (resume) {
+    const previous = JSON.parse(localStorage.getItem(resumeKey) || "null");
+    if (previous && /^[a-z-]+\.html$/.test(previous.url) && previous.title) {
+      const link = resume.querySelector("[data-resume-link]");
+      link.href = previous.url;
+      link.textContent = previous.title;
+      resume.hidden = false;
+    }
+  } else if (!["search.html", "reference.html", "driver-guide.html"].includes(currentPageFile)) {
+    localStorage.setItem(resumeKey, JSON.stringify({url: currentPageFile, title: document.querySelector("h1")?.textContent || currentPageFile}));
+  }
+  document.querySelectorAll("[data-home-progress]").forEach((label) => {
+    const state = JSON.parse(localStorage.getItem(`caterham-academy-2026:${label.dataset.homeProgress}:v1`) || "{}");
+    const count = Object.values(state).filter(Boolean).length;
+    if (count) label.textContent = `${count} ${count === 1 ? "check" : "checks"} complete · Continue checklist`;
+  });
+} catch {
+  // Navigation and checklists remain usable when storage is unavailable.
 }
 
 if ("serviceWorker" in navigator) {

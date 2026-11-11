@@ -13,6 +13,7 @@
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="icon-192.png" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="layout.css" />
     <script>
       if (["#guide", "#todo", "#prep-mods"].includes(window.location.hash)) {
         window.location.replace(`delivery-prep.html${window.location.hash}`);
@@ -21,100 +22,96 @@
     <script src="script.js" defer></script>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header">
       <nav class="topbar" aria-label="Primary">
         <a class="brand" href="index.html" aria-label="Caterham Academy 2026 home">
-          <span class="brand-mark">7</span>
-          <span>Caterham Academy 2026</span>
+          <span class="brand-mark" aria-hidden="true">7</span>
+          <span>Academy <small>2026 field guide</small></span>
         </a>
-        <button class="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false">
-          <span class="menu-toggle-icon" aria-hidden="true"></span>
-          <span>Menu</span>
+        <form class="nav-search" action="search.html" role="search">
+          <label class="visually-hidden" for="nav-query">Search the whole guide</label>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+          <input id="nav-query" name="q" type="search" placeholder="Find a check, part or answer…" autocomplete="off" />
+          <button type="submit">Search</button>
+        </form>
+        <a class="mobile-search" href="search.html" aria-label="Search the whole guide"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg></a>
+        <span class="season-label">2026 season</span>
+        <button class="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false" aria-label="Open navigation">
+          <span class="menu-toggle-icon" aria-hidden="true"></span><span>Menu</span>
         </button>
-        <div id="primary-menu" class="topbar-links" data-primary-menu>
-          <a href="index.html">Start</a>
-          <a href="delivery-prep.html">Delivery prep</a>
-          <a href="race-prep.html">Race prep</a>
-          <a href="spanner-checks.html">Spanner checks</a>
-          <a href="reference.html">Reference</a>
+        <div id="primary-menu" class="topbar-links site-sidebar" data-primary-menu>
+          <a class="nav-home" href="index.html">Overview</a>
+          <div class="nav-group"><p>Prepare</p>
+            <a href="delivery-prep.html">Delivery prep</a>
+            <a href="delivery-prep-builder.html">Checklist builder</a>
+            <a href="race-prep.html">Race prep</a>
+            <a href="spanner-checks.html">Spanner checks</a>
+          </div>
+          <div class="nav-group"><p>Driver guide</p>
+            <a href="guide-basics.html">Basics &amp; terms</a>
+            <a href="guide-car-prep.html">Car preparation</a>
+            <a href="guide-safety.html">Harness &amp; safety</a>
+            <a href="guide-setup-maintenance.html">Setup &amp; maintenance</a>
+            <a href="guide-events-rules.html">Events &amp; rules</a>
+            <a href="guide-racecraft.html">Racecraft</a>
+          </div>
+          <div class="nav-group"><p>Reference</p>
+            <a href="parts.html">Parts &amp; regulations</a>
+            <a href="sources.html">Sources &amp; open questions</a>
+            <a href="reference.html">Reference overview</a>
+          </div>
+          <div class="nav-footer"><a href="driver-guide.html">Browse the driver guide</a><span>Independent Academy reference</span></div>
         </div>
       </nav>
+      <button class="nav-backdrop" type="button" tabindex="-1" aria-label="Close navigation"></button>
 
-      <section id="top" class="hero">
+      <section id="top" class="hero home-hero">
         <div class="hero-copy">
-          <p class="eyebrow">2026 Caterham Academy</p>
-          <h1>Start Here</h1>
-          <p class="lead">
-            Pick the job you are doing now. The operational pages stay focused on
-            checklists; the reference pages hold the detail, rules, and source coverage.
-          </p>
+          <p class="breadcrumb">Your 2026 Caterham Academy</p>
+          <h1>Ready for your next session.</h1>
+          <p class="lead">From the first driver fit to the last wheel-nut check. Your car prep, workshop checks and race-day reference, all in one place.</p>
+          <form class="home-search" action="search.html" role="search">
+            <label class="visually-hidden" for="home-query">Find a check, part or answer</label>
+            <input id="home-query" type="search" name="q" placeholder="Try wheel nuts, helmet clearance or a part number" />
+            <button type="submit">Search</button>
+          </form>
+          <nav class="home-quick-links" aria-label="Quick access"><a href="race-prep.html#before-going-out">Before a session</a><a href="spanner-checks.html#before-every-session">Wheel nuts</a><a href="guide-safety.html#belting-in">Belting in</a></nav>
         </div>
-        <aside class="source-card" aria-label="Site structure">
-          <dl>
-            <div>
-              <dt>Main workflows</dt>
-              <dd>Delivery prep, race weekend prep, and spanner checks</dd>
-            </div>
-            <div>
-              <dt>Reference material</dt>
-              <dd>Parts, driver guide, sources, and search</dd>
-            </div>
-          </dl>
-        </aside>
       </section>
     </header>
 
-    <main>
-      <section class="notice" aria-label="Important note">
-        <strong>Use the workflow pages first.</strong> Start with the page that matches
-        the job in front of you, then use Reference when you need the rule context,
-        part number, or source trail.
-      </section>
-
-      <section class="content-section task-hub" aria-label="Task launcher">
-        <div class="section-heading">
-          <p class="section-kicker">Choose a workflow</p>
-          <h2>What Are You Doing?</h2>
-          <p>
-            The site is organised around the three jobs you repeat through the season,
-            with reference material kept separate so the checklists stay easier to use.
-          </p>
-        </div>
-        <div class="task-grid">
-          <a class="task-card primary-task" href="delivery-prep.html">
-            <span class="task-label">After handover</span>
-            <strong>Get the car ready</strong>
-            <span>
-              Generated delivery checklist, saved prep-job choices, shopping items, and
-              first shakedown readiness.
-            </span>
-          </a>
-          <a class="task-card" href="race-prep.html">
-            <span class="task-label">Event week</span>
-            <strong>Prepare for a race weekend</strong>
-            <span>
-              Driver safety, before-session checks, scrutineering risks, trackside notes,
-              and road reset.
-            </span>
-          </a>
-          <a class="task-card" href="spanner-checks.html">
-            <span class="task-label">Workshop</span>
-            <strong>Spanner check the car</strong>
-            <span>
-              Torque values, support points, physical nut-and-bolt checks, tools, and
-              consumables.
-            </span>
-          </a>
-          <a class="task-card" href="reference.html">
-            <span class="task-label">Look up</span>
-            <strong>Find parts, rules, or sources</strong>
-            <span>
-              Parts reference, driver guide, source coverage, global search, and the
-              regulations link.
-            </span>
-          </a>
+    <main id="main-content" class="home-body" tabindex="-1">
+      <div class="home-resume" data-resume hidden><div><small>Pick up where you left off</small><a data-resume-link href="delivery-prep.html">Continue reading</a></div><span aria-hidden="true">↗</span></div>
+      <section class="home-section" aria-labelledby="choose-a-job">
+        <h2 id="choose-a-job">What are you working on?</h2>
+        <div class="home-workflows">
+          <a class="workflow-link" href="delivery-prep.html"><span class="workflow-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 7h16v13H4zM8 7V4h8v3M8 12h8M8 16h5"/></svg></span><strong>Get the car ready</strong><p>Plan your prep, choose the parts to fit and work through your delivery checklist.</p><span class="workflow-meta">Delivery prep &amp; checklist builder</span></a>
+          <a class="workflow-link" href="race-prep.html"><span class="workflow-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 21V3m0 1c5-4 9 4 15 0v10c-6 4-10-4-15 0"/></svg></span><strong>Prepare for a race</strong><p>Paperwork, kit, safety and the checks to make before and after each session.</p><span class="workflow-meta" data-home-progress="race-prep">Race weekend checklist</span></a>
+          <a class="workflow-link" href="spanner-checks.html"><span class="workflow-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14 5a6 6 0 0 0-7 7L3 17a2.8 2.8 0 0 0 4 4l5-5a6 6 0 0 0 7-7l-4 4-4-4 4-4z"/></svg></span><strong>Check the car</strong><p>Work around the car with torque settings, tool sizes and mechanical checks.</p><span class="workflow-meta" data-home-progress="spanner-checks">Workshop checklist</span></a>
         </div>
       </section>
+      <div class="home-columns">
+        <section class="home-section" aria-labelledby="at-the-circuit">
+          <h2 id="at-the-circuit">At the circuit</h2>
+          <div class="lookup-list">
+            <a href="race-prep.html#before-going-out">Before going out <span>Car &amp; driver checks</span></a>
+            <a href="spanner-checks.html#before-every-session">Wheel nuts &amp; session checks <span>Torque &amp; fluids</span></a>
+            <a href="guide-safety.html#belting-in">Get belted in <span>Harness, FHR &amp; restraints</span></a>
+            <a href="race-prep.html#back-in">Back in the paddock <span>After-session checks</span></a>
+          </div>
+        </section>
+        <section class="home-section" aria-labelledby="look-something-up">
+          <h2 id="look-something-up">Look something up</h2>
+          <div class="lookup-list">
+            <a href="parts.html">Parts &amp; regulations <span>Part numbers &amp; options</span></a>
+            <a href="guide-setup-maintenance.html">Setup &amp; maintenance <span>Setup, oil &amp; brakes</span></a>
+            <a href="guide-events-rules.html">Events &amp; rules <span>Timetables &amp; procedures</span></a>
+            <a href="driver-guide.html">Explore the driver guide <span>All six chapters</span></a>
+          </div>
+        </section>
+      </div>
+      <p class="home-footnote">Checklists and prep choices are saved in this browser. This independent guide supports the current regulations and official Caterham instructions.</p>
     </main>
 
     <footer class="site-footer">

@@ -13,44 +13,65 @@
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="icon-192.png" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="layout.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header">
       <nav class="topbar" aria-label="Primary">
         <a class="brand" href="index.html" aria-label="Caterham Academy 2026 home">
-          <span class="brand-mark">7</span>
-          <span>Caterham Academy 2026</span>
+          <span class="brand-mark" aria-hidden="true">7</span>
+          <span>Academy <small>2026 field guide</small></span>
         </a>
-        <button class="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false">
-          <span class="menu-toggle-icon" aria-hidden="true"></span>
-          <span>Menu</span>
+        <form class="nav-search" action="search.html" role="search">
+          <label class="visually-hidden" for="nav-query">Search the whole guide</label>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+          <input id="nav-query" name="q" type="search" placeholder="Find a check, part or answer…" autocomplete="off" />
+          <button type="submit">Search</button>
+        </form>
+        <a class="mobile-search" href="search.html" aria-label="Search the whole guide"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg></a>
+        <span class="season-label">2026 season</span>
+        <button class="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false" aria-label="Open navigation">
+          <span class="menu-toggle-icon" aria-hidden="true"></span><span>Menu</span>
         </button>
-        <div id="primary-menu" class="topbar-links" data-primary-menu>
-          <a href="index.html">Start</a>
-          <a href="delivery-prep.html">Delivery prep</a>
-          <a href="race-prep.html">Race prep</a>
-          <a href="spanner-checks.html">Spanner checks</a>
-          <a href="reference.html">Reference</a>
+        <div id="primary-menu" class="topbar-links site-sidebar" data-primary-menu>
+          <a class="nav-home" href="index.html">Overview</a>
+          <div class="nav-group"><p>Prepare</p>
+            <a href="delivery-prep.html">Delivery prep</a>
+            <a href="delivery-prep-builder.html">Checklist builder</a>
+            <a href="race-prep.html">Race prep</a>
+            <a href="spanner-checks.html">Spanner checks</a>
+          </div>
+          <div class="nav-group"><p>Driver guide</p>
+            <a href="guide-basics.html">Basics &amp; terms</a>
+            <a href="guide-car-prep.html">Car preparation</a>
+            <a href="guide-safety.html">Harness &amp; safety</a>
+            <a href="guide-setup-maintenance.html">Setup &amp; maintenance</a>
+            <a href="guide-events-rules.html">Events &amp; rules</a>
+            <a href="guide-racecraft.html">Racecraft</a>
+          </div>
+          <div class="nav-group"><p>Reference</p>
+            <a href="parts.html">Parts &amp; regulations</a>
+            <a href="sources.html">Sources &amp; open questions</a>
+            <a href="reference.html">Reference overview</a>
+          </div>
+          <div class="nav-footer"><a href="driver-guide.html">Browse the driver guide</a><span>Independent Academy reference</span></div>
         </div>
       </nav>
+      <button class="nav-backdrop" type="button" tabindex="-1" aria-label="Close navigation"></button>
 
       <section id="top" class="hero">
         <div class="hero-copy">
+          <p class="breadcrumb"><a href="index.html">Overview</a><span aria-hidden="true">/</span>Reference</p>
           <p class="eyebrow">Source map</p>
-          <h1>Sources &amp; Coverage</h1>
+          <h1>Sources &amp; open questions</h1>
           <p class="lead">
             A cross-reference showing where the Driver Guide, ARDS deck, Spanner
             Checks sheet, and regulations are represented across the site.
           </p>
-          <nav class="on-page-nav" aria-label="On this page">
-            <span>On this page</span>
-            <a href="#method">Method</a>
-            <a href="#coverage">Coverage</a>
-            <a href="#open-questions">Open questions</a>
-          </nav>
         </div>
-        <aside class="source-card" aria-label="Source details">
+        <details class="source-card" aria-label="Source details"><summary>Page details &amp; sources</summary>
           <dl>
             <div>
               <dt>Use this page for</dt>
@@ -65,51 +86,20 @@
               </dd>
             </div>
           </dl>
-        </aside>
+        </details>
       </section>
     </header>
+    <div class="page-jump"><nav class="on-page-nav" aria-label="On this page"><span>On this page</span><a href="#method">Method</a><a href="#coverage">Coverage</a><a href="#open-questions">Open questions</a></nav></div>
 
-    <main>
+
+    <main id="main-content" tabindex="-1">
       <section class="notice" aria-label="Important note">
         <strong>Coverage map, not a guarantee.</strong> The site is a practical
         reference. The current championship regulations, NCR, final instructions,
         official bulletins, and scrutineer instructions still override this site.
       </section>
 
-      <section class="content-section guide-menu" aria-label="Driver guide menu">
-        <div class="guide-menu-grid">
-          <a class="guide-menu-card" href="guide-basics.html">
-            <strong>Basics &amp; Terms</strong>
-            <span>Responsibilities, glossary, safety kit, tools, and the basic car notes.</span>
-          </a>
-          <a class="guide-menu-card" href="guide-car-prep.html">
-            <strong>Car Prep Knowledge</strong>
-            <span>Driver fit, controls, bodywork, compliance, fuel, data, and ARDS confirm items.</span>
-          </a>
-          <a class="guide-menu-card" href="guide-safety.html">
-            <strong>Harness &amp; Safety</strong>
-            <span>Harness setup, FHR/HANS notes, arm restraints, and belting-in order.</span>
-          </a>
-          <a class="guide-menu-card" href="guide-setup-maintenance.html">
-            <strong>Setup &amp; Maintenance</strong>
-            <span>Race setup basics, flat-floor process, oil checks, pads, bearings, and routine checks.</span>
-          </a>
-          <a class="guide-menu-card" href="guide-events-rules.html">
-            <strong>Events &amp; Rules</strong>
-            <span>Race-weekend process, sprint notes, first race, flags, Parc Ferme, and protests.</span>
-          </a>
-          <a class="guide-menu-card" href="guide-racecraft.html">
-            <strong>Racecraft</strong>
-            <span>Qualifying, starts, overtaking, defending, the tow, driving tips, and marshalling.</span>
-          </a>
-          <a class="guide-menu-card is-current" href="sources.html">
-            <strong>Sources &amp; Coverage</strong>
-            <span>Where each PDF section is covered, what has been cross-checked, and what still needs confirmation.</span>
-          </a>
-        </div>
-      </section>
-
-      <section class="controls" aria-label="Search source coverage">
+<section class="controls" aria-label="Search source coverage">
         <label for="site-search">Search source coverage</label>
         <input
           id="site-search"
@@ -119,11 +109,12 @@
         />
         <p id="search-status" role="status" aria-live="polite">Showing all entries.</p>
       </section>
+      <div id="filter-empty" class="notice" hidden><strong>No entries match your filter.</strong> Try a component name or <button type="button" class="secondary-button" data-clear-filter>Clear filter</button>.</div>
 
       <section id="method" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Method</p>
-          <h2>How The Site Was Cross-Checked</h2>
+          <h2 id="how-the-site-was-cross-checked">How The Site Was Cross-Checked</h2>
           <p>
             The text-heavy PDFs were read directly and the ARDS deck was also reviewed
             visually from rendered slide contact sheets, because automated OCR did not
@@ -131,7 +122,7 @@
           </p>
         </div>
         <div class="plain-list">
-          <h3>Source Priority</h3>
+          <h3 id="source-priority">Source Priority</h3>
           <ul>
             <li>For technical legality, the 2026 regulations and later official bulletins override guide or presentation wording.</li>
             <li>Where a presentation visual showed older values, the site keeps the current regulation values, such as 635 kg minimum weight.</li>
@@ -144,7 +135,7 @@
       <section id="coverage" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Coverage</p>
-          <h2>Where Each Source Section Is Covered</h2>
+          <h2 id="where-each-source-section-is-covered">Where Each Source Section Is Covered</h2>
           <p>
             This is the audit trail for the split pages. It is deliberately topic-based
             rather than a page-by-page copy of the PDFs.
@@ -153,7 +144,7 @@
         <div class="coverage-grid">
           <article class="coverage-row">
             <div>
-              <h3>Driver Guide pages 1-8</h3>
+              <h3 id="driver-guide-pages-1-8">Driver Guide pages 1-8</h3>
               <p>Title, contents, intro, responsibility, and glossary.</p>
             </div>
             <div>
@@ -168,7 +159,7 @@
 
           <article class="coverage-row">
             <div>
-              <h3>Driver Guide pages 10-14</h3>
+              <h3 id="driver-guide-pages-10-14">Driver Guide pages 10-14</h3>
               <p>Shopping list, personal kit, tools, and basic car operation.</p>
             </div>
             <div>
@@ -183,7 +174,7 @@
 
           <article class="coverage-row">
             <div>
-              <h3>Driver Guide pages 16-22</h3>
+              <h3 id="driver-guide-pages-16-22">Driver Guide pages 16-22</h3>
               <p>Preparing the car for competition.</p>
             </div>
             <div>
@@ -198,7 +189,7 @@
 
           <article class="coverage-row">
             <div>
-              <h3>Driver Guide pages 24-30</h3>
+              <h3 id="driver-guide-pages-24-30">Driver Guide pages 24-30</h3>
               <p>Preparing yourself and fitting the harness.</p>
             </div>
             <div>
@@ -212,7 +203,7 @@
 
           <article class="coverage-row">
             <div>
-              <h3>Driver Guide pages 32-37</h3>
+              <h3 id="driver-guide-pages-32-37">Driver Guide pages 32-37</h3>
               <p>Race setup and maintenance.</p>
             </div>
             <div>
@@ -226,7 +217,7 @@
 
           <article class="coverage-row">
             <div>
-              <h3>Driver Guide pages 39-50</h3>
+              <h3 id="driver-guide-pages-39-50">Driver Guide pages 39-50</h3>
               <p>Race weekends, sprinting, testing, first race, flags, and procedures.</p>
             </div>
             <div>
@@ -240,7 +231,7 @@
 
           <article class="coverage-row">
             <div>
-              <h3>Driver Guide pages 52-71</h3>
+              <h3 id="driver-guide-pages-52-71">Driver Guide pages 52-71</h3>
               <p>Racecraft, driving tips, marshalling, contacts, and end notes.</p>
             </div>
             <div>
@@ -255,7 +246,7 @@
 
           <article class="coverage-row">
             <div>
-              <h3>ARDS slides 1-16</h3>
+              <h3 id="ards-slides-1-16">ARDS slides 1-16</h3>
               <p>Safety equipment, harness fit, arm restraints, padding, and helmet clearance.</p>
             </div>
             <div>
@@ -269,7 +260,7 @@
 
           <article class="coverage-row">
             <div>
-              <h3>ARDS slides 17-26</h3>
+              <h3 id="ards-slides-17-26">ARDS slides 17-26</h3>
               <p>Road-car to race-car prep, headlight tape, windscreen tape, tow straps, and fuel sampling kit.</p>
             </div>
             <div>
@@ -284,7 +275,7 @@
 
           <article class="coverage-row">
             <div>
-              <h3>ARDS slides 27-38</h3>
+              <h3 id="ards-slides-27-38">ARDS slides 27-38</h3>
               <p>Wheel centre caps, wheel nuts, rules, mirrors, camera, boot floor sealing, and extinguisher.</p>
             </div>
             <div>
@@ -298,7 +289,7 @@
 
           <article class="coverage-row">
             <div>
-              <h3>ARDS slides 39-52</h3>
+              <h3 id="ards-slides-39-52">ARDS slides 39-52</h3>
               <p>Jacking, axle stands, spanner checks, pads, exclusion risks, ride height, weight, and ballast.</p>
             </div>
             <div>
@@ -313,7 +304,7 @@
 
           <article class="coverage-row">
             <div>
-              <h3>Spanner Checks PDF</h3>
+              <h3 id="spanner-checks-pdf">Spanner Checks PDF</h3>
               <p>Workshop nut-and-bolt checks, support points, top tips, tools, and consumables.</p>
             </div>
             <div>
@@ -327,7 +318,23 @@
 
           <article class="coverage-row">
             <div>
-              <h3>2026 Regulations</h3>
+              <h3 id="sigma-assembly-guide-edition-2-2">Sigma Assembly Guide, Edition 2.2</h3>
+              <p>Supplementary tool-size cross-reference for the workshop checklist.</p>
+            </div>
+            <div>
+              <p class="source-note">Covered in</p>
+              <p><a href="spanner-checks.html#tool-sizes">Tool sizes</a> and <a href="spanner-checks.html#torque-checks">torque checks</a>.</p>
+            </div>
+            <ul>
+              <li><a href="https://caterhamcars.com/assets/Documents/Owner-Downloads/Assembly_Guide_SIGMA_Edition_2.2..pdf">Official Sigma assembly guide PDF</a>; references use printed page numbers.</li>
+              <li>Used for tools and fastener illustrations only. The 2026 Academy checklist remains the torque source.</li>
+              <li>Radius-arm compatibility confirmed by the owner. Other Sigma references require checking against the car; partial mappings and engine/gearbox differences are labelled.</li>
+            </ul>
+          </article>
+
+          <article class="coverage-row">
+            <div>
+              <h3 id="2026-regulations">2026 Regulations</h3>
               <p>Permitted modifications, mandatory items, weights, tyres, ballast, and part numbers.</p>
             </div>
             <div>
@@ -344,7 +351,7 @@
       <section id="open-questions" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Confirm before acting</p>
-          <h2>Open Questions</h2>
+          <h2 id="open-questions-2">Open Questions</h2>
           <p>
             These remain deliberately visible because the PDFs identify them, but the
             current supply or fitting position should be confirmed before treating them
@@ -352,7 +359,7 @@
           </p>
         </div>
         <div class="plain-list">
-          <h3>Items To Confirm</h3>
+          <h3 id="items-to-confirm">Items To Confirm</h3>
           <ul>
             <li>Fuel sampling kit: the ARDS deck calls it out, but confirm whether it is supplied, fitted, or only required to be available.</li>
             <li>Boot floor sealing: the ARDS deck shows this as a check item; confirm the reason and whether the factory now handles it.</li>

@@ -19,6 +19,18 @@ knowledge, race prep, spanner checks, and permitted parts reference.
 
 ## Local Preview
 
+The shared navigation is present in every HTML page. `styles.css` holds the content
+components; `layout.css` defines the responsive sidebar, page headers, reading layout,
+and mobile tables. Checklist storage keys and list order must stay stable so saved
+progress survives presentation changes.
+
+Site search indexes the actual section content and links directly to heading IDs.
+After editing HTML content, regenerate its offline index:
+
+```sh
+python3 scripts/build-search-index.py
+```
+
 Open any of the HTML pages directly in a browser, or serve the directory with
 any static file server.
 
@@ -32,8 +44,9 @@ npx playwright install chromium
 npm run check
 ```
 
-The tests cover the Delivery Prep checklist builder, saved selection handling,
-dependency expansion, and the generated checklist handoff.
+The tests cover the Delivery Prep builder and saved selections, all 16 pages at
+desktop/tablet/phone widths, internal links, mobile navigation, section search,
+workshop progress, and offline search/navigation.
 
 ## GitHub Pages
 

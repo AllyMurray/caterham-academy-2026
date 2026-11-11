@@ -13,44 +13,66 @@
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="icon-192.png" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="layout.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header">
       <nav class="topbar" aria-label="Primary">
         <a class="brand" href="index.html" aria-label="Caterham Academy 2026 home">
-          <span class="brand-mark">7</span>
-          <span>Caterham Academy 2026</span>
+          <span class="brand-mark" aria-hidden="true">7</span>
+          <span>Academy <small>2026 field guide</small></span>
         </a>
-        <button class="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false">
-          <span class="menu-toggle-icon" aria-hidden="true"></span>
-          <span>Menu</span>
+        <form class="nav-search" action="search.html" role="search">
+          <label class="visually-hidden" for="nav-query">Search the whole guide</label>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+          <input id="nav-query" name="q" type="search" placeholder="Find a check, part or answer…" autocomplete="off" />
+          <button type="submit">Search</button>
+        </form>
+        <a class="mobile-search" href="search.html" aria-label="Search the whole guide"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg></a>
+        <span class="season-label">2026 season</span>
+        <button class="menu-toggle" type="button" aria-controls="primary-menu" aria-expanded="false" aria-label="Open navigation">
+          <span class="menu-toggle-icon" aria-hidden="true"></span><span>Menu</span>
         </button>
-        <div id="primary-menu" class="topbar-links" data-primary-menu>
-          <a href="index.html">Start</a>
-          <a href="delivery-prep.html">Delivery prep</a>
-          <a href="race-prep.html">Race prep</a>
-          <a href="spanner-checks.html">Spanner checks</a>
-          <a href="reference.html">Reference</a>
+        <div id="primary-menu" class="topbar-links site-sidebar" data-primary-menu>
+          <a class="nav-home" href="index.html">Overview</a>
+          <div class="nav-group"><p>Prepare</p>
+            <a href="delivery-prep.html">Delivery prep</a>
+            <a href="delivery-prep-builder.html">Checklist builder</a>
+            <a href="race-prep.html">Race prep</a>
+            <a href="spanner-checks.html">Spanner checks</a>
+          </div>
+          <div class="nav-group"><p>Driver guide</p>
+            <a href="guide-basics.html">Basics &amp; terms</a>
+            <a href="guide-car-prep.html">Car preparation</a>
+            <a href="guide-safety.html">Harness &amp; safety</a>
+            <a href="guide-setup-maintenance.html">Setup &amp; maintenance</a>
+            <a href="guide-events-rules.html">Events &amp; rules</a>
+            <a href="guide-racecraft.html">Racecraft</a>
+          </div>
+          <div class="nav-group"><p>Reference</p>
+            <a href="parts.html">Parts &amp; regulations</a>
+            <a href="sources.html">Sources &amp; open questions</a>
+            <a href="reference.html">Reference overview</a>
+          </div>
+          <div class="nav-footer"><a href="driver-guide.html">Browse the driver guide</a><span>Independent Academy reference</span></div>
         </div>
       </nav>
+      <button class="nav-backdrop" type="button" tabindex="-1" aria-label="Close navigation"></button>
 
       <section id="top" class="hero">
         <div class="hero-copy">
+          <p class="breadcrumb"><a href="index.html">Overview</a><span aria-hidden="true">/</span>Reference</p>
           <p class="eyebrow">Full parts reference</p>
-          <h1>Parts Reference</h1>
+          <h1>Parts &amp; regulations</h1>
           <p class="lead">
             A searchable list of permitted modifications, options, part numbers, and
             explicitly prohibited parts called out in the 2026 regulations. If a
             modification is not clearly specified as permitted, assume it is not permitted.
           </p>
-          <nav class="on-page-nav" aria-label="On this page">
-            <span>On this page</span>
-            <a href="#sections">Parts sections</a>
-            <a href="#prohibited">Prohibited parts</a>
-          </nav>
         </div>
-        <aside class="source-card" aria-label="Source details">
+        <details class="source-card" aria-label="Source details"><summary>Page details &amp; sources</summary>
           <dl>
             <div>
               <dt>Source</dt>
@@ -69,11 +91,13 @@
               <dd>Permitted options, part numbers, and explicit prohibited parts</dd>
             </div>
           </dl>
-        </aside>
+        </details>
       </section>
     </header>
+    <div class="page-jump"><nav class="on-page-nav" aria-label="On this page"><span>On this page</span><a href="#chassis-safety">Chassis / Safety</a><a href="#bodywork">Bodywork</a><a href="#engine">Engine / Cooling / Exhaust / Fuel Delivery</a><a href="#suspension">Suspension</a><a href="#electrics">Electrics / Data / Lighting</a><a href="#fuel-rules">Fuel</a><a href="#brakes">Brakes</a><a href="#wheels">Wheels / Steering</a><a href="#tyres">Tyres</a><a href="#weight-ballast">Weight / Ballast</a><a href="#fuel-tank">Fuel Tank</a><a href="#prohibited">Prohibited parts</a></nav></div>
 
-    <main>
+
+    <main id="main-content" tabindex="-1">
       <section class="notice" aria-label="Important note">
         <strong>Part-number links</strong> point to direct Caterham Parts product pages
         where a matching page is known; otherwise they point to Caterham Parts exact
@@ -93,9 +117,10 @@
         />
         <p id="search-status" role="status" aria-live="polite">Showing all entries.</p>
       </section>
+      <div id="filter-empty" class="notice" hidden><strong>No entries match your filter.</strong> Try a component name or <button type="button" class="secondary-button" data-clear-filter>Clear filter</button>.</div>
 
       <section class="rule-card">
-        <h2>Part Number Rule</h2>
+        <h2 id="part-number-rule">Part Number Rule</h2>
         <ul>
           <li>Caterham may change part numbers during the life of the regulations.</li>
           <li>
@@ -110,25 +135,12 @@
         </ul>
       </section>
 
-      <section id="sections" class="section-index" aria-label="Content sections">
-        <a href="#chassis-safety">Chassis / Safety</a>
-        <a href="#bodywork">Bodywork</a>
-        <a href="#engine">Engine / Cooling / Exhaust / Fuel Delivery</a>
-        <a href="#suspension">Suspension</a>
-        <a href="#electrics">Electrics / Data / Lighting</a>
-        <a href="#brakes">Brakes</a>
-        <a href="#wheels">Wheels / Steering</a>
-        <a href="#tyres">Tyres</a>
-        <a href="#fuel-rules">Fuel</a>
-        <a href="#weight-ballast">Weight / Ballast</a>
-        <a href="#fuel-tank">Fuel Tank</a>
-        <a href="#prohibited">Prohibited</a>
-      </section>
+      <span id="sections"></span>
 
       <section id="chassis-safety" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Safety and cockpit</p>
-          <h2>Chassis / Safety</h2>
+          <h2 id="chassis-safety-2">Chassis / Safety</h2>
         </div>
         <div class="table-wrap">
           <table>
@@ -141,20 +153,20 @@
             </thead>
             <tbody>
               <tr>
-                <td>Suitable towing strap</td>
-                <td><a href="https://caterhamparts.co.uk/other/5033-tow-strap-cars-2-required.html">30P344A</a></td>
-                <td><span class="source-badge mandatory">Mandatory</span> Towing straps are mandatory front and rear; choice of strap is free.</td>
+                <td data-label="Modification / option">Suitable towing strap</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/other/5033-tow-strap-cars-2-required.html">30P344A</a></td>
+                <td data-label="Notes"><span class="source-badge mandatory">Mandatory</span> Towing straps are mandatory front and rear; choice of strap is free.</td>
               </tr>
               <tr>
-                <td>Driver's side honeycomb panel</td>
-                <td><a href="https://caterhamparts.co.uk/search?controller=search&amp;orderby=position&amp;orderway=desc&amp;search_query=76817&amp;submit_search=">76817</a></td>
-                <td>Permitted to raise the driver's feet. No Caterham Parts product page found/listed.</td>
+                <td data-label="Modification / option">Driver's side honeycomb panel</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/search?controller=search&amp;orderby=position&amp;orderway=desc&amp;search_query=76817&amp;submit_search=">76817</a></td>
+                <td data-label="Notes">Permitted to raise the driver's feet. No Caterham Parts product page found/listed.</td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="plain-list">
-          <h3>Permitted without a part number</h3>
+          <h3 id="permitted-without-a-part-number">Permitted without a part number</h3>
           <ul>
             <li>Cut slots in the seat back aluminium panel for shoulder straps, with protection.</li>
             <li>Modify seatbelt/harness apertures to avoid strap contact.</li>
@@ -170,7 +182,7 @@
       <section id="bodywork" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Panels, screens, badges</p>
-          <h2>Bodywork</h2>
+          <h2 id="bodywork-2">Bodywork</h2>
         </div>
         <div class="table-wrap">
           <table>
@@ -183,115 +195,115 @@
             </thead>
             <tbody>
               <tr>
-                <td>Locking bonnet catches</td>
-                <td><a href="https://caterhamparts.co.uk/bonnets/5300-bonnet-catch-locking-all-models.html">30Z1079A</a></td>
-                <td><span class="source-badge mandatory">Mandatory</span> Rear bonnet fixing.</td>
+                <td data-label="Modification / option">Locking bonnet catches</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/bonnets/5300-bonnet-catch-locking-all-models.html">30Z1079A</a></td>
+                <td data-label="Notes"><span class="source-badge mandatory">Mandatory</span> Rear bonnet fixing.</td>
               </tr>
               <tr>
-                <td>Nylon rear wing screws</td>
-                <td><a href="https://caterhamparts.co.uk/fixings/1768-bolt-m5-rear-wing-fixing-race-application.html">BM5 x 25</a></td>
-                <td>Regs describe these as plastic; Caterham Parts lists them as nylon. Academy cars are now supplied with nylon rear wing fixings as standard. They let a wing detach more cleanly and can reduce bodywork damage, but the wing can also come off more easily after light cone, bollard, or car contact. For road use or trackdays, metal fixings may retain the wing better.</td>
+                <td data-label="Modification / option">Nylon rear wing screws</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/fixings/1768-bolt-m5-rear-wing-fixing-race-application.html">BM5 x 25</a></td>
+                <td data-label="Notes">Regs describe these as plastic; Caterham Parts lists them as nylon. Academy cars are now supplied with nylon rear wing fixings as standard. They let a wing detach more cleanly and can reduce bodywork damage, but the wing can also come off more easily after light cone, bollard, or car contact. For road use or trackdays, metal fixings may retain the wing better.</td>
               </tr>
               <tr>
-                <td>Standard carbon-effect sidescreen, right-hand side</td>
-                <td><a href="https://caterhamparts.co.uk/sidescreens/7646-sidescreen-in-carbon-vinyl-rh-for-s3.html">30V110A</a></td>
-                <td>Carbon-effect option.</td>
+                <td data-label="Modification / option">Standard carbon-effect sidescreen, right-hand side</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/sidescreens/7646-sidescreen-in-carbon-vinyl-rh-for-s3.html">30V110A</a></td>
+                <td data-label="Notes">Carbon-effect option.</td>
               </tr>
               <tr>
-                <td>Standard carbon-effect sidescreen, left-hand side</td>
-                <td><a href="https://caterhamparts.co.uk/sidescreens/7645-sidescreen-in-carbon-vinyl-lh-for-s3.html">30V111A</a></td>
-                <td>Carbon-effect option.</td>
+                <td data-label="Modification / option">Standard carbon-effect sidescreen, left-hand side</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/sidescreens/7645-sidescreen-in-carbon-vinyl-lh-for-s3.html">30V111A</a></td>
+                <td data-label="Notes">Carbon-effect option.</td>
               </tr>
               <tr>
-                <td>Half sidescreen kit</td>
-                <td><a href="https://caterhamparts.co.uk/sidescreens/172-half-sidescreen-kit-for-s3-cars.html">WE67K</a></td>
-                <td>Permitted alternative. Kit contains 76258A RH half sidescreen, 76257A LH half sidescreen, 76213 button x4, 76212 socket x4, 30Z1046B base x4, 76211M one-way base x4, 76211B one-way button x4, 76211 one-way socket x4, and 1604-0514 countersunk rivet x4.</td>
+                <td data-label="Modification / option">Half sidescreen kit</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/sidescreens/172-half-sidescreen-kit-for-s3-cars.html">WE67K</a></td>
+                <td data-label="Notes">Permitted alternative. Kit contains 76258A RH half sidescreen, 76257A LH half sidescreen, 76213 button x4, 76212 socket x4, 30Z1046B base x4, 76211M one-way base x4, 76211B one-way button x4, 76211 one-way socket x4, and 1604-0514 countersunk rivet x4.</td>
               </tr>
               <tr>
-                <td>Carbon-effect half sidescreen, right-hand side</td>
-                <td><a href="https://caterhamparts.co.uk/sidescreens/5081-half-sidescreen-s3-rh-carbon-vinyl.html">30V086A</a></td>
-                <td>Permitted alternative.</td>
+                <td data-label="Modification / option">Carbon-effect half sidescreen, right-hand side</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/sidescreens/5081-half-sidescreen-s3-rh-carbon-vinyl.html">30V086A</a></td>
+                <td data-label="Notes">Permitted alternative.</td>
               </tr>
               <tr>
-                <td>Carbon-effect half sidescreen, left-hand side</td>
-                <td><a href="https://caterhamparts.co.uk/sidescreens/5038-half-sidescreen-s3-lh-carbon-vinyl.html">30V087A</a></td>
-                <td>Permitted alternative.</td>
+                <td data-label="Modification / option">Carbon-effect half sidescreen, left-hand side</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/sidescreens/5038-half-sidescreen-s3-lh-carbon-vinyl.html">30V087A</a></td>
+                <td data-label="Notes">Permitted alternative.</td>
               </tr>
               <tr>
-                <td>Carbon-effect vinyl boot cover, regulation-listed number</td>
-                <td><a href="https://caterhamparts.co.uk/search?controller=search&amp;orderby=position&amp;orderway=desc&amp;search_query=300V0131A&amp;submit_search=">300V0131A</a></td>
-                <td>Regulations list this part number.</td>
+                <td data-label="Modification / option">Carbon-effect vinyl boot cover, regulation-listed number</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/search?controller=search&amp;orderby=position&amp;orderway=desc&amp;search_query=300V0131A&amp;submit_search=">300V0131A</a></td>
+                <td data-label="Notes">Regulations list this part number.</td>
               </tr>
               <tr>
-                <td>Carbon-effect vinyl boot cover, current product page</td>
-                <td><a href="https://caterhamparts.co.uk/boot-covers/5079-boot-cover-s3-carbon-vinyl.html">30V089A</a></td>
-                <td>Caterham Parts product page lists this part number.</td>
+                <td data-label="Modification / option">Carbon-effect vinyl boot cover, current product page</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/boot-covers/5079-boot-cover-s3-carbon-vinyl.html">30V089A</a></td>
+                <td data-label="Notes">Caterham Parts product page lists this part number.</td>
               </tr>
               <tr>
-                <td>Plain windscreen glass</td>
-                <td><a href="https://caterhamparts.co.uk/windscreens-aeroscreens/2529-windscreen-glass-s3-plain-race-use.html">76050</a></td>
-                <td>Permitted instead of the standard heated glass.</td>
+                <td data-label="Modification / option">Plain windscreen glass</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/windscreens-aeroscreens/2529-windscreen-glass-s3-plain-race-use.html">76050</a></td>
+                <td data-label="Notes">Permitted instead of the standard heated glass.</td>
               </tr>
               <tr>
-                <td>Stainless steel sill protectors</td>
-                <td><a href="https://caterhamparts.co.uk/other/8033-sill-protector-stainless-steel.html">30P071A</a></td>
-                <td>Permitted option, but usually unnecessary when using half sidescreens because entry is over the cage and impact bar rather than across the sill.</td>
+                <td data-label="Modification / option">Stainless steel sill protectors</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/other/8033-sill-protector-stainless-steel.html">30P071A</a></td>
+                <td data-label="Notes">Permitted option, but usually unnecessary when using half sidescreens because entry is over the cage and impact bar rather than across the sill.</td>
               </tr>
               <tr>
-                <td>Carbon fibre sill protectors</td>
-                <td><a href="https://caterhamparts.co.uk/protectors/8258-sill-protector-s3-carbon-fibre.html">300P0236A</a></td>
-                <td>Permitted option rather than a recommended prep purchase; Caterham Parts currently lists this as 300P0236B.</td>
+                <td data-label="Modification / option">Carbon fibre sill protectors</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/protectors/8258-sill-protector-s3-carbon-fibre.html">300P0236A</a></td>
+                <td data-label="Notes">Permitted option rather than a recommended prep purchase; Caterham Parts currently lists this as 300P0236B.</td>
               </tr>
               <tr>
-                <td>Passenger side impact protection bar</td>
-                <td><a href="https://caterhamparts.co.uk/side-intrusion-bars/8018-side-impact-bar-lh-s3-metric-chassis.html">30P307E</a>, superseding regulation-listed 30P307A</td>
-                <td>Hood is not compatible with this bar and is not permitted for racing. Regulations list 30P307A; 30P307E supersedes it. Order the side protection bar hardware pack as well.</td>
+                <td data-label="Modification / option">Passenger side impact protection bar</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/side-intrusion-bars/8018-side-impact-bar-lh-s3-metric-chassis.html">30P307E</a>, superseding regulation-listed 30P307A</td>
+                <td data-label="Notes">Hood is not compatible with this bar and is not permitted for racing. Regulations list 30P307A; 30P307E supersedes it. Order the side protection bar hardware pack as well.</td>
               </tr>
               <tr>
-                <td>Side protection bar hardware pack</td>
-                <td><a href="https://caterhamparts.co.uk/hardware-packs/7096-hardware-pack-side-protection-bar.html">Hardware pack</a></td>
-                <td><span class="source-badge required">Required with impact bar</span> Required hardware pack when ordering the passenger side impact protection bar.</td>
+                <td data-label="Modification / option">Side protection bar hardware pack</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/hardware-packs/7096-hardware-pack-side-protection-bar.html">Hardware pack</a></td>
+                <td data-label="Notes"><span class="source-badge required">Required with impact bar</span> Required hardware pack when ordering the passenger side impact protection bar.</td>
               </tr>
               <tr>
-                <td>Replacement wingstay, part 370W30003A</td>
-                <td><a href="https://caterhamparts.co.uk/search?controller=search&amp;orderby=position&amp;orderway=desc&amp;search_query=370W30003A&amp;submit_search=">370W30003A</a></td>
-                <td>Replacement for standard wingstays with side repeater wire hole. No Caterham Parts product page found/listed.</td>
+                <td data-label="Modification / option">Replacement wingstay, part 370W30003A</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/search?controller=search&amp;orderby=position&amp;orderway=desc&amp;search_query=370W30003A&amp;submit_search=">370W30003A</a></td>
+                <td data-label="Notes">Replacement for standard wingstays with side repeater wire hole. No Caterham Parts product page found/listed.</td>
               </tr>
               <tr>
-                <td>Replacement wingstay, part 370W30004A</td>
-                <td><a href="https://caterhamparts.co.uk/search?controller=search&amp;orderby=position&amp;orderway=desc&amp;search_query=370W30004A&amp;submit_search=">370W30004A</a></td>
-                <td>Replacement for standard wingstays with side repeater wire hole. No Caterham Parts product page found/listed.</td>
+                <td data-label="Modification / option">Replacement wingstay, part 370W30004A</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/search?controller=search&amp;orderby=position&amp;orderway=desc&amp;search_query=370W30004A&amp;submit_search=">370W30004A</a></td>
+                <td data-label="Notes">Replacement for standard wingstays with side repeater wire hole. No Caterham Parts product page found/listed.</td>
               </tr>
               <tr>
-                <td>Lower wingstay, left-hand side</td>
-                <td><a href="https://caterhamparts.co.uk/brackets/8019-cycle-wingstay-lh-185-60-r13-race.html">300P0276A</a></td>
-                <td>Alternative replacement without the side repeater wire hole.</td>
+                <td data-label="Modification / option">Lower wingstay, left-hand side</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/brackets/8019-cycle-wingstay-lh-185-60-r13-race.html">300P0276A</a></td>
+                <td data-label="Notes">Alternative replacement without the side repeater wire hole.</td>
               </tr>
               <tr>
-                <td>Lower wingstay, right-hand side</td>
-                <td><a href="https://caterhamparts.co.uk/brackets/8020-cycle-wingstay-rh-185-60-r13-race.html">300P0277A</a></td>
-                <td>Alternative replacement without the side repeater wire hole.</td>
+                <td data-label="Modification / option">Lower wingstay, right-hand side</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/brackets/8020-cycle-wingstay-rh-185-60-r13-race.html">300P0277A</a></td>
+                <td data-label="Notes">Alternative replacement without the side repeater wire hole.</td>
               </tr>
               <tr>
-                <td>Standard wingstay being replaced, left-hand side</td>
-                <td><a href="https://caterhamparts.co.uk/brackets/1112-cycle-wingstay-lh-13-14-wheel-road-use.html">76103</a></td>
-                <td>Listed as the standard wingstay with side repeater wire hole.</td>
+                <td data-label="Modification / option">Standard wingstay being replaced, left-hand side</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/brackets/1112-cycle-wingstay-lh-13-14-wheel-road-use.html">76103</a></td>
+                <td data-label="Notes">Listed as the standard wingstay with side repeater wire hole.</td>
               </tr>
               <tr>
-                <td>Standard wingstay being replaced, right-hand side</td>
-                <td><a href="https://caterhamparts.co.uk/brackets/1113-cycle-wingstay-rh-13-14-wheel-road-use.html">76104</a></td>
-                <td>Listed as the standard wingstays with side repeater wire hole.</td>
+                <td data-label="Modification / option">Standard wingstay being replaced, right-hand side</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/brackets/1113-cycle-wingstay-rh-13-14-wheel-road-use.html">76104</a></td>
+                <td data-label="Notes">Listed as the standard wingstays with side repeater wire hole.</td>
               </tr>
               <tr>
-                <td>"CATERHAM" rear badge</td>
-                <td><a href="https://caterhamparts.co.uk/badges/7024-badge-rear-panel-caterham.html">300V0053A</a></td>
-                <td>Must be in the standard position, or the badge may be removed completely.</td>
+                <td data-label="Modification / option">"CATERHAM" rear badge</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/badges/7024-badge-rear-panel-caterham.html">300V0053A</a></td>
+                <td data-label="Notes">Must be in the standard position, or the badge may be removed completely.</td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="plain-list">
-          <h3>Permitted without a part number</h3>
+          <h3 id="permitted-without-a-part-number-2">Permitted without a part number</h3>
           <ul>
             <li><span class="source-badge mandatory">Mandatory track prep</span> Remove the front number plate during competition or track use for intercooler airflow; rear number plates may also be removed.</li>
             <li>Use tape from the windscreen back to the front hoop of the roll cage to reduce rain ingress.</li>
@@ -313,7 +325,7 @@
       <section id="engine" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Powertrain</p>
-          <h2>Engine / Cooling / Exhaust / Fuel Delivery</h2>
+          <h2 id="engine-cooling-exhaust-fuel-delivery">Engine / Cooling / Exhaust / Fuel Delivery</h2>
         </div>
         <div class="table-wrap">
           <table>
@@ -326,50 +338,50 @@
             </thead>
             <tbody>
               <tr>
-                <td>Mesh "7" grille</td>
-                <td><a href="https://caterhamparts.co.uk/nosecones/6349-nosecone-grille-with-hex-mesh-seven-620.html">3FP471D</a></td>
-                <td><span class="source-badge mandatory">Mandatory</span> Cooling-system fitment.</td>
+                <td data-label="Modification / option">Mesh "7" grille</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/nosecones/6349-nosecone-grille-with-hex-mesh-seven-620.html">3FP471D</a></td>
+                <td data-label="Notes"><span class="source-badge mandatory">Mandatory</span> Cooling-system fitment.</td>
               </tr>
               <tr>
-                <td>Mesh "7" grille, alternative part number</td>
-                <td><a href="https://caterhamparts.co.uk/nosecones/144-nosecone-grille-with-mesh-s3.html">30C093A</a></td>
-                <td><span class="source-badge mandatory">Mandatory</span> Cooling-system fitment.</td>
+                <td data-label="Modification / option">Mesh "7" grille, alternative part number</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/nosecones/144-nosecone-grille-with-mesh-s3.html">30C093A</a></td>
+                <td data-label="Notes"><span class="source-badge mandatory">Mandatory</span> Cooling-system fitment.</td>
               </tr>
               <tr>
-                <td>Cold air induction cut-out grille</td>
-                <td><a href="https://caterhamparts.co.uk/other/8315-grille-bonnet-side-inlet-black-hex.html">3FP623B</a></td>
-                <td><span class="source-badge mandatory">Mandatory</span> Induction-system fitment.</td>
+                <td data-label="Modification / option">Cold air induction cut-out grille</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/other/8315-grille-bonnet-side-inlet-black-hex.html">3FP623B</a></td>
+                <td data-label="Notes"><span class="source-badge mandatory">Mandatory</span> Induction-system fitment.</td>
               </tr>
               <tr>
-                <td>Cold air induction cut-out grille, alternative part number</td>
-                <td><a href="https://caterhamparts.co.uk/bonnets/4441-bonnet-teardrop.html">30P159C</a></td>
-                <td><span class="source-badge mandatory">Mandatory</span> Induction-system fitment.</td>
+                <td data-label="Modification / option">Cold air induction cut-out grille, alternative part number</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/bonnets/4441-bonnet-teardrop.html">30P159C</a></td>
+                <td data-label="Notes"><span class="source-badge mandatory">Mandatory</span> Induction-system fitment.</td>
               </tr>
               <tr>
-                <td>Exhaust silencer</td>
-                <td><a href="https://caterhamparts.co.uk/search?controller=search&amp;orderby=position&amp;orderway=desc&amp;search_query=3BAX0001B&amp;submit_search=">3BAX0001B</a></td>
-                <td>Only permissible exhaust system part. Not yet listed on Caterham Parts.</td>
+                <td data-label="Modification / option">Exhaust silencer</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/search?controller=search&amp;orderby=position&amp;orderway=desc&amp;search_query=3BAX0001B&amp;submit_search=">3BAX0001B</a></td>
+                <td data-label="Notes">Only permissible exhaust system part. Not yet listed on Caterham Parts.</td>
               </tr>
               <tr>
-                <td>Link pipe, turbo to cat</td>
-                <td><a href="https://caterhamparts.co.uk/other/8746-pipe-turbo-to-cat-horse.html">3BAX0004</a></td>
-                <td>Caterham Parts currently lists this as 3BAX0004A.</td>
+                <td data-label="Modification / option">Link pipe, turbo to cat</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/other/8746-pipe-turbo-to-cat-horse.html">3BAX0004</a></td>
+                <td data-label="Notes">Caterham Parts currently lists this as 3BAX0004A.</td>
               </tr>
               <tr>
-                <td>Link pipe, cat to silencer</td>
-                <td><a href="https://caterhamparts.co.uk/other/8753-link-pipe-cat-to-silencer-horse.html">3BAX0002A</a></td>
-                <td>Only permissible exhaust system part.</td>
+                <td data-label="Modification / option">Link pipe, cat to silencer</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/other/8753-link-pipe-cat-to-silencer-horse.html">3BAX0002A</a></td>
+                <td data-label="Notes">Only permissible exhaust system part.</td>
               </tr>
               <tr>
-                <td>Cat assembly</td>
-                <td><a href="https://caterhamparts.co.uk/collectors-catalysts/8754-catalyst-assembly-horse.html">3BAX0003A</a></td>
-                <td>Only permissible exhaust system part.</td>
+                <td data-label="Modification / option">Cat assembly</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/collectors-catalysts/8754-catalyst-assembly-horse.html">3BAX0003A</a></td>
+                <td data-label="Notes">Only permissible exhaust system part.</td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="plain-list">
-          <h3>Permitted without a part number</h3>
+          <h3 id="permitted-without-a-part-number-3">Permitted without a part number</h3>
           <ul>
             <li>Drill the exhaust at the mating between the front link pipe and silencer and insert one rivet to stop silencer rotation.</li>
             <li><span class="source-badge caution">Caterham caution</span> Bypass or remove the engine immobiliser only if you are having immobiliser issues; Caterham do not recommend this as routine prep, and it must be done by Caterham or an appointed Caterham Motorsport Service Centre.</li>
@@ -382,7 +394,7 @@
       <section id="suspension" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Setup and hardware</p>
-          <h2>Suspension</h2>
+          <h2 id="suspension-2">Suspension</h2>
         </div>
         <div class="table-wrap">
           <table>
@@ -395,70 +407,70 @@
             </thead>
             <tbody>
               <tr>
-                <td>Standard De Dion tube</td>
-                <td><a href="https://caterhamparts.co.uk/de-dion-tube/3018-de-dion-tube-s3.html">79028B</a></td>
-                <td>Permitted.</td>
+                <td data-label="Modification / option">Standard De Dion tube</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/de-dion-tube/3018-de-dion-tube-s3.html">79028B</a></td>
+                <td data-label="Notes">Permitted.</td>
               </tr>
               <tr>
-                <td>Reinforced De Dion tube</td>
-                <td><a href="https://caterhamparts.co.uk/de-dion-tube/7599-de-dion-tube-s3-race.html">370R0003A</a></td>
-                <td>Permitted.</td>
+                <td data-label="Modification / option">Reinforced De Dion tube</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/de-dion-tube/7599-de-dion-tube-s3-race.html">370R0003A</a></td>
+                <td data-label="Notes">Permitted.</td>
               </tr>
               <tr>
-                <td>Race braze-welded A-frame</td>
-                <td><a href="https://caterhamparts.co.uk/a-frames/7849-race-aframe-brazed.html">300R0004A</a></td>
-                <td>Permitted instead of standard MIG-welded A-frame.</td>
+                <td data-label="Modification / option">Race braze-welded A-frame</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/a-frames/7849-race-aframe-brazed.html">300R0004A</a></td>
+                <td data-label="Notes">Permitted instead of standard MIG-welded A-frame.</td>
               </tr>
               <tr>
-                <td>Standard MIG-welded A-frame</td>
-                <td><a href="https://caterhamparts.co.uk/a-frames/1177-a-frame-de-dion-s3-metric-only.html">30R019B</a></td>
-                <td>Standard part referenced by the rules.</td>
+                <td data-label="Modification / option">Standard MIG-welded A-frame</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/a-frames/1177-a-frame-de-dion-s3-metric-only.html">30R019B</a></td>
+                <td data-label="Notes">Standard part referenced by the rules.</td>
               </tr>
               <tr>
-                <td>Camber shim 0.1mm / 0.1 deg</td>
-                <td><a href="https://caterhamparts.co.uk/de-dion-tube/6526-camber-shim-01mm-de-dion-cars.html">300R0005A</a></td>
-                <td>Caterham Parts currently lists this as 300R0005B.</td>
+                <td data-label="Modification / option">Camber shim 0.1mm / 0.1 deg</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/de-dion-tube/6526-camber-shim-01mm-de-dion-cars.html">300R0005A</a></td>
+                <td data-label="Notes">Caterham Parts currently lists this as 300R0005B.</td>
               </tr>
               <tr>
-                <td>Camber shim 0.2mm / 0.2 deg</td>
-                <td><a href="https://caterhamparts.co.uk/de-dion-tube/6527-camber-shim-02mm-de-dion-cars.html">300R0006A</a></td>
-                <td>Caterham Parts currently lists this as 300R0006B.</td>
+                <td data-label="Modification / option">Camber shim 0.2mm / 0.2 deg</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/de-dion-tube/6527-camber-shim-02mm-de-dion-cars.html">300R0006A</a></td>
+                <td data-label="Notes">Caterham Parts currently lists this as 300R0006B.</td>
               </tr>
               <tr>
-                <td>Camber shim 0.5mm / 0.5 deg</td>
-                <td><a href="https://caterhamparts.co.uk/de-dion-tube/6528-camber-shim-05mm-de-dion-cars.html">300R0007A</a></td>
-                <td>Caterham Parts currently lists this as 300R0007B.</td>
+                <td data-label="Modification / option">Camber shim 0.5mm / 0.5 deg</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/de-dion-tube/6528-camber-shim-05mm-de-dion-cars.html">300R0007A</a></td>
+                <td data-label="Notes">Caterham Parts currently lists this as 300R0007B.</td>
               </tr>
               <tr>
-                <td>Toe shim 0.5mm / 0.08 deg</td>
-                <td><a href="https://caterhamparts.co.uk/de-dion-tube/8100-toe-shim-05mm.html">300R0008A</a></td>
-                <td>Caterham Parts currently lists this as 300R0008B.</td>
+                <td data-label="Modification / option">Toe shim 0.5mm / 0.08 deg</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/de-dion-tube/8100-toe-shim-05mm.html">300R0008A</a></td>
+                <td data-label="Notes">Caterham Parts currently lists this as 300R0008B.</td>
               </tr>
               <tr>
-                <td>Toe shim 1.0mm / 0.16 deg</td>
-                <td><a href="https://caterhamparts.co.uk/de-dion-tube/6530-toe-shim-0250mm-de-dion-cars.html">300R0009A</a></td>
-                <td>Caterham Parts currently lists this as 300R0009C.</td>
+                <td data-label="Modification / option">Toe shim 1.0mm / 0.16 deg</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/de-dion-tube/6530-toe-shim-0250mm-de-dion-cars.html">300R0009A</a></td>
+                <td data-label="Notes">Caterham Parts currently lists this as 300R0009C.</td>
               </tr>
               <tr>
-                <td>Front anti-roll bar, 5/8 inch, red</td>
-                <td><a href="https://caterhamparts.co.uk/anti-roll-bars/2675-anti-roll-bar-front-5-8-narrow-track-red-s3.html">72090</a></td>
-                <td>Permitted Caterham supplied front ARB. The Driver Guide says the car must not be run without a front anti-roll bar.</td>
+                <td data-label="Modification / option">Front anti-roll bar, 5/8 inch, red</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/anti-roll-bars/2675-anti-roll-bar-front-5-8-narrow-track-red-s3.html">72090</a></td>
+                <td data-label="Notes">Permitted Caterham supplied front ARB. The Driver Guide says the car must not be run without a front anti-roll bar.</td>
               </tr>
               <tr>
-                <td>Front anti-roll bar, 1/2 inch, orange</td>
-                <td><a href="https://caterhamparts.co.uk/anti-roll-bars/2555-arb-front-12-narrow-track-orange-s3.html">72088</a></td>
-                <td>Standard permitted Caterham supplied front ARB. The Driver Guide says the car must not be run without a front anti-roll bar.</td>
+                <td data-label="Modification / option">Front anti-roll bar, 1/2 inch, orange</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/anti-roll-bars/2555-arb-front-12-narrow-track-orange-s3.html">72088</a></td>
+                <td data-label="Notes">Standard permitted Caterham supplied front ARB. The Driver Guide says the car must not be run without a front anti-roll bar.</td>
               </tr>
               <tr>
-                <td>Quick release front anti-roll bar kit</td>
-                <td><a href="https://caterhamparts.co.uk/anti-roll-bars/6710-quick-release-front-anti-roll-bar-mount-kit-s3.html">30F063AK</a></td>
-                <td>Permitted for easier front ARB changes.</td>
+                <td data-label="Modification / option">Quick release front anti-roll bar kit</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/anti-roll-bars/6710-quick-release-front-anti-roll-bar-mount-kit-s3.html">30F063AK</a></td>
+                <td data-label="Notes">Permitted for easier front ARB changes.</td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="plain-list">
-          <h3>Permitted without a part number</h3>
+          <h3 id="permitted-without-a-part-number-4">Permitted without a part number</h3>
           <ul>
             <li>Adjust ride height using standard damper spring seats.</li>
             <li>Adjust front camber to max 3 deg negative and castor via the adjustable top wishbone and lower wishbone shimming.</li>
@@ -473,7 +485,7 @@
       <section id="electrics" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Switches, logging, lights</p>
-          <h2>Electrics / Data / Lighting</h2>
+          <h2 id="electrics-data-lighting">Electrics / Data / Lighting</h2>
         </div>
         <div class="table-wrap">
           <table>
@@ -486,60 +498,60 @@
             </thead>
             <tbody>
               <tr>
-                <td>Inertia switch subloom</td>
-                <td><a href="https://caterhamparts.co.uk/looms/6202-sub-loom-inertia-switch-sigma-race.html">37E552A</a></td>
-                <td><span class="source-badge recommended">Caterham recommended location</span> Use this if relocating the standard fuel inertia cut-out switch rather than removing it. Caterham recommend mounting the relocated switch on the centre tunnel, just in front of the passenger seat on the left-hand side of the gear lever, where it is easier to reset. The Driver Guide recommends the jumper/removal route.</td>
+                <td data-label="Modification / option">Inertia switch subloom</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/looms/6202-sub-loom-inertia-switch-sigma-race.html">37E552A</a></td>
+                <td data-label="Notes"><span class="source-badge recommended">Caterham recommended location</span> Use this if relocating the standard fuel inertia cut-out switch rather than removing it. Caterham recommend mounting the relocated switch on the centre tunnel, just in front of the passenger seat on the left-hand side of the gear lever, where it is easier to reset. The Driver Guide recommends the jumper/removal route.</td>
               </tr>
               <tr>
-                <td>Inertia switch jumper wire</td>
-                <td><a href="https://caterhamparts.co.uk/switches/7564-inertia-switch-bypass-plug.html">370L0003A</a></td>
-                <td><span class="source-badge recommended">Driver Guide recommended</span> Use this if removing the standard fuel inertia cut-out switch rather than relocating it. Kerbs can trip the switch and stop the engine suddenly; the jumper completes the circuit after switch removal. Only this Caterham jumper may be used for that purpose.</td>
+                <td data-label="Modification / option">Inertia switch jumper wire</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/switches/7564-inertia-switch-bypass-plug.html">370L0003A</a></td>
+                <td data-label="Notes"><span class="source-badge recommended">Driver Guide recommended</span> Use this if removing the standard fuel inertia cut-out switch rather than relocating it. Kerbs can trip the switch and stop the engine suddenly; the jumper completes the circuit after switch removal. Only this Caterham jumper may be used for that purpose.</td>
               </tr>
               <tr>
-                <td>VBOX OBD adaptor lead</td>
-                <td><a href="https://caterhamparts.co.uk/search?controller=search&amp;orderby=position&amp;orderway=desc&amp;search_query=370D0003A&amp;submit_search=">370D0003A</a></td>
-                <td>Regulations state this is permitted when available; RaceSense may use the RaceSense supplied lead. Not yet listed on Caterham Parts.</td>
+                <td data-label="Modification / option">VBOX OBD adaptor lead</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/search?controller=search&amp;orderby=position&amp;orderway=desc&amp;search_query=370D0003A&amp;submit_search=">370D0003A</a></td>
+                <td data-label="Notes">Regulations state this is permitted when available; RaceSense may use the RaceSense supplied lead. Not yet listed on Caterham Parts.</td>
               </tr>
               <tr>
-                <td>ACES programmable sequential shift lights</td>
-                <td><a href="https://caterhamparts.co.uk/search?controller=search&amp;orderby=position&amp;orderway=desc&amp;search_query=ACES01&amp;submit_search=">ACES01</a></td>
-                <td><span class="source-badge recommended">Caterham recommended</span> Recommended by Caterham; shift-light choice is free. No Caterham Parts product page found/listed.</td>
+                <td data-label="Modification / option">ACES programmable sequential shift lights</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/search?controller=search&amp;orderby=position&amp;orderway=desc&amp;search_query=ACES01&amp;submit_search=">ACES01</a></td>
+                <td data-label="Notes"><span class="source-badge recommended">Caterham recommended</span> Recommended by Caterham; shift-light choice is free. No Caterham Parts product page found/listed.</td>
               </tr>
               <tr>
-                <td>Fog/reverse light blanking cover</td>
-                <td><a href="https://caterhamparts.co.uk/fittings/7600-cover-fog-and-reverse.html">300V0084A</a></td>
-                <td><span class="source-badge required">Required if lights removed</span> Required if fog and reverse light units are removed.</td>
+                <td data-label="Modification / option">Fog/reverse light blanking cover</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/fittings/7600-cover-fog-and-reverse.html">300V0084A</a></td>
+                <td data-label="Notes"><span class="source-badge required">Required if lights removed</span> Required if fog and reverse light units are removed.</td>
               </tr>
               <tr>
-                <td>Fog/reverse light blanking insert</td>
-                <td><a href="https://caterhamparts.co.uk/search?controller=search&amp;orderby=position&amp;orderway=desc&amp;search_query=300V0086B&amp;submit_search=">300V0086B</a></td>
-                <td><span class="source-badge required">Required if lights removed</span> Required if fog and reverse light units are removed. No Caterham Parts product page found/listed.</td>
+                <td data-label="Modification / option">Fog/reverse light blanking insert</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/search?controller=search&amp;orderby=position&amp;orderway=desc&amp;search_query=300V0086B&amp;submit_search=">300V0086B</a></td>
+                <td data-label="Notes"><span class="source-badge required">Required if lights removed</span> Required if fog and reverse light units are removed. No Caterham Parts product page found/listed.</td>
               </tr>
               <tr>
-                <td>Clear front indicator lenses</td>
-                <td><a href="https://caterhamparts.co.uk/indicators/3340-indicator-lens-clear-for-orange-bulbs.html">FRL425L</a></td>
-                <td>Permitted with orange bulbs.</td>
+                <td data-label="Modification / option">Clear front indicator lenses</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/indicators/3340-indicator-lens-clear-for-orange-bulbs.html">FRL425L</a></td>
+                <td data-label="Notes">Permitted with orange bulbs.</td>
               </tr>
               <tr>
-                <td>Orange indicator bulbs</td>
-                <td><a href="https://caterhamparts.co.uk/bulbs/3339-indicator-bulb-amber-used-with-frl425l-lens-only.html">B614</a></td>
-                <td>Permitted with clear front indicator lenses.</td>
+                <td data-label="Modification / option">Orange indicator bulbs</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/bulbs/3339-indicator-bulb-amber-used-with-frl425l-lens-only.html">B614</a></td>
+                <td data-label="Notes">Permitted with clear front indicator lenses.</td>
               </tr>
               <tr>
-                <td>High intensity rear light</td>
-                <td><a href="https://caterhamparts.co.uk/rear-lights/5476-rain-light-race-led.html">30L284A</a></td>
-                <td><span class="source-badge mandatory">Mandatory</span> Rear warning light.</td>
+                <td data-label="Modification / option">High intensity rear light</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/rear-lights/5476-rain-light-race-led.html">30L284A</a></td>
+                <td data-label="Notes"><span class="source-badge mandatory">Mandatory</span> Rear warning light.</td>
               </tr>
               <tr>
-                <td>Rear light clamp bracket</td>
-                <td><a href="https://caterhamparts.co.uk/fittings-other/711-rubber-coated-clip.html">RSGU132/25</a></td>
-                <td><span class="source-badge required">Required with rear light</span> Required bracket for rear warning light; do not drill or weld the roll cage.</td>
+                <td data-label="Modification / option">Rear light clamp bracket</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/fittings-other/711-rubber-coated-clip.html">RSGU132/25</a></td>
+                <td data-label="Notes"><span class="source-badge required">Required with rear light</span> Required bracket for rear warning light; do not drill or weld the roll cage.</td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="plain-list">
-          <h3>Permitted without a part number</h3>
+          <h3 id="permitted-without-a-part-number-5">Permitted without a part number</h3>
           <ul>
             <li>Free-choice ignition/starter switch, positioned on the dashboard. For a plain two-position ignition toggle, install down as OFF and up as ON. If using an aircraft-style guarded switch, make sure its guard action is deliberate: it must not be able to fall or bounce shut and kill the ignition unintentionally. Mark the OFF position.</li>
             <li>Relocate or remove the standard fuel inertia cut-out switch, subject to loom/jumper rules above.</li>
@@ -557,10 +569,10 @@
       <section id="fuel-rules" class="content-section searchable compact-section">
         <div class="section-heading">
           <p class="section-kicker">Fuel rules</p>
-          <h2>Fuel</h2>
+          <h2 id="fuel">Fuel</h2>
         </div>
         <div class="plain-list">
-          <h3>Required fuel source</h3>
+          <h3 id="required-fuel-source">Required fuel source</h3>
           <ul>
             <li><span class="source-badge mandatory">Fuel rule</span> Use commercially available pump fuel from normal forecourt pumps or circuit pumps.</li>
             <li>Do not use fuel additives or illegal fuels.</li>
@@ -572,7 +584,7 @@
       <section id="brakes" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Pads and controls</p>
-          <h2>Brakes</h2>
+          <h2 id="brakes-2">Brakes</h2>
         </div>
         <div class="table-wrap">
           <table>
@@ -585,25 +597,25 @@
             </thead>
             <tbody>
               <tr>
-                <td>Competition front brake pads</td>
-                <td><a href="https://caterhamparts.co.uk/brake-pads/8220-brake-pad-front-fast-road-track-2-pot-caliper-2015.html">300B0067A</a></td>
-                <td>Permitted replacement for standard front pads; use the current Caterham Parts number.</td>
+                <td data-label="Modification / option">Competition front brake pads</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/brake-pads/8220-brake-pad-front-fast-road-track-2-pot-caliper-2015.html">300B0067A</a></td>
+                <td data-label="Notes">Permitted replacement for standard front pads; use the current Caterham Parts number.</td>
               </tr>
               <tr>
-                <td>Competition rear brake pads</td>
-                <td><a href="https://caterhamparts.co.uk/calipers-pads-discs/8658-brake-pads-rear-upgrade-academy-2026.html">3BAB0007A</a></td>
-                <td>Permitted replacement for standard rear pads.</td>
+                <td data-label="Modification / option">Competition rear brake pads</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/calipers-pads-discs/8658-brake-pads-rear-upgrade-academy-2026.html">3BAB0007A</a></td>
+                <td data-label="Notes">Permitted replacement for standard rear pads.</td>
               </tr>
               <tr>
-                <td>Race master cylinder cap</td>
-                <td><a href="https://caterhamparts.co.uk/master-cylinder/914-brake-master-cylinder-cap-race-no-float-switch.html">77175</a> or <a href="https://caterhamparts.co.uk/master-cylinder/6971-clutch-master-cylinder-cap.html">300B0043A</a></td>
-                <td>Not strictly road legal because these remove the low-fluid warning; treat as a post-factory-IVA race-prep change.</td>
+                <td data-label="Modification / option">Race master cylinder cap</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/master-cylinder/914-brake-master-cylinder-cap-race-no-float-switch.html">77175</a> or <a href="https://caterhamparts.co.uk/master-cylinder/6971-clutch-master-cylinder-cap.html">300B0043A</a></td>
+                <td data-label="Notes">Not strictly road legal because these remove the low-fluid warning; treat as a post-factory-IVA race-prep change.</td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="plain-list">
-          <h3>Permitted without a part number</h3>
+          <h3 id="permitted-without-a-part-number-6">Permitted without a part number</h3>
           <ul>
             <li>Use lockwire instead of standard R-clips to secure brake pad retaining pins.</li>
             <li>Use tape or another method to bridge the gap between handbrake lever end and transmission tunnel top.</li>
@@ -614,7 +626,7 @@
       <section id="wheels" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Driver controls</p>
-          <h2>Wheels / Steering</h2>
+          <h2 id="wheels-steering">Wheels / Steering</h2>
         </div>
         <div class="table-wrap">
           <table>
@@ -627,45 +639,45 @@
             </thead>
             <tbody>
               <tr>
-                <td>Apollo wheel, silver, regulation-listed number</td>
-                <td><a href="https://caterhamparts.co.uk/search?controller=search&amp;orderby=position&amp;orderway=desc&amp;search_query=30W044A&amp;submit_search=">30W044A</a></td>
-                <td>Regulations list this part number.</td>
+                <td data-label="Modification / option">Apollo wheel, silver, regulation-listed number</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/search?controller=search&amp;orderby=position&amp;orderway=desc&amp;search_query=30W044A&amp;submit_search=">30W044A</a></td>
+                <td data-label="Notes">Regulations list this part number.</td>
               </tr>
               <tr>
-                <td>Apollo wheel, silver, current product page</td>
-                <td><a href="https://caterhamparts.co.uk/lightweight-13-apollo/8466-6x13-apollo-wheel-sport-silver.html">30W029D</a></td>
-                <td>Caterham Parts product page lists this part number.</td>
+                <td data-label="Modification / option">Apollo wheel, silver, current product page</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/lightweight-13-apollo/8466-6x13-apollo-wheel-sport-silver.html">30W029D</a></td>
+                <td data-label="Notes">Caterham Parts product page lists this part number.</td>
               </tr>
               <tr>
-                <td>Apollo wheel, black/polished, regulation-listed number</td>
-                <td><a href="https://caterhamparts.co.uk/search?controller=search&amp;orderby=position&amp;orderway=desc&amp;search_query=30W041A&amp;submit_search=">30W041A</a></td>
-                <td>Regulations list this part number.</td>
+                <td data-label="Modification / option">Apollo wheel, black/polished, regulation-listed number</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/search?controller=search&amp;orderby=position&amp;orderway=desc&amp;search_query=30W041A&amp;submit_search=">30W041A</a></td>
+                <td data-label="Notes">Regulations list this part number.</td>
               </tr>
               <tr>
-                <td>Apollo wheel, black/polished, current product page</td>
-                <td><a href="https://caterhamparts.co.uk/lightweight-13-apollo/8498-6x13-apollo-wheel-black-diamond-cut.html">30W041D</a></td>
-                <td>Caterham Parts product page lists this part number.</td>
+                <td data-label="Modification / option">Apollo wheel, black/polished, current product page</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/lightweight-13-apollo/8498-6x13-apollo-wheel-black-diamond-cut.html">30W041D</a></td>
+                <td data-label="Notes">Caterham Parts product page lists this part number.</td>
               </tr>
               <tr>
-                <td>Apollo wheel, Hi-Power silver</td>
-                <td><a href="https://caterhamparts.co.uk/search?controller=search&amp;orderby=position&amp;orderway=desc&amp;search_query=30W029A&amp;submit_search=">30W029A</a></td>
-                <td>No Caterham Parts product page found/listed for the Hi-Power silver wheel.</td>
+                <td data-label="Modification / option">Apollo wheel, Hi-Power silver</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/search?controller=search&amp;orderby=position&amp;orderway=desc&amp;search_query=30W029A&amp;submit_search=">30W029A</a></td>
+                <td data-label="Notes">No Caterham Parts product page found/listed for the Hi-Power silver wheel.</td>
               </tr>
               <tr>
-                <td>Quick release steering column</td>
-                <td><a href="https://caterhamparts.co.uk/columns/127-quick-release-steering-upper-column-assembly.html">30S043A</a></td>
-                <td>Permitted.</td>
+                <td data-label="Modification / option">Quick release steering column</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/columns/127-quick-release-steering-upper-column-assembly.html">30S043A</a></td>
+                <td data-label="Notes">Permitted.</td>
               </tr>
               <tr>
-                <td>Steering column UJ</td>
-                <td><a href="https://caterhamparts.co.uk/columns/7678-steering-universal-joint-all-cars.html">300S0014A</a></td>
-                <td>Permitted.</td>
+                <td data-label="Modification / option">Steering column UJ</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/columns/7678-steering-universal-joint-all-cars.html">300S0014A</a></td>
+                <td data-label="Notes">Permitted.</td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="plain-list">
-          <h3>Permitted without a part number</h3>
+          <h3 id="permitted-without-a-part-number-7">Permitted without a part number</h3>
           <ul>
             <li>Paint wheels any colour.</li>
             <li>Free-choice steering wheel, subject to NCR 7.2.11.</li>
@@ -678,16 +690,16 @@
       <section id="tyres" class="content-section searchable compact-section">
         <div class="section-heading">
           <p class="section-kicker">Control tyre</p>
-          <h2>Tyres</h2>
+          <h2 id="tyres-2">Tyres</h2>
         </div>
         <div class="plain-list">
-          <h3>Permitted without a part number</h3>
+          <h3 id="permitted-without-a-part-number-8">Permitted without a part number</h3>
           <ul>
             <li>Manually remove rubber pick-up from tyres.</li>
           </ul>
         </div>
         <div class="plain-list">
-          <h3>Required tyre specification</h3>
+          <h3 id="required-tyre-specification">Required tyre specification</h3>
           <ul>
             <li><span class="source-badge mandatory">Mandatory tyre spec</span> Toyo Proxes CF2, 185/60R13 front and rear.</li>
             <li>Tyres may only be sourced through HP Tyre Ltd, Daventry.</li>
@@ -698,17 +710,17 @@
       <section id="weight-ballast" class="content-section searchable compact-section">
         <div class="section-heading">
           <p class="section-kicker">Minimum weight</p>
-          <h2>Weight / Ballast</h2>
+          <h2 id="weight-ballast-2">Weight / Ballast</h2>
         </div>
         <div class="plain-list">
-          <h3>Required minimum weight</h3>
+          <h3 id="required-minimum-weight">Required minimum weight</h3>
           <ul>
             <li><span class="source-badge mandatory">Mandatory</span> Minimum weight is 635 kg, including the driver in full racing kit.</li>
             <li>Drivers weighing less than about 85 kg may need ballast to reach the minimum weight.</li>
           </ul>
         </div>
         <div class="plain-list">
-          <h3>Permitted without a part number</h3>
+          <h3 id="permitted-without-a-part-number-9">Permitted without a part number</h3>
           <ul>
             <li><span class="source-badge required">Required if ballast fitted</span> Add ballast if needed, fitted on the passenger side of the cockpit and mounted with at least four M10 fixings and suitable steel washers.</li>
           </ul>
@@ -718,7 +730,7 @@
       <section id="fuel-tank" class="content-section searchable">
         <div class="section-heading">
           <p class="section-kicker">Tank and filler options</p>
-          <h2>Fuel Tank</h2>
+          <h2 id="fuel-tank-2">Fuel Tank</h2>
         </div>
         <div class="table-wrap">
           <table>
@@ -731,40 +743,40 @@
             </thead>
             <tbody>
               <tr>
-                <td>Standard aluminium tank</td>
-                <td><a href="https://caterhamparts.co.uk/tanks/2537-fuel-tank-s3-sigma.html">36T003A</a></td>
-                <td>One permitted fuel tank type.</td>
+                <td data-label="Modification / option">Standard aluminium tank</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/tanks/2537-fuel-tank-s3-sigma.html">36T003A</a></td>
+                <td data-label="Notes">One permitted fuel tank type.</td>
               </tr>
               <tr>
-                <td>Moulded FIA-FT3 fuel cell</td>
-                <td><a href="https://caterhamparts.co.uk/tanks/7616-atl-moulded-fuel-cell.html">300T0023A</a></td>
-                <td>Alternative permitted fuel tank type.</td>
+                <td data-label="Modification / option">Moulded FIA-FT3 fuel cell</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/tanks/7616-atl-moulded-fuel-cell.html">300T0023A</a></td>
+                <td data-label="Notes">Alternative permitted fuel tank type.</td>
               </tr>
               <tr>
-                <td>Aluminium honeycomb protection kit</td>
-                <td><a href="https://caterhamparts.co.uk/search?controller=search&amp;orderby=position&amp;orderway=desc&amp;search_query=TI04P&amp;submit_search=">TI04P</a></td>
-                <td><span class="source-badge mandatory">Mandatory with aluminium tank</span> Required when the aluminium tank is retained. No Caterham Parts product page found/listed.</td>
+                <td data-label="Modification / option">Aluminium honeycomb protection kit</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/search?controller=search&amp;orderby=position&amp;orderway=desc&amp;search_query=TI04P&amp;submit_search=">TI04P</a></td>
+                <td data-label="Notes"><span class="source-badge mandatory">Mandatory with aluminium tank</span> Required when the aluminium tank is retained. No Caterham Parts product page found/listed.</td>
               </tr>
               <tr>
-                <td>Fuel cell aluminium container</td>
-                <td><a href="https://caterhamparts.co.uk/tanks/7595-atl-moulded-fuel-cell-container.html">300T0024A</a></td>
-                <td><span class="source-badge required">Required with fuel cell</span> Required when using moulded fuel cell.</td>
+                <td data-label="Modification / option">Fuel cell aluminium container</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/tanks/7595-atl-moulded-fuel-cell-container.html">300T0024A</a></td>
+                <td data-label="Notes"><span class="source-badge required">Required with fuel cell</span> Required when using moulded fuel cell.</td>
               </tr>
               <tr>
-                <td>Aero fuel filler, black</td>
-                <td><a href="https://caterhamparts.co.uk/caps/4632-fuel-filler-cap-black-aero.html">30T065A</a></td>
-                <td><span class="source-badge mandatory">Mandatory with standard tank</span> Required when standard tank is retained; cap tether may be removed.</td>
+                <td data-label="Modification / option">Aero fuel filler, black</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/caps/4632-fuel-filler-cap-black-aero.html">30T065A</a></td>
+                <td data-label="Notes"><span class="source-badge mandatory">Mandatory with standard tank</span> Required when standard tank is retained; cap tether may be removed.</td>
               </tr>
               <tr>
-                <td>Aero fuel filler, silver</td>
-                <td><a href="https://caterhamparts.co.uk/caps/4633-fuel-filler-kit-silver-aero.html">30T066A</a></td>
-                <td><span class="source-badge mandatory">Mandatory with standard tank</span> Required when standard tank is retained; cap tether may be removed.</td>
+                <td data-label="Modification / option">Aero fuel filler, silver</td>
+                <td data-label="Part number"><a href="https://caterhamparts.co.uk/caps/4633-fuel-filler-kit-silver-aero.html">30T066A</a></td>
+                <td data-label="Notes"><span class="source-badge mandatory">Mandatory with standard tank</span> Required when standard tank is retained; cap tether may be removed.</td>
               </tr>
             </tbody>
           </table>
         </div>
         <div class="plain-list">
-          <h3>Permitted without a part number</h3>
+          <h3 id="permitted-without-a-part-number-10">Permitted without a part number</h3>
           <ul>
             <li>Fit fuel-tank vent tube/additional check valve if needed to prevent spillage.</li>
             <li>With moulded fuel cell, retain redundant standard tank filler cap, blank the rear-panel hole with aluminium, or delete the hole during rear-panel replacement.</li>
@@ -775,7 +787,7 @@
       <section id="prohibited" class="content-section prohibited searchable">
         <div class="section-heading">
           <p class="section-kicker">Explicitly prohibited</p>
-          <h2>Part Numbers To Avoid</h2>
+          <h2 id="part-numbers-to-avoid">Part Numbers To Avoid</h2>
         </div>
         <div class="table-wrap">
           <table>
@@ -788,9 +800,9 @@
             </thead>
             <tbody>
               <tr>
-                <td>Quicker ratio steering rack</td>
-                <td>30S030A</td>
-                <td>Specifically prohibited; intentionally not linked.</td>
+                <td data-label="Prohibited item">Quicker ratio steering rack</td>
+                <td data-label="Part number">30S030A</td>
+                <td data-label="Notes">Specifically prohibited; intentionally not linked.</td>
               </tr>
             </tbody>
           </table>
